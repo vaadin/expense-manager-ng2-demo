@@ -1,10 +1,11 @@
 import {Component} from 'angular2/core';
 import {VaadinGrid} from '../vaadin-grid/vaadin_grid.directive';
+import {SearchFilters} from '../search-filters/search_filters.components';
 
 @Component({
     selector: 'expenses-list',
     template: `
-      <search-filters #searchfilters>Search filters</search-filters>
+      <search-filters></search-filters>
       <vaadin-grid #expenses>
         <table>
           <colgroup>
@@ -18,7 +19,7 @@ import {VaadinGrid} from '../vaadin-grid/vaadin_grid.directive';
       </vaadin-grid>
       <button>Add</button>
     `,
-    directives: [VaadinGrid]
+    directives: [VaadinGrid, SearchFilters]
 })
 export class ExpensesList {
 

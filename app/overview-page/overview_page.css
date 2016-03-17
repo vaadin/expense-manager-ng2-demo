@@ -1,0 +1,10 @@
+.content {
+  display: flex;
+}
+expenses-list {
+  flex: 1;
+}
+overview-panel {
+  width: 33%;
+  max-width: 300px;
+}
