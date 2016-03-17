@@ -1,4 +1,5 @@
-import {Component} from 'angular2/core';
+import {Component, Input} from 'angular2/core';
+import {Http} from 'angular2/http';
 import {ExpensesList} from '../expenses-list/expenses_list.component';
 import {OverviewPanel} from '../overview-panel/overview_panel.component';
 
@@ -7,7 +8,7 @@ import {OverviewPanel} from '../overview-panel/overview_panel.component';
     template: `
       <div #toolbar><h1>Expense Manager</h1></div>
       <div class="content">
-        <expenses-list></expenses-list>
+        <expenses-list [http]="http"></expenses-list>
         <overview-panel></overview-panel>
       </div>
     `,
@@ -16,4 +17,5 @@ import {OverviewPanel} from '../overview-panel/overview_panel.component';
 })
 export class OverviewPage {
 
+  @Input() http: Http;
 }

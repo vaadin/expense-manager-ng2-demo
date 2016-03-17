@@ -1,4 +1,4 @@
-System.register(['angular2/core', './overview-page/overview_page.component'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', './overview-page/overview_page.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,27 +8,31 @@ System.register(['angular2/core', './overview-page/overview_page.component'], fu
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, overview_page_component_1;
+    var core_1, http_1, overview_page_component_1;
     var ExpenseApp;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
+            function (http_1_1) {
+                http_1 = http_1_1;
+            },
             function (overview_page_component_1_1) {
                 overview_page_component_1 = overview_page_component_1_1;
             }],
         execute: function() {
             ExpenseApp = (function () {
-                function ExpenseApp() {
+                function ExpenseApp(http) {
+                    this.http = http;
                 }
                 ExpenseApp = __decorate([
                     core_1.Component({
                         selector: 'expense-app',
-                        template: '<overview-page></overview-page>',
+                        template: '<overview-page [http]="http"></overview-page>',
                         directives: [overview_page_component_1.OverviewPage]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [http_1.Http])
                 ], ExpenseApp);
                 return ExpenseApp;
             })();
