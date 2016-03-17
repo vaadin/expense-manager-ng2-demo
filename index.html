@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Expense Manager</title>
+
+    <style is="custom-style">
+      body {
+        width: 100% !important;
+        overflow-y: hidden;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        height: 100vh;
+      }
+
+      body.loading {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      #loadingScreen {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        opacity: 1 !important;
+        background: url(images/app-icon.svg) #37474F center center no-repeat;
+        background-size: 200px 200px;
+        transition: opacity 400ms;
+      }
+
+      .ready #loadingScreen {
+        opacity: 0 !important;
+      }
+    </style>
+    <link rel="manifest" href="manifest.json">
+
+    <meta name="theme-color" content="#37474F" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="icon" sizes="192x192" href="images/app-icon-192.png" />
+    <meta name="application-name" content="Expense Manager">
+
+    <!-- iOS -->
+    <link rel="apple-touch-icon" href="images/app-icon-192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Expense Manager">
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css" async>
+    <!-- endbuild-->
+
+    <script src="./bower_components/webcomponentsjs/webcomponents.js"></script>
+
+    <!-- <script>
+      var Polymer = Polymer || {};
+      Polymer.dom = 'shadow';
+    </script> -->
+
+    <!-- IE required polyfill -->
+    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
+
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/rxjs/bundles/Rx.umd.js"></script>
+    <script src="node_modules/angular2/bundles/angular2-all.umd.js"></script>
+
+    <!-- <link rel="import" href="bower_components/polymer/polymer.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/paper-dialog/paper-dialog.html"> -->
+
+    <script src='app/about-dialog/about-dialog.js'></script>
+    <script src='app/main.js'></script>
+
+    <!-- <link rel="import" id="bundle" href="elements/elements.html" async> -->
+    <!-- <link rel="import" href="./bower_components/polymer/polymer.html">
+    <link rel="import" id="bundle" href="./elements/expense-app.html">
+    <link rel="import" href="./styles/app-theme.html"> -->
+
+    <script>
+      window.Polymer = window.Polymer || {};
+      window.Polymer.dom = 'shadow';
+    </script>
+
+  <!-- import a component that relies on Polymer -->
+  <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.2.3.2/lib/paper-card/paper-card.html">
+  <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.2.3.2/lib/paper-dropdown-menu/paper-dropdown-menu.html">
+  <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.2.3.2/lib/paper-listbox/paper-listbox.html">
+  <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.2.3.2/lib/paper-item/paper-item.html">
+  <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.2.3.2/lib/paper-button/paper-button.html">
+  <link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.2.3.2/lib/paper-dialog/paper-dialog.html">
+
+
+    <!-- <script src="https://code.angularjs.org/tools/system.js"></script>
+    <script src="https://code.angularjs.org/tools/typescript.js"></script>
+    <script>
+    System.config({
+      //use typescript for compilation
+      transpiler: 'typescript',
+      //typescript compiler options
+      typescriptOptions: {
+        emitDecoratorMetadata: true
+      },
+      //map tells the System loader where to look for things
+      map: {
+        app: "./src"
+      },
+      //packages defines our app package
+      packages: {
+        app: {
+          main: './app.ts',
+          defaultExtension: 'ts'
+        }
+      }
+    });
+    </script>
+    <script src="https://code.angularjs.org/2.0.0-beta.9/angular2-polyfills.min.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.9/Rx.min.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.9/angular2.min.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.9/http.min.js"></script>
+    <script src="https://code.angularjs.org/2.0.0-beta.9/router.min.js"></script>
+
+    <script>
+    System.import('app')
+      .catch(console.error.bind(console));
+  </script> -->
+
+
+    <script>
+      function onImportLoaded() {
+        var loadingScreen = document.querySelector('#loadingScreen');
+        loadingScreen.addEventListener('transitionend', function() {
+          // Remove the loading screen from DOM after CSS transition.
+          document.body.removeChild(loadingScreen);
+        });
+
+        document.body.classList.remove('loading');
+        document.body.classList.add('ready');
+        var appElement = document.createElement('expense-app');
+        document.body.appendChild(appElement);
+      }
+
+      function finishLazyLoading() {
+        var link = document.querySelector('#bundle');
+        if (link.import && link.import.readyState === 'complete') {
+          onImportLoaded();
+        } else {
+          link.addEventListener('load', onImportLoaded);
+        }
+      }
+    </script>
+
+  </head>
+
+  <body>
+  <!-- <body onload="finishLazyLoading()"> -->
+    <!-- <div id="loadingScreen"></div>
+    <span id="browser-sync-binding"></span> -->
+    <!-- <login-page> -->
+    <!-- <expense-app>
+      loading...
+    </expense-app> -->
+    <about-dialog>
+    <!-- <my-app>
+     Loading...
+   </my-app> -->
+  </body>
+
+</html>
