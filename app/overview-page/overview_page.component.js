@@ -35,7 +35,7 @@ System.register(['angular2/core', 'angular2/http', '../expenses-list/expenses_li
                 OverviewPage = __decorate([
                     core_1.Component({
                         selector: 'overview-page',
-                        template: "\n      <div #toolbar><h1>Expense Manager</h1></div>\n      <div class=\"content\">\n        <expenses-list [http]=\"http\"></expenses-list>\n        <overview-panel></overview-panel>\n      </div>\n    ",
+                        template: "\n      <div class=\"toolbar\"><h1>Expense Manager</h1><span>LOGOUT</span></div>\n      <div class=\"content\">\n        <expenses-list [http]=\"http\"></expenses-list>\n        <overview-panel></overview-panel>\n      </div>\n    ",
                         directives: [expenses_list_component_1.ExpensesList, overview_panel_component_1.OverviewPanel],
                         styleUrls: ['./app/overview-page/overview_page.css']
                     }), 
