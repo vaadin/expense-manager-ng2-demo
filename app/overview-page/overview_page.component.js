@@ -1,4 +1,6 @@
-System.register(['angular2/core', 'angular2/http', '../expenses-list/expenses_list.component', '../overview-panel/overview_panel.component'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', '../expenses-list/expenses_list.component', '../overview-panel/overview_panel.component'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -37,12 +39,12 @@ System.register(['angular2/core', 'angular2/http', '../expenses-list/expenses_li
                         selector: 'overview-page',
                         template: "\n      <div class=\"toolbar\"><h1>Expense Manager</h1><span>LOGOUT</span></div>\n      <div class=\"content\">\n        <expenses-list [http]=\"http\"></expenses-list>\n        <overview-panel></overview-panel>\n      </div>\n    ",
                         directives: [expenses_list_component_1.ExpensesList, overview_panel_component_1.OverviewPanel],
-                        styleUrls: ['./app/overview-page/overview_page.css']
+                        styles: ["\n      .content {\n        display: flex;\n      }\n      expenses-list {\n        flex: 1;\n      }\n      overview-panel {\n        width: 33%;\n        max-width: 300px;\n        background: #80CBC4;\n        z-index: 1;\n      }\n      .toolbar {\n        display: flex;\n        align-items: center;\n        justify-content: space-between;\n        padding: 0 20px;\n        background: #37474F;\n        color: #fff;\n      }\n    "]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], OverviewPage);
                 return OverviewPage;
-            })();
+            }());
             exports_1("OverviewPage", OverviewPage);
         }
     }

@@ -1,20 +1,27 @@
-import {Component} from 'angular2/core';
+import {Component, EventEmitter, Output} from 'angular2/core';
 
 @Component({
   selector: 'search-filters',
   template: `
-      <vaadin-combo-box label="Merchant"></vaadin-combo-box>
+      <vaadin-combo-box [items]="merchants" label="Merchant" (value-changed)="filters.merchant = $event.target.value; filtersChanged();"></vaadin-combo-box>
       <div>
-        <input placeholder="Min"><input placeholder="Max">
-      </div>
-      <div>
-        <strong>Status</strong>
-        <input type="checkbox" name="type" value="new"> New
-        <input type="checkbox" name="type" value="inprogress"> In Progress
-        <input type="checkbox" name="type" value="reimbursed"> Reimbursed
+        <input placeholder="Min" (keyup)="filters.min = $event.target.value; filtersChanged();">
+        <input placeholder="Max" (keyup)="filters.max = $event.target.value; filtersChanged();">
       </div>
     `
 })
 export class SearchFilters {
+
+  filters: Object = {};
+
+  @Output() filtersChange = new EventEmitter();
+
+  merchants: string[] = ["Airline", "Rental car", "Taxi", "Restaurant",
+    "Breakfast", "Office supplies", "Fast food", "Electronics", "Parking",
+    "Hotel", "Shuttle", "Ride sharing"];
+
+  filtersChanged() {
+    this.filtersChange.emit(this.filters);
+  }
 
 }

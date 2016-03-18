@@ -6,8 +6,8 @@ import {SearchFilters} from '../search-filters/search_filters.components';
 @Component({
   selector: 'expenses-list',
   template: `
-      <search-filters></search-filters>
-      <vaadin-grid [items]="expenses">
+      <search-filters (filtersChange)="filtersChange($event, grid)"></search-filters>
+      <vaadin-grid #grid [items]="expenses">
         <table>
           <colgroup>
             <col name="date" width="120" sortable/>
@@ -26,12 +26,34 @@ export class ExpensesList {
 
   @Input() http: Http;
 
-  ngOnInit() {
-    this.expenses.http = this.http;
+  filters: Object;
+
+  constructor() {
+    this.expenses.$ = this;
   }
 
   expenses(params, callback) {
-    this.http.get('./app/expenses-dev.json')
-      .subscribe(response => { callback(response.json(), 1000) });
+    this.$.http.get('./app/expenses-dev.json')
+      .subscribe(response => {
+        var result = response.json();
+        var filters = this.$.filters;
+        if (filters) {
+          result = result.filter((item) => {
+            return !filters.merchant || item.merchant === filters.merchant;
+          }).filter((item) => {
+            return !filters.min || item.total >= filters.min;
+          }).filter((item) => {
+            return !filters.max || item.total <= filters.max;
+          });
+        }
+        callback(result, result.length);
+      }
+    );
+  }
+
+  filtersChange(filters, grid) {
+    this.filters = filters;
+    grid.refreshItems();
+
   }
 }

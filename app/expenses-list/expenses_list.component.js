@@ -1,4 +1,6 @@
-System.register(['angular2/core', 'angular2/http', '../vaadin-grid/vaadin_grid.directive', '../search-filters/search_filters.components'], function(exports_1) {
+System.register(['angular2/core', 'angular2/http', '../vaadin-grid/vaadin_grid.directive', '../search-filters/search_filters.components'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -27,13 +29,29 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-grid/vaadin_grid.d
         execute: function() {
             ExpensesList = (function () {
                 function ExpensesList() {
+                    this.expenses.$ = this;
                 }
-                ExpensesList.prototype.ngOnInit = function () {
-                    this.expenses.http = this.http;
-                };
                 ExpensesList.prototype.expenses = function (params, callback) {
-                    this.http.get('./app/expenses-dev.json')
-                        .subscribe(function (response) { callback(response.json(), 1000); });
+                    var _this = this;
+                    this.$.http.get('./app/expenses-dev.json')
+                        .subscribe(function (response) {
+                        var result = response.json();
+                        var filters = _this.$.filters;
+                        if (filters) {
+                            result = result.filter(function (item) {
+                                return !filters.merchant || item.merchant === filters.merchant;
+                            }).filter(function (item) {
+                                return !filters.min || item.total >= filters.min;
+                            }).filter(function (item) {
+                                return !filters.max || item.total <= filters.max;
+                            });
+                        }
+                        callback(result, result.length);
+                    });
+                };
+                ExpensesList.prototype.filtersChange = function (filters, grid) {
+                    this.filters = filters;
+                    grid.refreshItems();
                 };
                 __decorate([
                     core_1.Input(), 
@@ -42,13 +60,13 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-grid/vaadin_grid.d
                 ExpensesList = __decorate([
                     core_1.Component({
                         selector: 'expenses-list',
-                        template: "\n      <search-filters></search-filters>\n      <vaadin-grid [items]=\"expenses\">\n        <table>\n          <colgroup>\n            <col name=\"date\" width=\"120\" sortable/>\n            <col name=\"merchant\" width=\"200\" sortable/>\n            <col name=\"total\" width=\"150\" sortable/>\n            <col name=\"status\" width=\"150\" sortable/>\n            <col name=\"comment\" sortable/>\n          </colgroup>\n        </table>\n      </vaadin-grid>\n      <button>Add</button>\n    ",
+                        template: "\n      <search-filters (filtersChange)=\"filtersChange($event, grid)\"></search-filters>\n      <vaadin-grid #grid [items]=\"expenses\">\n        <table>\n          <colgroup>\n            <col name=\"date\" width=\"120\" sortable/>\n            <col name=\"merchant\" width=\"200\" sortable/>\n            <col name=\"total\" width=\"150\" sortable/>\n            <col name=\"status\" width=\"150\" sortable/>\n            <col name=\"comment\" sortable/>\n          </colgroup>\n        </table>\n      </vaadin-grid>\n      <button>Add</button>\n    ",
                         directives: [vaadin_grid_directive_1.VaadinGrid, search_filters_components_1.SearchFilters]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], ExpensesList);
                 return ExpensesList;
-            })();
+            }());
             exports_1("ExpensesList", ExpensesList);
         }
     }

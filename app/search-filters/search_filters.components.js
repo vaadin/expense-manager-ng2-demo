@@ -1,4 +1,6 @@
-System.register(['angular2/core'], function(exports_1) {
+System.register(['angular2/core'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,16 +20,28 @@ System.register(['angular2/core'], function(exports_1) {
         execute: function() {
             SearchFilters = (function () {
                 function SearchFilters() {
+                    this.filters = {};
+                    this.filtersChange = new core_1.EventEmitter();
+                    this.merchants = ["Airline", "Rental car", "Taxi", "Restaurant",
+                        "Breakfast", "Office supplies", "Fast food", "Electronics", "Parking",
+                        "Hotel", "Shuttle", "Ride sharing"];
                 }
+                SearchFilters.prototype.filtersChanged = function () {
+                    this.filtersChange.emit(this.filters);
+                };
+                __decorate([
+                    core_1.Output(), 
+                    __metadata('design:type', Object)
+                ], SearchFilters.prototype, "filtersChange", void 0);
                 SearchFilters = __decorate([
                     core_1.Component({
                         selector: 'search-filters',
-                        template: "\n      <vaadin-combo-box label=\"Merchant\"></vaadin-combo-box>\n      <div>\n        <input placeholder=\"Min\"><input placeholder=\"Max\">\n      </div>\n      <div>\n        <strong>Status</strong>\n        <input type=\"checkbox\" name=\"type\" value=\"new\"> New\n        <input type=\"checkbox\" name=\"type\" value=\"inprogress\"> In Progress\n        <input type=\"checkbox\" name=\"type\" value=\"reimbursed\"> Reimbursed\n      </div>\n    "
+                        template: "\n      <vaadin-combo-box [items]=\"merchants\" label=\"Merchant\" (value-changed)=\"filters.merchant = $event.target.value; filtersChanged();\"></vaadin-combo-box>\n      <div>\n        <input placeholder=\"Min\" (keyup)=\"filters.min = $event.target.value; filtersChanged();\">\n        <input placeholder=\"Max\" (keyup)=\"filters.max = $event.target.value; filtersChanged();\">\n      </div>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], SearchFilters);
                 return SearchFilters;
-            })();
+            }());
             exports_1("SearchFilters", SearchFilters);
         }
     }
