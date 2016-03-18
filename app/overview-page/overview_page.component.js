@@ -30,6 +30,10 @@ System.register(['angular2/core', 'angular2/http', '../expenses-list/expenses_li
             OverviewPage = (function () {
                 function OverviewPage() {
                 }
+                OverviewPage.prototype.editExpense = function (expense, editor) {
+                    editor.expense = expense;
+                    //editor.open();
+                };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', http_1.Http)
@@ -37,7 +41,7 @@ System.register(['angular2/core', 'angular2/http', '../expenses-list/expenses_li
                 OverviewPage = __decorate([
                     core_1.Component({
                         selector: 'overview-page',
-                        template: "\n      <div class=\"toolbar\"><h1>Expense Manager</h1><span>LOGOUT</span></div>\n      <div class=\"content\">\n        <expenses-list [http]=\"http\"></expenses-list>\n        <overview-panel></overview-panel>\n      </div>\n    ",
+                        template: "\n      <div class=\"toolbar\"><h1>Expense Manager</h1><span>LOGOUT</span></div>\n      <div class=\"content\">\n        <expenses-list [http]=\"http\" (editExpense)=\"editExpense($event, expenseEditor)\"></expenses-list>\n        <overview-panel></overview-panel>\n      </div>\n      <expense-editor #expenseEditor></expense-editor>\n    ",
                         directives: [expenses_list_component_1.ExpensesList, overview_panel_component_1.OverviewPanel],
                         styles: ["\n      .content {\n        display: flex;\n      }\n      expenses-list {\n        flex: 1;\n      }\n      overview-panel {\n        width: 33%;\n        max-width: 300px;\n        background: #80CBC4;\n        z-index: 1;\n      }\n      .toolbar {\n        display: flex;\n        align-items: center;\n        justify-content: space-between;\n        padding: 0 20px;\n        background: #37474F;\n        color: #fff;\n      }\n    "]
                     }), 

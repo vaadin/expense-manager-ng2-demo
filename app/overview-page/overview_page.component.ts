@@ -8,9 +8,10 @@ import {OverviewPanel} from '../overview-panel/overview_panel.component';
   template: `
       <div class="toolbar"><h1>Expense Manager</h1><span>LOGOUT</span></div>
       <div class="content">
-        <expenses-list [http]="http"></expenses-list>
+        <expenses-list [http]="http" (editExpense)="editExpense($event, expenseEditor)"></expenses-list>
         <overview-panel></overview-panel>
       </div>
+      <expense-editor #expenseEditor></expense-editor>
     `,
   directives: [ExpensesList, OverviewPanel],
   styles: [`
@@ -39,4 +40,9 @@ import {OverviewPanel} from '../overview-panel/overview_panel.component';
 export class OverviewPage {
 
   @Input() http: Http;
+
+  editExpense(expense, editor) {
+    editor.expense = expense;
+    //editor.open();
+  }
 }

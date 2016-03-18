@@ -1,4 +1,4 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Input, Output, EventEmitter} from 'angular2/core';
 import {Http} from 'angular2/http';
 import {VaadinGrid} from '../vaadin-grid/vaadin_grid.directive';
 import {SearchFilters} from '../search-filters/search_filters.components';
@@ -7,14 +7,14 @@ import {SearchFilters} from '../search-filters/search_filters.components';
   selector: 'expenses-list',
   template: `
       <search-filters (filtersChange)="filtersChange($event, grid)"></search-filters>
-      <vaadin-grid #grid [items]="expenses">
+      <vaadin-grid #grid [items]="expenses" frozen-columns="1" (selected-items-changed)="selected(grid)">
         <table>
           <colgroup>
-            <col name="date" width="120" sortable/>
-            <col name="merchant" width="200" sortable/>
-            <col name="total" width="150" sortable/>
-            <col name="status" width="150" sortable/>
-            <col name="comment" sortable/>
+            <col name="date" width="120" />
+            <col name="merchant" width="200" />
+            <col name="total" width="150" />
+            <col name="status" width="150" />
+            <col name="comment" />
           </colgroup>
         </table>
       </vaadin-grid>
@@ -25,6 +25,8 @@ import {SearchFilters} from '../search-filters/search_filters.components';
 export class ExpensesList {
 
   @Input() http: Http;
+
+  @Output() editExpense = new EventEmitter();
 
   filters: Object;
 
@@ -51,9 +53,21 @@ export class ExpensesList {
     );
   }
 
+
   filtersChange(filters, grid) {
     this.filters = filters;
+    grid.scrollToStart();
     grid.refreshItems();
 
+  }
+
+  selected(grid) {
+    var selection = grid.selection.selected();
+    grid.selection.clear();
+    if (selection.length === 1) {
+      grid.getItem(selection[0], (err, item) => {
+        this.editExpense.emit(item);
+      });
+    }
   }
 }

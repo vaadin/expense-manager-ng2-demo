@@ -29,6 +29,7 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-grid/vaadin_grid.d
         execute: function() {
             ExpensesList = (function () {
                 function ExpensesList() {
+                    this.editExpense = new core_1.EventEmitter();
                     this.expenses.$ = this;
                 }
                 ExpensesList.prototype.expenses = function (params, callback) {
@@ -51,16 +52,31 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-grid/vaadin_grid.d
                 };
                 ExpensesList.prototype.filtersChange = function (filters, grid) {
                     this.filters = filters;
+                    grid.scrollToStart();
                     grid.refreshItems();
+                };
+                ExpensesList.prototype.selected = function (grid) {
+                    var _this = this;
+                    var selection = grid.selection.selected();
+                    grid.selection.clear();
+                    if (selection.length === 1) {
+                        grid.getItem(selection[0], function (err, item) {
+                            _this.editExpense.emit(item);
+                        });
+                    }
                 };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', http_1.Http)
                 ], ExpensesList.prototype, "http", void 0);
+                __decorate([
+                    core_1.Output(), 
+                    __metadata('design:type', Object)
+                ], ExpensesList.prototype, "editExpense", void 0);
                 ExpensesList = __decorate([
                     core_1.Component({
                         selector: 'expenses-list',
-                        template: "\n      <search-filters (filtersChange)=\"filtersChange($event, grid)\"></search-filters>\n      <vaadin-grid #grid [items]=\"expenses\">\n        <table>\n          <colgroup>\n            <col name=\"date\" width=\"120\" sortable/>\n            <col name=\"merchant\" width=\"200\" sortable/>\n            <col name=\"total\" width=\"150\" sortable/>\n            <col name=\"status\" width=\"150\" sortable/>\n            <col name=\"comment\" sortable/>\n          </colgroup>\n        </table>\n      </vaadin-grid>\n      <button>Add</button>\n    ",
+                        template: "\n      <search-filters (filtersChange)=\"filtersChange($event, grid)\"></search-filters>\n      <vaadin-grid #grid [items]=\"expenses\" frozen-columns=\"1\" (selected-items-changed)=\"selected(grid)\">\n        <table>\n          <colgroup>\n            <col name=\"date\" width=\"120\" />\n            <col name=\"merchant\" width=\"200\" />\n            <col name=\"total\" width=\"150\" />\n            <col name=\"status\" width=\"150\" />\n            <col name=\"comment\" />\n          </colgroup>\n        </table>\n      </vaadin-grid>\n      <button>Add</button>\n    ",
                         directives: [vaadin_grid_directive_1.VaadinGrid, search_filters_components_1.SearchFilters]
                     }), 
                     __metadata('design:paramtypes', [])
