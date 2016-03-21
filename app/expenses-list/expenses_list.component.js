@@ -76,7 +76,7 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-grid/vaadin_grid.d
                 ExpensesList = __decorate([
                     core_1.Component({
                         selector: 'expenses-list',
-                        template: "\n      <search-filters (filtersChange)=\"filtersChange($event, grid)\"></search-filters>\n      <vaadin-grid #grid [items]=\"expenses\" frozen-columns=\"1\" (selected-items-changed)=\"selected(grid)\">\n        <table>\n          <colgroup>\n            <col name=\"date\" width=\"120\" />\n            <col name=\"merchant\" width=\"200\" />\n            <col name=\"total\" width=\"150\" />\n            <col name=\"status\" width=\"150\" />\n            <col name=\"comment\" />\n          </colgroup>\n        </table>\n      </vaadin-grid>\n      <button>Add</button>\n    ",
+                        templateUrl: './app/expenses-list/expenses_list.component.html',
                         directives: [vaadin_grid_directive_1.VaadinGrid, search_filters_components_1.SearchFilters]
                     }), 
                     __metadata('design:paramtypes', [])

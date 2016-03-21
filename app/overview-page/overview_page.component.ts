@@ -5,14 +5,7 @@ import {OverviewPanel} from '../overview-panel/overview_panel.component';
 
 @Component({
   selector: 'overview-page',
-  template: `
-      <div class="toolbar"><h1>Expense Manager</h1><span>LOGOUT</span></div>
-      <div class="content">
-        <expenses-list [http]="http" (editExpense)="editExpense($event, expenseEditor)"></expenses-list>
-        <overview-panel></overview-panel>
-      </div>
-      <expense-editor #expenseEditor></expense-editor>
-    `,
+  templateUrl: './app/overview-page/overview_page.component.html',
   directives: [ExpensesList, OverviewPanel],
   styles: [`
       .content {
