@@ -36,7 +36,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 SearchFilters = __decorate([
                     core_1.Component({
                         selector: 'search-filters',
-                        template: "\n      <vaadin-combo-box [items]=\"merchants\" label=\"Merchant\" (value-changed)=\"filters.merchant = $event.target.value; filtersChanged();\"></vaadin-combo-box>\n      <div>\n        <input placeholder=\"Min\" (keyup)=\"filters.min = $event.target.value; filtersChanged();\">\n        <input placeholder=\"Max\" (keyup)=\"filters.max = $event.target.value; filtersChanged();\">\n      </div>\n    "
+                        templateUrl: './app/search-filters/search_filters.component.html'
                     }), 
                     __metadata('design:paramtypes', [])
                 ], SearchFilters);
@@ -46,4 +46,4 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         }
     }
 });
-//# sourceMappingURL=search_filters.components.js.map
+//# sourceMappingURL=search_filters.component.js.map

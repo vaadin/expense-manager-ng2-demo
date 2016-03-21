@@ -1,7 +1,7 @@
 import {Component, Input, Output, EventEmitter} from 'angular2/core';
 import {Http} from 'angular2/http';
 import {VaadinGrid} from '../vaadin-grid/vaadin_grid.directive';
-import {SearchFilters} from '../search-filters/search_filters.components';
+import {SearchFilters} from '../search-filters/search_filters.component';
 
 @Component({
   selector: 'expenses-list',

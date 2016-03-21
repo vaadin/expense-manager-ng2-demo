@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', '../vaadin-grid/vaadin_grid.directive', '../search-filters/search_filters.components'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', '../vaadin-grid/vaadin_grid.directive', '../search-filters/search_filters.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-grid/vaadin_grid.d
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, vaadin_grid_directive_1, search_filters_components_1;
+    var core_1, http_1, vaadin_grid_directive_1, search_filters_component_1;
     var ExpensesList;
     return {
         setters:[
@@ -23,8 +23,8 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-grid/vaadin_grid.d
             function (vaadin_grid_directive_1_1) {
                 vaadin_grid_directive_1 = vaadin_grid_directive_1_1;
             },
-            function (search_filters_components_1_1) {
-                search_filters_components_1 = search_filters_components_1_1;
+            function (search_filters_component_1_1) {
+                search_filters_component_1 = search_filters_component_1_1;
             }],
         execute: function() {
             ExpensesList = (function () {
@@ -77,7 +77,7 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-grid/vaadin_grid.d
                     core_1.Component({
                         selector: 'expenses-list',
                         templateUrl: './app/expenses-list/expenses_list.component.html',
-                        directives: [vaadin_grid_directive_1.VaadinGrid, search_filters_components_1.SearchFilters]
+                        directives: [vaadin_grid_directive_1.VaadinGrid, search_filters_component_1.SearchFilters]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], ExpensesList);

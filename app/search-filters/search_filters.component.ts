@@ -2,13 +2,7 @@ import {Component, EventEmitter, Output} from 'angular2/core';
 
 @Component({
   selector: 'search-filters',
-  template: `
-      <vaadin-combo-box [items]="merchants" label="Merchant" (value-changed)="filters.merchant = $event.target.value; filtersChanged();"></vaadin-combo-box>
-      <div>
-        <input placeholder="Min" (keyup)="filters.min = $event.target.value; filtersChanged();">
-        <input placeholder="Max" (keyup)="filters.max = $event.target.value; filtersChanged();">
-      </div>
-    `
+  templateUrl: './app/search-filters/search_filters.component.html'
 })
 export class SearchFilters {
 
