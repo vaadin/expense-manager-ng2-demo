@@ -1,0 +1,36 @@
+<vaadin-bar-chart id="basic-bar">
+    <chart-title>Historic World Population by Region</chart-title>
+    <subtitle>Source: Wikipedia.org</subtitle>
+    <x-axis>
+        <categories>Africa, America, Asia, Europe, Oceania</categories>
+        <chart-title></chart-title>
+    </x-axis>
+    <y-axis min="0">
+        <chart-title align="high">Population (millions)</chart-title>
+        <labels overflow="justify"></labels>
+    </y-axis>
+    <tooltip value-suffix=" millions"></tooltip>
+    <plot-options>
+        <bar>
+            <data-labels enabled="true"></data-labels>
+        </bar>
+    </plot-options>
+    <legend layout="vertical" align="right" vertical-align="top" x="-40" y="80" floating="true" border-width="1"
+            background-color="#FFFFFF" shadow="true"></legend>
+    <data-series name="Year 1800">
+        <data>107, 31, 635, 203, 2</data>
+    </data-series>
+</vaadin-bar-chart>
+
+<vaadin-upload id="rejectEventDemo" max-files="3" max-file-size="1000000">
+  <div class="drop-label">
+    <iron-icon icon="file-upload"></iron-icon>
+    Accepts up to 3 PDF files, up to 1MB each
+  </div>
+</vaadin-upload>
+
+<vaadin-date-picker label="Birthday" value="2000-01-01"></vaadin-date-picker>
+<paper-button>
+  <iron-icon icon="vaadin-icons:check"></iron-icon>
+  Hello
+</paper-button>

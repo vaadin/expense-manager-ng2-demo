@@ -36,7 +36,8 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 SearchFilters = __decorate([
                     core_1.Component({
                         selector: 'search-filters',
-                        templateUrl: './app/search-filters/search_filters.component.html'
+                        templateUrl: './app/search-filters/search_filters.component.html',
+                        styleUrls: ['./app/search-filters/search_filters.component.css']
                     }), 
                     __metadata('design:paramtypes', [])
                 ], SearchFilters);

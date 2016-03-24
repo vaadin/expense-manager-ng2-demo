@@ -2,7 +2,8 @@ import {Component, EventEmitter, Output} from 'angular2/core';
 
 @Component({
   selector: 'search-filters',
-  templateUrl: './app/search-filters/search_filters.component.html'
+  templateUrl: './app/search-filters/search_filters.component.html',
+  styleUrls: ['./app/search-filters/search_filters.component.css']
 })
 export class SearchFilters {
 
