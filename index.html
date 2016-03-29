@@ -6,42 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <title>Expense Manager</title>
 
-  <style is="custom-style">
-    body {
-      width: 100% !important;
-      overflow-y: hidden;
-      display: flex;
-      flex-direction: column;
-      margin: 0;
-      height: 100vh;
-    }
-
-    body.loading {
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    #loadingScreen {
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      opacity: 1 !important;
-      background: url(images/app-icon.svg) #37474F center center no-repeat;
-      background-size: 200px 200px;
-      transition: opacity 400ms;
-    }
-
-    .ready #loadingScreen {
-      opacity: 0 !important;
-    }
-  </style>
-  <link rel="manifest" href="manifest.json">
-
-  <meta name="theme-color" content="#37474F" />
   <meta name="mobile-web-app-capable" content="yes" />
   <link rel="icon" sizes="192x192" href="images/app-icon-192.png" />
   <meta name="application-name" content="Expense Manager">
@@ -52,13 +16,19 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Expense Manager">
 
-  <!-- build:css styles/main.css -->
   <link rel="stylesheet" href="styles/main.css" async>
-  <!-- endbuild-->
 
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="bower_components/vaadin-grid/vaadin-grid.html">
   <link rel="import" href="bower_components/vaadin-combo-box/vaadin-combo-box.html">
+  <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+  <link rel="import" href="bower_components/vaadin-charts/vaadin-bar-chart.html">
+  <link rel="import" href="bower_components/vaadin-upload/vaadin-upload.html">
+  <link rel="import" href="bower_components/vaadin-date-picker/vaadin-date-picker.html">
+  <link rel="import" href="bower_components/vaadin-icons/vaadin-icons.html">
+  <link rel="import" href="bower_components/paper-input/paper-input.html">
+  <link rel="import" href="bower_components/paper-input/paper-textarea.html">
+
 
   <script src="node_modules/es6-shim/es6-shim.min.js"></script>
   <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
@@ -85,102 +55,12 @@
     });
   </script>
 
-  <!-- <link rel="import" id="bundle" href="elements/elements.html" async> -->
-  <!-- <link rel="import" href="./bower_components/polymer/polymer.html">
-    <link rel="import" id="bundle" href="./elements/expense-app.html">
-    <link rel="import" href="./styles/app-theme.html"> -->
-
-
-  <!-- import a component that relies on Polymer -->
-
-
-  <!-- <script src="https://code.angularjs.org/tools/system.js"></script>
-    <script src="https://code.angularjs.org/tools/typescript.js"></script>
-    <script>
-    System.config({
-      //use typescript for compilation
-      transpiler: 'typescript',
-      //typescript compiler options
-      typescriptOptions: {
-        emitDecoratorMetadata: true
-      },
-      //map tells the System loader where to look for things
-      map: {
-        app: "./src"
-      },
-      //packages defines our app package
-      packages: {
-        app: {
-          main: './app.ts',
-          defaultExtension: 'ts'
-        }
-      }
-    });
-    </script>
-    <script src="https://code.angularjs.org/2.0.0-beta.9/angular2-polyfills.min.js"></script>
-    <script src="https://code.angularjs.org/2.0.0-beta.9/Rx.min.js"></script>
-    <script src="https://code.angularjs.org/2.0.0-beta.9/angular2.min.js"></script>
-    <script src="https://code.angularjs.org/2.0.0-beta.9/http.min.js"></script>
-    <script src="https://code.angularjs.org/2.0.0-beta.9/router.min.js"></script>
-
-    <script>
-    System.import('app')
-      .catch(console.error.bind(console));
-  </script> -->
-
-
-  <script>
-    function onImportLoaded() {
-      var loadingScreen = document.querySelector('#loadingScreen');
-      loadingScreen.addEventListener('transitionend', function() {
-        // Remove the loading screen from DOM after CSS transition.
-        document.body.removeChild(loadingScreen);
-      });
-
-      document.body.classList.remove('loading');
-      document.body.classList.add('ready');
-      var appElement = document.createElement('expense-app');
-      document.body.appendChild(appElement);
-    }
-
-    function finishLazyLoading() {
-      var link = document.querySelector('#bundle');
-      if (link.import && link.import.readyState === 'complete') {
-        onImportLoaded();
-      } else {
-        link.addEventListener('load', onImportLoaded);
-      }
-    }
-  </script>
-
-
-  <link rel="import" href="./bower_components/paper-header-panel/paper-header-panel.html">
-  <link rel="import" href="./bower_components/paper-toast/paper-toast.html">
-  <link rel="import" href="./bower_components/paper-header-panel/paper-header-panel.html">
-  <link rel="import" href="./bower_components/paper-toolbar/paper-toolbar.html">
-  <link rel="import" href="./bower_components/paper-icon-button/paper-icon-button.html">
-  <link rel="import" href="./bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
-  <link rel="import" href="./bower_components/neon-animation/animations/hero-animation.html">
-  <link rel="import" href="./bower_components/neon-animation/animations/fade-in-animation.html">
-  <link rel="import" href="./bower_components/neon-animation/animations/fade-out-animation.html">
-
-  <link rel="import" href="./bower_components/vaadin-charts/vaadin-bar-chart.html">
-  <link rel="import" href="./bower_components/vaadin-upload/vaadin-upload.html">
-  <link rel="import" href="./bower_components/vaadin-date-picker/vaadin-date-picker.html">
-  <link rel="import" href="./bower_components/vaadin-icons/vaadin-icons.html">
-  <link rel="import" href="./bower_components/iron-ajax/iron-ajax.html">
-
 </head>
 
 <body>
-  <!-- <body onload="finishLazyLoading()"> -->
-  <!-- <div id="loadingScreen"></div>
-    <span id="browser-sync-binding"></span> -->
-  <!-- <login-page> -->
   <expense-app>
     loading...
   </expense-app>
-
 </body>
 
 </html>

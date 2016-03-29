@@ -58,8 +58,8 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-grid/vaadin_grid.d
                 ExpensesList.prototype.selected = function (grid) {
                     var _this = this;
                     var selection = grid.selection.selected();
-                    grid.selection.clear();
                     if (selection.length === 1) {
+                        grid.selection.clear();
                         grid.getItem(selection[0], function (err, item) {
                             _this.editExpense.emit(item);
                         });

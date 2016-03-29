@@ -3,18 +3,30 @@ import {Directive, ViewContainerRef} from 'angular2/core';
 
 /*
 * This directive aims to overcome the current issues in integrating vaadin-grid 1.0 to an Angular 2 app.
-* The problems mainly relate to using a <table> element for configuring the grid.
 */
 @Directive({
   selector: 'vaadin-grid'
 })
 export class VaadinGrid {
+
+  stopper: Function = (e) => {
+    e.stopPropagation();
+  }
+
+  ngOnInit() {
+    const grid = this.viewContainer.element.nativeElement
+    grid.parentElement.removeEventListener('selected-items-changed', this.stopper, true);
+  }
+
   constructor(public viewContainer: ViewContainerRef) {
+    // Need to stop selected-items-changed events during init to
+    // avoid "Attempt to use a dehydrated detector" error.
     const grid = viewContainer.element.nativeElement;
+    grid.parentElement.addEventListener('selected-items-changed', this.stopper, true);
 
     // Configuration <table> might be placed in a wrong container.
     // Let's move it in the light dom programmatically to fix that.
-    var localDomTable = grid.querySelector("table:not(.vaadin-grid)");
+    const localDomTable = grid.querySelector("table:not(.vaadin-grid)");
     if (localDomTable) {
       Polymer.dom(grid).appendChild(localDomTable);
     }

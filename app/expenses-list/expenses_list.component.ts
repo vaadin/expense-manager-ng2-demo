@@ -49,8 +49,8 @@ export class ExpensesList {
 
   selected(grid) {
     var selection = grid.selection.selected();
-    grid.selection.clear();
     if (selection.length === 1) {
+      grid.selection.clear();
       grid.getItem(selection[0], (err, item) => {
         this.editExpense.emit(item);
       });

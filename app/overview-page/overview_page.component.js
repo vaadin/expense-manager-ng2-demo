@@ -1,6 +1,4 @@
-System.register(['angular2/core', 'angular2/http', '../expenses-list/expenses_list.component', '../overview-panel/overview_panel.component'], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(['angular2/core', 'angular2/http', '../expenses-list/expenses_list.component', '../overview-panel/overview_panel.component', '../expense-editor/expense_editor.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,7 +8,7 @@ System.register(['angular2/core', 'angular2/http', '../expenses-list/expenses_li
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, expenses_list_component_1, overview_panel_component_1;
+    var core_1, http_1, expenses_list_component_1, overview_panel_component_1, expense_editor_component_1;
     var OverviewPage;
     return {
         setters:[
@@ -25,14 +23,17 @@ System.register(['angular2/core', 'angular2/http', '../expenses-list/expenses_li
             },
             function (overview_panel_component_1_1) {
                 overview_panel_component_1 = overview_panel_component_1_1;
+            },
+            function (expense_editor_component_1_1) {
+                expense_editor_component_1 = expense_editor_component_1_1;
             }],
         execute: function() {
             OverviewPage = (function () {
                 function OverviewPage() {
                 }
-                OverviewPage.prototype.editExpense = function (expense, editor) {
+                OverviewPage.prototype.editExpense = function (expense, editor, dialog) {
                     editor.expense = expense;
-                    //editor.open();
+                    dialog.open();
                 };
                 __decorate([
                     core_1.Input(), 
@@ -42,13 +43,13 @@ System.register(['angular2/core', 'angular2/http', '../expenses-list/expenses_li
                     core_1.Component({
                         selector: 'overview-page',
                         templateUrl: './app/overview-page/overview_page.component.html',
-                        directives: [expenses_list_component_1.ExpensesList, overview_panel_component_1.OverviewPanel],
-                        styles: ["\n      .content {\n        display: flex;\n      }\n      expenses-list {\n        flex: 1;\n      }\n      overview-panel {\n        width: 33%;\n        max-width: 300px;\n        background: #80CBC4;\n        z-index: 1;\n      }\n      .toolbar {\n        display: flex;\n        align-items: center;\n        justify-content: space-between;\n        padding: 0 20px;\n        background: #37474F;\n        color: #fff;\n      }\n    "]
+                        directives: [expenses_list_component_1.ExpensesList, overview_panel_component_1.OverviewPanel, expense_editor_component_1.ExpenseEditor],
+                        styles: ["\n      .content {\n        display: flex;\n      }\n      expenses-list {\n        flex: 1;\n      }\n      overview-panel {\n        width: 33%;\n        max-width: 300px;\n        background: #80CBC4;\n        z-index: 1;\n      }\n      .toolbar {\n        display: flex;\n        align-items: center;\n        justify-content: space-between;\n        padding: 0 20px;\n        background: #37474F;\n        color: #fff;\n      }\n      paper-dialog {\n        display: block;\n        padding: 16px 32px 64px 32px;\n        border: 1px solid #ccc;\n        position: absolute;\n        top: 0;\n        margin: 0;\n        width: 80vw;\n        height: 100vh;\n      }\n      expense-editor {\n        display: flex;\n        flex-direction: column;\n        height: 100%;\n      }\n    "]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], OverviewPage);
                 return OverviewPage;
-            }());
+            })();
             exports_1("OverviewPage", OverviewPage);
         }
     }
