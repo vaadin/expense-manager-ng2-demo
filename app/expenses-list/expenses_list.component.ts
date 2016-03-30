@@ -1,13 +1,13 @@
 import {Component, Input, Output, EventEmitter} from 'angular2/core';
 import {Http} from 'angular2/http';
-import {VaadinGrid} from '../vaadin-grid/vaadin_grid.directive';
+import {VaadinElement} from '../vaadin-element/vaadin_element.directive';
 import {SearchFilters} from '../search-filters/search_filters.component';
 
 @Component({
   selector: 'expenses-list',
   templateUrl: './app/expenses-list/expenses_list.component.html',
   styleUrls: ['./app/expenses-list/expenses_list.component.css'],
-  directives: [VaadinGrid, SearchFilters]
+  directives: [VaadinElement, SearchFilters]
 })
 export class ExpensesList {
 

@@ -1,5 +1,8 @@
 import {Component, Output, EventEmitter} from 'angular2/core'
+import {NgForm}    from 'angular2/common';
 import {PolymerElement} from '../polymer-element/polymer_element.directive';
+import {VaadinElement} from '../vaadin-element/vaadin_element.directive';
+
 
 @Component({
   selector: 'expense-editor',
@@ -11,24 +14,28 @@ import {PolymerElement} from '../polymer-element/polymer_element.directive';
 
     <div class="wrapper">
       <div class="form">
-        <iron-a11y-keys keys="enter" on-keys-pressed="_save"></iron-a11y-keys>
-        <paper-input name="merchant" id="merchant" label="Merchant" auto-validate required error-message="Merchant name required"></paper-input>
-        <paper-input polymer-element name="total" id="total" label="Total" auto-validate required pattern="[\d,.]+" error-message="Numeric values only">
-          <div prefix>$</div>
-        </paper-input>
+        <form (ngSubmit)="onSubmit()" #expenseForm="ngForm">
+          <paper-input #merchant ngControl="merchant" ngDefaultControl [value]="expense.merchant" (value-changed)="expense.merchant=$event.detail.value; merchant.fire('input');" label="Merchant" auto-validate required error-message="Merchant name required"></paper-input>
+          <paper-input #total ngControl="total" ngDefaultControl [value]="expense.total" (value-changed)="expense.total=$event.detail.value; total.fire('input');" polymer-element label="Total" auto-validate required pattern="[0-9,.]+" error-message="Numeric values only">
+            <div prefix>$</div>
+          </paper-input>
 
-        <vaadin-date-picker label="Date" id="date" name="date" auto-validate></vaadin-date-picker>
-        <paper-textarea id="comment" name="comment" label="Comment" value=""></paper-textarea>
+          <vaadin-date-picker #spy ngControl="date" ngDefaultControl name="date" auto-validate required [value]="expense.date" (value-changed)="expense.date=$event.detail.value" label="Date"></vaadin-date-picker>
 
-        <input type="file" accept="image/jpeg" id="receiptupload" name="receipt" capture="camera" hidden>
-        <span id="error">{{errorText}}</span>
+          <paper-textarea value="{{expense.comment}}" id="comment" name="comment" label="Comment" value=""></paper-textarea>
+
+          <input type="file" accept="image/jpeg" id="receiptupload" name="receipt" capture="camera" hidden>
+          <span id="error">{{errorText}}</span>
+
+        </form>
       </div>
+
       <div class="receipt">
         <vaadin-upload></vaadin-upload>
       </div>
     </div>
     <div class="buttons-layout">
-      <paper-button raised (click)="_save" class="save-button">Save</paper-button>
+      <paper-button raised (click)="expenseForm.submit()" class="save-button" [disabled]="!expenseForm.form.valid">Save</paper-button>
       <paper-button (click)="closeEditor.emit()" class="cancel-button">Cancel</paper-button>
       <paper-button (click)="_delete" id="delete" class="delete-button">Delete</paper-button>
     </div>
@@ -60,16 +67,24 @@ import {PolymerElement} from '../polymer-element/polymer_element.directive';
         background: #F7F8F8;
       }
     `],
-  directives: [PolymerElement]
+  directives: [PolymerElement, VaadinElement]
 })
 export class ExpenseEditor {
 
   heading: String = 'Edit expense'
 
+  expense: Object = {comment: ''}
+
+  items = ['foo', 'bar']
+
   @Output() closeEditor = new EventEmitter();
 
   constructor() {
 
+  }
+
+  onSubmit() {
+    
   }
 
 
