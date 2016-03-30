@@ -11,9 +11,9 @@
     var resultArray = expenses.filter(function(item) {
       return !merchant || item.merchant === merchant;
     }).filter(function(item) {
-      return !min || item.total >= min;
+      return !min || item.total >= parseInt(min);
     }).filter(function(item) {
-      return !max || item.total <= max;
+      return !max || item.total <= parseInt(max);
     });
 
     // Concat enough arrays to satisfy the requested range
