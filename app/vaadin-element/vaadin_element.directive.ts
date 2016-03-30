@@ -5,7 +5,7 @@ import {Directive, ViewContainerRef} from 'angular2/core';
 * This directive aims to overcome the current issues in integrating vaadin-elements to an Angular 2 app.
 */
 @Directive({
-  selector: 'vaadin-grid, vaadin-combo-box, vaadin-date-picker, vaadin-upload'
+  selector: 'vaadin-grid, vaadin-combo-box, vaadin-date-picker, vaadin-upload, [vaadin-element]'
 })
 export class VaadinElement {
 
@@ -22,30 +22,37 @@ export class VaadinElement {
   constructor(public viewContainer: ViewContainerRef) {
     this.element = viewContainer.element.nativeElement;
 
-    if (this.element.is === 'vaadin-grid') {
-      const grid = this.element;
+    /*
+    * common workarounds
+    */
+    // Move all elements targeted to light dom to the actual light dom with Polymer apis
+    var misplaced;
+    while (misplaced = this.element.querySelector("*:not(.style-scope)")) {
+      Polymer.dom(this.element).appendChild(misplaced);
+    }
 
-      // Need to stop selected-items-changed events during init to
+    /*
+    * vaadin-grid workarounds
+    */
+    if (this.element.is === 'vaadin-grid') {
+      // Need to stop selected-items-changed events during grid init to
       // avoid "Attempt to use a dehydrated detector" error.
       window.addEventListener('selected-items-changed', this.stopper, true);
 
-      // Configuration <table> might be placed in a wrong container.
-      // Let's move it in the light dom programmatically to fix that.
-      const localDomTable = grid.querySelector("table:not(.style-scope)");
-      if (localDomTable) {
-        Polymer.dom(grid).appendChild(localDomTable);
-      }
-
       // vaadin-grid 1.0 doesn't support placing a configuration table dynamically. A hacky workaround needed for now.
-      const _c = grid._grid.c;
+      const _c = this.element._grid.c;
       try {
-        grid._grid.c = null;
-        grid._grid.init(grid, grid._findTableElement(Polymer.dom(grid).children), Polymer.dom(grid.root), grid.$.measureobject);
+        this.element._grid.c = null;
+        this.element._grid.init(this.element, this.element._findTableElement(Polymer.dom(this.element).children), Polymer.dom(this.element.root), this.element.$.measureobject);
       } catch (e) {
-        grid._grid.c = _c;
+        // Ignore
       }
+      this.element._grid.c = _c;
     }
 
+    /*
+    * Common workarounds for vaadin-combo-box and vaadin-date-picker
+    */
     if (this.element.is === 'vaadin-combo-box' || this.element.is === 'vaadin-date-picker') {
       // Need to fire 'input' event manually so ngControl can react to changes
       this.element.addEventListener('value-changed', () => {
@@ -53,15 +60,19 @@ export class VaadinElement {
       });
       // Need to fire 'blur' event manually so ngControl can react to changes
       this.element.$$('paper-input-container').addEventListener('blur', () => {
-        if (!this.element.opened && !this.element._opened){
+        if (!this.element.opened && !this.element._opened) {
           this.element.fire('blur');
         }
       });
     }
 
-
-
-
+    /*
+    * Vaadin Charts workarounds
+    */
+    if (this.element.reloadConfiguration) {
+      // Charts need reloadConfiguration called if light dom configuration changes dynamically
+      this.element.reloadConfiguration();
+    }
 
   }
 }

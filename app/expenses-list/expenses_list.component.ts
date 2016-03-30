@@ -6,7 +6,6 @@ import {SearchFilters} from '../search-filters/search_filters.component';
 @Component({
   selector: 'expenses-list',
   templateUrl: './app/expenses-list/expenses_list.component.html',
-  styleUrls: ['./app/expenses-list/expenses_list.component.css'],
   directives: [VaadinElement, SearchFilters]
 })
 export class ExpensesList {

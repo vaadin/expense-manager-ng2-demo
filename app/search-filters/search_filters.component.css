@@ -1,6 +1,6 @@
 :host {
-  display: block;
-  padding: 0 12px;
+  display: flex;
+  padding: 0 12px 24px;
 }
 
 .status {

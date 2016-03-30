@@ -27,27 +27,34 @@ System.register(['angular2/core'], function(exports_1) {
                         e.stopPropagation();
                     };
                     this.element = viewContainer.element.nativeElement;
+                    /*
+                    * common workarounds
+                    */
+                    // Move all elements targeted to light dom to the actual light dom with Polymer apis
+                    var misplaced;
+                    while (misplaced = this.element.querySelector("*:not(.style-scope)")) {
+                        Polymer.dom(this.element).appendChild(misplaced);
+                    }
+                    /*
+                    * vaadin-grid workarounds
+                    */
                     if (this.element.is === 'vaadin-grid') {
-                        var grid = this.element;
-                        // Need to stop selected-items-changed events during init to
+                        // Need to stop selected-items-changed events during grid init to
                         // avoid "Attempt to use a dehydrated detector" error.
                         window.addEventListener('selected-items-changed', this.stopper, true);
-                        // Configuration <table> might be placed in a wrong container.
-                        // Let's move it in the light dom programmatically to fix that.
-                        var localDomTable = grid.querySelector("table:not(.style-scope)");
-                        if (localDomTable) {
-                            Polymer.dom(grid).appendChild(localDomTable);
-                        }
                         // vaadin-grid 1.0 doesn't support placing a configuration table dynamically. A hacky workaround needed for now.
-                        var _c = grid._grid.c;
+                        var _c = this.element._grid.c;
                         try {
-                            grid._grid.c = null;
-                            grid._grid.init(grid, grid._findTableElement(Polymer.dom(grid).children), Polymer.dom(grid.root), grid.$.measureobject);
+                            this.element._grid.c = null;
+                            this.element._grid.init(this.element, this.element._findTableElement(Polymer.dom(this.element).children), Polymer.dom(this.element.root), this.element.$.measureobject);
                         }
                         catch (e) {
-                            grid._grid.c = _c;
                         }
+                        this.element._grid.c = _c;
                     }
+                    /*
+                    * Common workarounds for vaadin-combo-box and vaadin-date-picker
+                    */
                     if (this.element.is === 'vaadin-combo-box' || this.element.is === 'vaadin-date-picker') {
                         // Need to fire 'input' event manually so ngControl can react to changes
                         this.element.addEventListener('value-changed', function () {
@@ -60,13 +67,20 @@ System.register(['angular2/core'], function(exports_1) {
                             }
                         });
                     }
+                    /*
+                    * Vaadin Charts workarounds
+                    */
+                    if (this.element.reloadConfiguration) {
+                        // Charts need reloadConfiguration called if light dom configuration changes dynamically
+                        this.element.reloadConfiguration();
+                    }
                 }
                 VaadinElement.prototype.ngOnInit = function () {
                     window.removeEventListener('selected-items-changed', this.stopper, true);
                 };
                 VaadinElement = __decorate([
                     core_1.Directive({
-                        selector: 'vaadin-grid, vaadin-combo-box, vaadin-date-picker, vaadin-upload'
+                        selector: 'vaadin-grid, vaadin-combo-box, vaadin-date-picker, vaadin-upload, [vaadin-element]'
                     }), 
                     __metadata('design:paramtypes', [core_1.ViewContainerRef])
                 ], VaadinElement);

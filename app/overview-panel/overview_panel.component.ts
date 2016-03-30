@@ -1,11 +1,11 @@
 import {Component} from 'angular2/core';
-import {VaadinBarChart} from '../vaadin-bar-chart/vaadin_bar_chart.directive';
+import {VaadinElement} from '../vaadin-element/vaadin_element.directive';
 
 @Component({
     selector: 'overview-panel',
     templateUrl: './app/overview-panel/overview_panel.component.html',
     styleUrls: ['./app/overview-panel/overview_panel.component.css'],
-    directives: [VaadinBarChart]
+    directives: [VaadinElement]
 })
 export class OverviewPanel {
 

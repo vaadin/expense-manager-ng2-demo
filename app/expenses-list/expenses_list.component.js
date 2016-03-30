@@ -78,7 +78,6 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-element/vaadin_ele
                     core_1.Component({
                         selector: 'expenses-list',
                         templateUrl: './app/expenses-list/expenses_list.component.html',
-                        styleUrls: ['./app/expenses-list/expenses_list.component.css'],
                         directives: [vaadin_element_directive_1.VaadinElement, search_filters_component_1.SearchFilters]
                     }), 
                     __metadata('design:paramtypes', [])
