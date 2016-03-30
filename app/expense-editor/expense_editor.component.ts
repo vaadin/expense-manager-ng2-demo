@@ -9,34 +9,32 @@ import {VaadinElement} from '../vaadin-element/vaadin_element.directive';
   template: `
     <div class="main-layout">
       <h2>{{heading}}</h2>
-      <paper-icon-button icon="close" (click)="closeEditor.emit()" class="close-button self-start"></paper-icon-button>
+      <paper-icon-button icon="close" (click)="close()" class="close-button self-start"></paper-icon-button>
     </div>
 
     <div class="wrapper">
       <div class="form">
-        <form (ngSubmit)="onSubmit()" #expenseForm="ngForm">
-          <paper-input #merchant ngControl="merchant" ngDefaultControl [value]="expense.merchant" (value-changed)="expense.merchant=$event.detail.value; merchant.fire('input');" label="Merchant" auto-validate required error-message="Merchant name required"></paper-input>
-          <paper-input #total ngControl="total" ngDefaultControl [value]="expense.total" (value-changed)="expense.total=$event.detail.value; total.fire('input');" polymer-element label="Total" auto-validate required pattern="[0-9,.]+" error-message="Numeric values only">
+        <form (ngSubmit)="onSubmit($event.value)" #expenseForm="ngForm">
+          <paper-input #merchant ngControl="merchant" ngDefaultControl [value]="expense.merchant" (value-changed)="merchant.fire('input');" label="Merchant" auto-validate required error-message="Merchant name required"></paper-input>
+          <paper-input #total ngControl="total" ngDefaultControl [value]="expense.total" (value-changed)="total.fire('input');" polymer-element label="Total" auto-validate required pattern="[0-9,.]+" error-message="Numeric values only">
             <div prefix>$</div>
           </paper-input>
 
-          <vaadin-date-picker #spy ngControl="date" ngDefaultControl name="date" auto-validate required [value]="expense.date" (value-changed)="expense.date=$event.detail.value" label="Date"></vaadin-date-picker>
+          <vaadin-date-picker ngControl="date" ngDefaultControl auto-validate required [value]="expense.date" label="Date"></vaadin-date-picker>
 
-          <paper-textarea value="{{expense.comment}}" id="comment" name="comment" label="Comment" value=""></paper-textarea>
+          <paper-textarea #comment ngControl="comment" ngDefaultControl [value]="expense.comment" (value-changed)="comment.fire('input');" label="Comment"></paper-textarea>
 
-          <input type="file" accept="image/jpeg" id="receiptupload" name="receipt" capture="camera" hidden>
-          <span id="error">{{errorText}}</span>
-
+          <vaadin-upload></vaadin-upload>
         </form>
       </div>
 
       <div class="receipt">
-        <vaadin-upload></vaadin-upload>
+
       </div>
     </div>
     <div class="buttons-layout">
-      <paper-button raised (click)="expenseForm.submit()" class="save-button" [disabled]="!expenseForm.form.valid">Save</paper-button>
-      <paper-button (click)="closeEditor.emit()" class="cancel-button">Cancel</paper-button>
+      <paper-button raised [disabled]="!expenseForm.form.valid" (click)="expenseForm.ngSubmit.emit(expenseForm)" class="save-button">Save</paper-button>
+      <paper-button (click)="close()" class="cancel-button">Cancel</paper-button>
       <paper-button (click)="_delete" id="delete" class="delete-button">Delete</paper-button>
     </div>
   `,
@@ -73,18 +71,21 @@ export class ExpenseEditor {
 
   heading: String = 'Edit expense'
 
-  expense: Object = {comment: ''}
-
-  items = ['foo', 'bar']
+  expense: Object = {}
 
   @Output() closeEditor = new EventEmitter();
 
-  constructor() {
+  onSubmit(updated) {
+    // Should save changes to some backend API probably
+    // but we'll just update the object in this demo instead
+    Object.assign(this.expense, updated);
 
+    this.close();
   }
 
-  onSubmit() {
-    
+  close() {
+    this.closeEditor.emit();
+    this.expense = {};
   }
 
 

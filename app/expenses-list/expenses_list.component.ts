@@ -22,29 +22,30 @@ export class ExpensesList {
   }
 
   expenses(params, callback) {
-    this.$.http.get('./app/expenses-dev.json')
-      .subscribe(response => {
-        var result = response.json();
-        var filters = this.$.filters;
-        if (filters) {
-          result = result.filter((item) => {
-            return !filters.merchant || item.merchant === filters.merchant;
-          }).filter((item) => {
-            return !filters.min || item.total >= filters.min;
-          }).filter((item) => {
-            return !filters.max || item.total <= filters.max;
-          });
-        }
-        callback(result, result.length);
-      }
-    );
+    const filters = this.$.filters || {};
+
+    var url = './api?index=' + params.index +
+    '&count=' + params.count +
+    '&merchant=' + (filters.merchant || '') +
+    '&min=' + (filters.min || '') +
+    '&max=' + (filters.max || '');
+
+    //this.$.http.get(url)
+    //  .subscribe(response => {...});
+    // In this demo we'll use a dummy datasource instead of an actual xhr
+    var totalCount = 2000;
+    totalCount -= filters.merchant ? 1000 : 0;
+    totalCount -= filters.min ? 300 : 0;
+    totalCount -= filters.max ? 300 : 0;
+    window.getJSON(url, (data) => {
+      callback(data, totalCount);
+    });
   }
 
   filtersChange(filters, grid) {
     this.filters = filters;
     grid.scrollToStart();
     grid.refreshItems();
-
   }
 
   selected(grid) {
@@ -55,5 +56,9 @@ export class ExpensesList {
         this.editExpense.emit(item);
       });
     }
+  }
+
+  refreshItems(grid) {
+    grid.refreshItems();
   }
 }

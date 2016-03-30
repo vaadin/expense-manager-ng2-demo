@@ -31,21 +31,21 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-element/vaadin_ele
                     this.expenses.$ = this;
                 }
                 ExpensesList.prototype.expenses = function (params, callback) {
-                    var _this = this;
-                    this.$.http.get('./app/expenses-dev.json')
-                        .subscribe(function (response) {
-                        var result = response.json();
-                        var filters = _this.$.filters;
-                        if (filters) {
-                            result = result.filter(function (item) {
-                                return !filters.merchant || item.merchant === filters.merchant;
-                            }).filter(function (item) {
-                                return !filters.min || item.total >= filters.min;
-                            }).filter(function (item) {
-                                return !filters.max || item.total <= filters.max;
-                            });
-                        }
-                        callback(result, result.length);
+                    var filters = this.$.filters || {};
+                    var url = './api?index=' + params.index +
+                        '&count=' + params.count +
+                        '&merchant=' + (filters.merchant || '') +
+                        '&min=' + (filters.min || '') +
+                        '&max=' + (filters.max || '');
+                    //this.$.http.get(url)
+                    //  .subscribe(response => {...});
+                    // In this demo we'll use a dummy datasource instead of an actual xhr
+                    var totalCount = 2000;
+                    totalCount -= filters.merchant ? 1000 : 0;
+                    totalCount -= filters.min ? 300 : 0;
+                    totalCount -= filters.max ? 300 : 0;
+                    window.getJSON(url, function (data) {
+                        callback(data, totalCount);
                     });
                 };
                 ExpensesList.prototype.filtersChange = function (filters, grid) {
@@ -62,6 +62,9 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-element/vaadin_ele
                             _this.editExpense.emit(item);
                         });
                     }
+                };
+                ExpensesList.prototype.refreshItems = function (grid) {
+                    grid.refreshItems();
                 };
                 __decorate([
                     core_1.Input(), 

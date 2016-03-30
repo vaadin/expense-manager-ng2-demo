@@ -54,4 +54,11 @@ export class OverviewPage {
     editor.expense = expense;
     dialog.open();
   }
+
+
+  closeEditor(dialog, list) {
+    dialog.close();
+    //TODO: BAAAD! Fix now
+    list.refreshItems(document.querySelector('vaadin-grid'));
+  }
 }
