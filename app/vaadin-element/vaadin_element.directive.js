@@ -31,10 +31,12 @@ System.register(['angular2/core'], function(exports_1) {
                     * common workarounds
                     */
                     // Move all elements targeted to light dom to the actual light dom with Polymer apis
-                    var misplaced;
-                    while (misplaced = this.element.querySelector("*:not(.style-scope)")) {
-                        Polymer.dom(this.element).appendChild(misplaced);
-                    }
+                    var misplaced = this.element.querySelectorAll("*:not(.style-scope)");
+                    [].forEach.call(misplaced, function (e) {
+                        if (e.parentElement === this.element) {
+                            Polymer.dom(this.element).appendChild(e);
+                        }
+                    });
                     /*
                     * vaadin-grid workarounds
                     */

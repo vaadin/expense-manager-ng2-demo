@@ -1,6 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(['angular2/core'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -36,13 +34,13 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 SearchFilters = __decorate([
                     core_1.Component({
                         selector: 'search-filters',
-                        templateUrl: './app/search-filters/search_filters.component.html',
+                        template: "\n    <vaadin-combo-box class=\"merchants\" [items]=\"merchants\" label=\"Merchant\" (value-changed)=\"filters.merchant = $event.target.value; filtersChanged();\"></vaadin-combo-box>\n    <paper-input placeholder=\"Min\" (keyup)=\"filters.min = $event.target.value; filtersChanged();\"></paper-input>\n    <paper-input placeholder=\"Max\" (keyup)=\"filters.max = $event.target.value; filtersChanged();\"></paper-input>\n  ",
                         styleUrls: ['./app/search-filters/search_filters.component.css']
                     }), 
                     __metadata('design:paramtypes', [])
                 ], SearchFilters);
                 return SearchFilters;
-            }());
+            })();
             exports_1("SearchFilters", SearchFilters);
         }
     }

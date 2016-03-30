@@ -8,9 +8,12 @@ export class PolymerElement {
   constructor(public viewContainer: ViewContainerRef) {
     const element = viewContainer.element.nativeElement;
     // Move all elements targeted to light dom to the actual light dom with Polymer apis
-    var misplaced;
-    while (misplaced = element.querySelector("*:not(.style-scope)")) {
-      Polymer.dom(element).appendChild(misplaced);
-    }
+    const misplaced = element.querySelectorAll("*:not(.style-scope)");
+    [].forEach.call(misplaced, function(e) {
+      if (e.parentElement === element) {
+        Polymer.dom(element).appendChild(e);
+      }
+    });
+
   }
 }

@@ -33,9 +33,8 @@ import {VaadinElement} from '../vaadin-element/vaadin_element.directive';
       </div>
     </div>
     <div class="buttons-layout">
-      <paper-button raised [disabled]="!expenseForm.form.valid" (click)="expenseForm.ngSubmit.emit(expenseForm)" class="save-button">Save</paper-button>
-      <paper-button (click)="close()" class="cancel-button">Cancel</paper-button>
-      <paper-button (click)="_delete" id="delete" class="delete-button">Delete</paper-button>
+      <paper-button raised [disabled]="!expenseForm.form.valid" (click)="expenseForm.ngSubmit.emit(expenseForm)">Save</paper-button>
+      <paper-button (click)="close()">Cancel</paper-button>
     </div>
   `,
   styles: [`
@@ -73,7 +72,7 @@ export class ExpenseEditor {
 
   @Output() closeEditor = new EventEmitter();
 
-  onSubmit(updated) {
+  private onSubmit(updated) {
     // Should save changes to some backend API probably
     // but we'll just update the object in this demo instead
     Object.assign(this.expense, updated);
@@ -81,7 +80,7 @@ export class ExpenseEditor {
     this.close();
   }
 
-  close() {
+  private close() {
     this.closeEditor.emit();
     this.expense = {};
   }

@@ -31,7 +31,7 @@ import {ExpenseEditor} from '../expense-editor/expense_editor.component';
       }
       paper-dialog {
         display: block;
-        padding: 16px 32px 64px 32px;
+        padding: 16px 32px;
         border: 1px solid #ccc;
         position: absolute;
         top: 0;
@@ -43,6 +43,8 @@ import {ExpenseEditor} from '../expense-editor/expense_editor.component';
         display: flex;
         flex-direction: column;
         height: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
       }
     `]
 })
@@ -50,12 +52,12 @@ export class OverviewPage {
 
   @Input() http: Http;
 
-  editExpense(expense, editor, dialog) {
+  private editExpense(expense, editor, dialog) {
     editor.expense = expense;
     dialog.open();
   }
 
-  closeEditor(dialog, list) {
+  private closeEditor(dialog, list) {
     dialog.close();
     //TODO: BAAAD! Fix now
     list.refreshItems(document.querySelector('vaadin-grid'));
