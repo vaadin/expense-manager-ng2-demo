@@ -21,10 +21,10 @@ export class ExpensesList {
     this.expenses.$ = this;
   }
 
-  expenses(params, callback) {
+  private expenses(params, callback) {
     const filters = this.$.filters || {};
 
-    var url = './api?index=' + params.index +
+    const url = './api?index=' + params.index +
     '&count=' + params.count +
     '&merchant=' + (filters.merchant || '') +
     '&min=' + (filters.min || '') +
@@ -42,13 +42,13 @@ export class ExpensesList {
     });
   }
 
-  filtersChange(filters, grid) {
+  private filtersChange(filters, grid) {
     this.filters = filters;
     grid.scrollToStart();
     grid.refreshItems();
   }
 
-  selected(grid) {
+  private selected(grid) {
     var selection = grid.selection.selected();
     if (selection.length === 1) {
       grid.selection.clear();

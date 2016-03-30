@@ -55,7 +55,6 @@ export class OverviewPage {
     dialog.open();
   }
 
-
   closeEditor(dialog, list) {
     dialog.close();
     //TODO: BAAAD! Fix now

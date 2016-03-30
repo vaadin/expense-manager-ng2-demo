@@ -8,7 +8,7 @@ import {VaadinElement} from '../vaadin-element/vaadin_element.directive';
   selector: 'expense-editor',
   template: `
     <div class="main-layout">
-      <h2>{{heading}}</h2>
+      <h2>Edit expense</h2>
       <paper-icon-button icon="close" (click)="close()" class="close-button self-start"></paper-icon-button>
     </div>
 
@@ -68,8 +68,6 @@ import {VaadinElement} from '../vaadin-element/vaadin_element.directive';
   directives: [PolymerElement, VaadinElement]
 })
 export class ExpenseEditor {
-
-  heading: String = 'Edit expense'
 
   expense: Object = {}
 
