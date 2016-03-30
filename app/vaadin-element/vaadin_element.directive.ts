@@ -27,7 +27,7 @@ export class VaadinElement {
     */
     // Move all elements targeted to light dom to the actual light dom with Polymer apis
     const misplaced = this.element.querySelectorAll("*:not(.style-scope)");
-    [].forEach.call(misplaced, function(e) {
+    [].forEach.call(misplaced, (e) => {
       if (e.parentElement === this.element) {
         Polymer.dom(this.element).appendChild(e);
       }

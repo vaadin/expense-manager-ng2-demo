@@ -9,7 +9,7 @@ export class PolymerElement {
     const element = viewContainer.element.nativeElement;
     // Move all elements targeted to light dom to the actual light dom with Polymer apis
     const misplaced = element.querySelectorAll("*:not(.style-scope)");
-    [].forEach.call(misplaced, function(e) {
+    [].forEach.call(misplaced, (e) => {
       if (e.parentElement === element) {
         Polymer.dom(element).appendChild(e);
       }
