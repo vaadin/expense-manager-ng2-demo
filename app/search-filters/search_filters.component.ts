@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from 'angular2/core';
+import {Component, EventEmitter, Output, Input} from 'angular2/core';
 
 @Component({
   selector: 'search-filters',
@@ -15,9 +15,7 @@ export class SearchFilters {
 
   @Output() filtersChange = new EventEmitter();
 
-  merchants: string[] = ["Airline", "Rental car", "Taxi", "Restaurant",
-    "Breakfast", "Office supplies", "Fast food", "Electronics", "Parking",
-    "Hotel", "Shuttle", "Ride sharing"];
+  @Input() merchants: string[];
 
   private filtersChanged() {
     this.filtersChange.emit(this.filters);

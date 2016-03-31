@@ -1,30 +1,42 @@
 (function() {
   window.getJSON = function(url, callback) {
-    var index = parseInt(getParameterByName(url, 'index') || 0);
-    var count = parseInt(getParameterByName(url, 'count') || 200);
+    if (url.indexOf('expenses') > -1) {
+      var index = parseInt(getParameterByName(url, 'index') || 0);
+      var count = parseInt(getParameterByName(url, 'count') || 200);
 
-    var merchant = getParameterByName(url, 'merchant');
-    var min = getParameterByName(url, 'min');
-    var max = getParameterByName(url, 'max');
+      var merchant = getParameterByName(url, 'merchant');
+      var min = getParameterByName(url, 'min');
+      var max = getParameterByName(url, 'max');
 
-    // Filter users by merchant
-    var resultArray = expenses.filter(function(item) {
-      return !merchant || item.merchant === merchant;
-    }).filter(function(item) {
-      return !min || item.total >= parseInt(min);
-    }).filter(function(item) {
-      return !max || item.total <= parseInt(max);
-    });
+      // Filter users by merchant
+      var resultArray = expenses.filter(function(item) {
+        return !merchant || item.merchant === merchant;
+      }).filter(function(item) {
+        return !min || item.total >= parseInt(min);
+      }).filter(function(item) {
+        return !max || item.total <= parseInt(max);
+      });
 
-    // Concat enough arrays to satisfy the requested range
-    while (resultArray.length > 0 && resultArray.length <= index + count) {
-      resultArray = resultArray.concat(resultArray);
+      // Concat enough arrays to satisfy the requested range
+      while (resultArray.length > 0 && resultArray.length <= index + count) {
+        resultArray = resultArray.concat(resultArray);
+      }
+
+      // Slice out the requested range
+      resultArray = resultArray.slice(index, index + count);
+
+      setTimeout(callback, 300, resultArray);
     }
 
-    // Slice out the requested range
-    resultArray = resultArray.slice(index, index + count);
+    if (url.indexOf('merchants') > -1) {
+      var resultArray = expenses.map(function(item) {
+        return item.merchant;
+      }).reduce(function(prev, curr) {
+        return prev.indexOf(curr) === -1 ? prev.concat(curr) : prev;
+      }, []);
 
-    setTimeout(callback, 300, resultArray);
+      setTimeout(callback, 300, resultArray);
+    }
   };
 
   function getParameterByName(url, name) {

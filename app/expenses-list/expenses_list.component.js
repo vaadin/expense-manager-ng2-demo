@@ -28,10 +28,11 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-element/vaadin_ele
             ExpensesList = (function () {
                 function ExpensesList() {
                     this.editExpense = new core_1.EventEmitter();
+                    this.refreshItems();
                 }
                 ExpensesList.prototype.expenses = function (params, callback) {
                     var filters = this.filters || {};
-                    var url = './api?index=' + params.index +
+                    var url = './api/expenses?index=' + params.index +
                         '&count=' + params.count +
                         '&merchant=' + (filters.merchant || '') +
                         '&min=' + (filters.min || '') +
@@ -62,8 +63,14 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-element/vaadin_ele
                         });
                     }
                 };
-                ExpensesList.prototype.refreshItems = function (grid) {
-                    grid.refreshItems();
+                ExpensesList.prototype.refreshItems = function () {
+                    var _this = this;
+                    // This will make grid update it's items (since the datasource changes)
+                    this.expenses = this.expenses.bind(this);
+                    // Update merchant list
+                    window.getJSON('./api/merchants', function (data) {
+                        _this.merchants = data.sort();
+                    });
                 };
                 __decorate([
                     core_1.Input(), 

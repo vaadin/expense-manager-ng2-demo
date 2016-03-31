@@ -16,10 +16,16 @@ export class ExpensesList {
 
   filters: Object;
 
+  private merchants: string[];
+
+  constructor() {
+    this.refreshItems();
+  }
+
   private expenses(params, callback) {
     const filters = this.filters || {};
 
-    const url = './api?index=' + params.index +
+    const url = './api/expenses?index=' + params.index +
     '&count=' + params.count +
     '&merchant=' + (filters.merchant || '') +
     '&min=' + (filters.min || '') +
@@ -53,7 +59,12 @@ export class ExpensesList {
     }
   }
 
-  refreshItems(grid) {
-    grid.refreshItems();
+  refreshItems() {
+    // This will make grid update it's items (since the datasource changes)
+    this.expenses = this.expenses.bind(this);
+    // Update merchant list
+    window.getJSON('./api/merchants', (data) => {
+      this.merchants = data.sort();
+    });
   }
 }

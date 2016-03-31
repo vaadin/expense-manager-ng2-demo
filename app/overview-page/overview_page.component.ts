@@ -59,7 +59,6 @@ export class OverviewPage {
 
   private closeEditor(dialog, list) {
     dialog.close();
-    //TODO: BAAAD! Fix now
-    list.refreshItems(document.querySelector('vaadin-grid'));
+    list.refreshItems();
   }
 }

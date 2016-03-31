@@ -20,9 +20,6 @@ System.register(['angular2/core'], function(exports_1) {
                 function SearchFilters() {
                     this.filters = {};
                     this.filtersChange = new core_1.EventEmitter();
-                    this.merchants = ["Airline", "Rental car", "Taxi", "Restaurant",
-                        "Breakfast", "Office supplies", "Fast food", "Electronics", "Parking",
-                        "Hotel", "Shuttle", "Ride sharing"];
                 }
                 SearchFilters.prototype.filtersChanged = function () {
                     this.filtersChange.emit(this.filters);
@@ -31,6 +28,10 @@ System.register(['angular2/core'], function(exports_1) {
                     core_1.Output(), 
                     __metadata('design:type', Object)
                 ], SearchFilters.prototype, "filtersChange", void 0);
+                __decorate([
+                    core_1.Input(), 
+                    __metadata('design:type', Array)
+                ], SearchFilters.prototype, "merchants", void 0);
                 SearchFilters = __decorate([
                     core_1.Component({
                         selector: 'search-filters',

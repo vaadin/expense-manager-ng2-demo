@@ -37,8 +37,7 @@ System.register(['angular2/core', 'angular2/http', '../expenses-list/expenses_li
                 };
                 OverviewPage.prototype.closeEditor = function (dialog, list) {
                     dialog.close();
-                    //TODO: BAAAD! Fix now
-                    list.refreshItems(document.querySelector('vaadin-grid'));
+                    list.refreshItems();
                 };
                 __decorate([
                     core_1.Input(), 
