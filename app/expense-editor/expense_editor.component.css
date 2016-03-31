@@ -1,0 +1,31 @@
+.main-layout {
+  display: flex;
+  justify-content: space-between;
+}
+
+form {
+  display: flex;
+  flex: 1;
+  overflow: auto;
+}
+
+.form {
+  flex: 2;
+  padding-right: 24px;
+}
+
+.receipt {
+  flex: 3;
+  background: #F7F8F8;
+}
+
+img {
+  max-width: 100%;
+  max-height: 500px;
+  margin-bottom: 20px;
+}
+
+vaadin-upload {
+  display: flex;
+  flex-direction: column-reverse;
+}
