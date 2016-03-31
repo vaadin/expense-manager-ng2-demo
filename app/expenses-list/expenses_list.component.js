@@ -28,16 +28,15 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-element/vaadin_ele
             ExpensesList = (function () {
                 function ExpensesList() {
                     this.editExpense = new core_1.EventEmitter();
-                    this.expenses.$ = this;
                 }
                 ExpensesList.prototype.expenses = function (params, callback) {
-                    var filters = this.$.filters || {};
+                    var filters = this.filters || {};
                     var url = './api?index=' + params.index +
                         '&count=' + params.count +
                         '&merchant=' + (filters.merchant || '') +
                         '&min=' + (filters.min || '') +
                         '&max=' + (filters.max || '');
-                    //this.$.http.get(url)
+                    //this.http.get(url)
                     //  .subscribe(response => {...});
                     // In this demo we'll use a dummy datasource instead of an actual xhr
                     var totalCount = 2000;

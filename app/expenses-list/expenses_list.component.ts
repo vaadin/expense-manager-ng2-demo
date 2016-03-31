@@ -16,12 +16,8 @@ export class ExpensesList {
 
   filters: Object;
 
-  constructor() {
-    this.expenses.$ = this;
-  }
-
   private expenses(params, callback) {
-    const filters = this.$.filters || {};
+    const filters = this.filters || {};
 
     const url = './api?index=' + params.index +
     '&count=' + params.count +
@@ -29,7 +25,7 @@ export class ExpensesList {
     '&min=' + (filters.min || '') +
     '&max=' + (filters.max || '');
 
-    //this.$.http.get(url)
+    //this.http.get(url)
     //  .subscribe(response => {...});
     // In this demo we'll use a dummy datasource instead of an actual xhr
     var totalCount = 2000;

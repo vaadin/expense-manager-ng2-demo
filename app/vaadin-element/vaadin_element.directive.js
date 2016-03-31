@@ -79,6 +79,15 @@ System.register(['angular2/core'], function(exports_1) {
                 }
                 VaadinElement.prototype.ngOnInit = function () {
                     window.removeEventListener('selected-items-changed', this.stopper, true);
+                    if (typeof this.element.items === 'function') {
+                        var parentContext = this.viewContainer.element.internalElement.parentView.context;
+                        for (var api in parentContext) {
+                            if (parentContext[api] === this.element.items) {
+                                this.element.items = this.element.items.bind(parentContext);
+                                break;
+                            }
+                        }
+                    }
                 };
                 VaadinElement = __decorate([
                     core_1.Directive({

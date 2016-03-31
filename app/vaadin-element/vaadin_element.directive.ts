@@ -17,6 +17,19 @@ export class VaadinElement {
 
   ngOnInit() {
     window.removeEventListener('selected-items-changed', this.stopper, true);
+
+
+    if (typeof this.element.items === 'function') {
+      const parentContext = this.viewContainer.element.internalElement.parentView.context;
+
+      for (var api in parentContext) {
+        if (parentContext[api] === this.element.items) {
+          this.element.items = this.element.items.bind(parentContext);
+          break;
+        }
+      }
+
+    }
   }
 
   constructor(public viewContainer: ViewContainerRef) {
