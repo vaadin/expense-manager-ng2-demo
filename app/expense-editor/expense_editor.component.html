@@ -16,7 +16,7 @@
 
   <div class="receipt">
     <input type="hidden" ngControl="receipt" [ngModel]="expense.receipt">
-    <vaadin-upload (upload-success)="uploadSuccess($event)">
+    <vaadin-upload (upload-before)="upload($event)" accept="image/*">
       <div class="file-list">
         <img *ngIf="expense.receipt !== 'default'" src={{expense.receipt}}>
         <img *ngIf="expense.receipt === 'default'" src="images/default-receipt.png">

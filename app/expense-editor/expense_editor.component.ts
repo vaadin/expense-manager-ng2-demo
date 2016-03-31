@@ -32,7 +32,7 @@ export class ExpenseEditor {
 
   }
 
-  private uploadSuccess(e) {
+  private upload(e) {
     const file = e.detail.file;
     var reader  = new FileReader();
 

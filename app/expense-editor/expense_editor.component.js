@@ -40,7 +40,7 @@ System.register(['angular2/core', '../polymer-element/polymer_element.directive'
                         _this.expense = {};
                     }, 100);
                 };
-                ExpenseEditor.prototype.uploadSuccess = function (e) {
+                ExpenseEditor.prototype.upload = function (e) {
                     var _this = this;
                     var file = e.detail.file;
                     var reader = new FileReader();
