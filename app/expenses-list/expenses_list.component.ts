@@ -1,5 +1,4 @@
 import {Component, Input, Output, EventEmitter} from 'angular2/core';
-import {Http} from 'angular2/http';
 import {VaadinElement} from '../vaadin-element/vaadin_element.directive';
 import {SearchFilters} from '../search-filters/search_filters.component';
 
@@ -9,8 +8,6 @@ import {SearchFilters} from '../search-filters/search_filters.component';
   directives: [VaadinElement, SearchFilters]
 })
 export class ExpensesList {
-
-  @Input() http: Http;
 
   @Output() editExpense = new EventEmitter();
 

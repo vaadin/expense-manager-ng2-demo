@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', '../vaadin-element/vaadin_element.directive', '../search-filters/search_filters.component'], function(exports_1) {
+System.register(['angular2/core', '../vaadin-element/vaadin_element.directive', '../search-filters/search_filters.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,15 +8,12 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-element/vaadin_ele
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, vaadin_element_directive_1, search_filters_component_1;
+    var core_1, vaadin_element_directive_1, search_filters_component_1;
     var ExpensesList;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (http_1_1) {
-                http_1 = http_1_1;
             },
             function (vaadin_element_directive_1_1) {
                 vaadin_element_directive_1 = vaadin_element_directive_1_1;
@@ -67,10 +64,6 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-element/vaadin_ele
                         _this.merchants = data.sort();
                     });
                 };
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', http_1.Http)
-                ], ExpensesList.prototype, "http", void 0);
                 __decorate([
                     core_1.Output(), 
                     __metadata('design:type', Object)

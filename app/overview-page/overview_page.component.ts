@@ -1,5 +1,4 @@
 import {Component, Input} from 'angular2/core';
-import {Http} from 'angular2/http';
 import {ExpensesList} from '../expenses-list/expenses_list.component';
 import {OverviewPanel} from '../overview-panel/overview_panel.component';
 import {ExpenseEditor} from '../expense-editor/expense_editor.component';
@@ -50,5 +49,5 @@ import {ExpenseEditor} from '../expense-editor/expense_editor.component';
 })
 export class OverviewPage {
 
-  @Input() http: Http;
+
 }
