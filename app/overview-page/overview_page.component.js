@@ -31,14 +31,6 @@ System.register(['angular2/core', 'angular2/http', '../expenses-list/expenses_li
             OverviewPage = (function () {
                 function OverviewPage() {
                 }
-                OverviewPage.prototype.editExpense = function (expense, editor, dialog) {
-                    editor.expense = expense;
-                    dialog.open();
-                };
-                OverviewPage.prototype.closeEditor = function (dialog, list) {
-                    dialog.close();
-                    list.refreshItems();
-                };
                 __decorate([
                     core_1.Input(), 
                     __metadata('design:type', http_1.Http)

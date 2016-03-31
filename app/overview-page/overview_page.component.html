@@ -1,8 +1,8 @@
 <div class="toolbar"><h1>Expense Manager</h1><span>LOGOUT</span></div>
 <div class="content">
-  <expenses-list #list [http]="http" (editExpense)="editExpense($event, expenseEditor, dialog)"></expenses-list>
+  <expenses-list #list [http]="http" (editExpense)="expenseEditor.expense=$event; dialog.open();"></expenses-list>
   <overview-panel></overview-panel>
 </div>
 <paper-dialog #dialog modal>
-  <expense-editor #expenseEditor (closeEditor)="closeEditor(dialog, list)"></expense-editor>
+  <expense-editor #expenseEditor (closeEditor)="dialog.close(); list.refreshItems();"></expense-editor>
 </paper-dialog>

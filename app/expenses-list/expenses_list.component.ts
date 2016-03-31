@@ -43,12 +43,6 @@ export class ExpensesList {
     });
   }
 
-  private filtersChange(filters, grid) {
-    this.filters = filters;
-    grid.scrollToStart();
-    grid.refreshItems();
-  }
-
   private selected(grid) {
     var selection = grid.selection.selected();
     if (selection.length === 1) {

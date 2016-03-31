@@ -51,14 +51,4 @@ import {ExpenseEditor} from '../expense-editor/expense_editor.component';
 export class OverviewPage {
 
   @Input() http: Http;
-
-  private editExpense(expense, editor, dialog) {
-    editor.expense = expense;
-    dialog.open();
-  }
-
-  private closeEditor(dialog, list) {
-    dialog.close();
-    list.refreshItems();
-  }
 }

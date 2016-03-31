@@ -48,11 +48,6 @@ System.register(['angular2/core', 'angular2/http', '../vaadin-element/vaadin_ele
                         callback(data, totalCount);
                     });
                 };
-                ExpensesList.prototype.filtersChange = function (filters, grid) {
-                    this.filters = filters;
-                    grid.scrollToStart();
-                    grid.refreshItems();
-                };
                 ExpensesList.prototype.selected = function (grid) {
                     var _this = this;
                     var selection = grid.selection.selected();
