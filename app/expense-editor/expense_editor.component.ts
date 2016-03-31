@@ -70,7 +70,6 @@ import {VaadinElement} from '../vaadin-element/vaadin_element.directive';
       }
 
       img {
-        width: 100%;
         max-height: 500px;
         margin-bottom: 20px;
       }
