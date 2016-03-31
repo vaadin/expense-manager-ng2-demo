@@ -16,7 +16,7 @@ export class VaadinElement {
   }
 
   ngOnInit() {
-    window.removeEventListener('selected-items-changed', this.stopper, true);
+    this.element.parentElement.removeEventListener('selected-items-changed', this.stopper, true);
 
 
     if (typeof this.element.items === 'function') {
@@ -52,7 +52,7 @@ export class VaadinElement {
     if (this.element.is === 'vaadin-grid') {
       // Need to stop selected-items-changed events during grid init to
       // avoid "Attempt to use a dehydrated detector" error.
-      window.addEventListener('selected-items-changed', this.stopper, true);
+      this.element.parentElement.addEventListener('selected-items-changed', this.stopper, true);
 
       // vaadin-grid 1.0 doesn't support placing a configuration table dynamically. A hacky workaround needed for now.
       const _c = this.element._grid.c;
