@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Output, Input} from 'angular2/core';
+import { VaadinComboBox } from '../../bower_components/vaadin-combo-box/directives/vaadin-combo-box';
 
 @Component({
   selector: 'search-filters',
@@ -7,7 +8,8 @@ import {Component, EventEmitter, Output, Input} from 'angular2/core';
     <paper-input placeholder="Min" (keyup)="filters.min = $event.target.value; filtersChanged();"></paper-input>
     <paper-input placeholder="Max" (keyup)="filters.max = $event.target.value; filtersChanged();"></paper-input>
   `,
-  styleUrls: ['./app/search-filters/search_filters.component.css']
+  styleUrls: ['./app/search-filters/search_filters.component.css'],
+  directives: [VaadinComboBox]
 })
 export class SearchFilters {
 

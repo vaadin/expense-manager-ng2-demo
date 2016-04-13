@@ -21,11 +21,8 @@
 
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="bower_components/vaadin-grid/vaadin-grid.html">
-  <link rel="import" href="bower_components/vaadin-combo-box/vaadin-combo-box.html">
   <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
   <link rel="import" href="bower_components/vaadin-charts/vaadin-bar-chart.html">
-  <link rel="import" href="bower_components/vaadin-upload/vaadin-upload.html">
-  <link rel="import" href="bower_components/vaadin-date-picker/vaadin-date-picker.html">
   <link rel="import" href="bower_components/vaadin-icons/vaadin-icons.html">
   <link rel="import" href="bower_components/paper-input/paper-input.html">
   <link rel="import" href="bower_components/paper-input/paper-textarea.html">
@@ -45,10 +42,27 @@
   <script>
     HTMLImports.whenReady(function() {
       System.config({
+        map: {
+          'vaadin-combo-box': 'bower_components/vaadin-combo-box/directives',
+          'vaadin-upload': 'bower_components/vaadin-upload/directives',
+          'vaadin-date-picker': 'bower_components/vaadin-date-picker/directives'
+        },
         packages: {
           app: {
             format: 'register',
             defaultExtension: 'js'
+          },
+          'vaadin-combo-box': {
+            defaultExtension: 'js',
+            main: 'vaadin-combo-box.js'
+          },
+          'vaadin-date-picker': {
+            defaultExtension: 'js',
+            main: 'vaadin-date-picker.js'
+          },
+          'vaadin-upload': {
+            defaultExtension: 'js',
+            main: 'vaadin-upload.js'
           }
         }
       });

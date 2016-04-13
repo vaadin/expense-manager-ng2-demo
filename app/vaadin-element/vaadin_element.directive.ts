@@ -5,7 +5,7 @@ import {Directive, ViewContainerRef} from 'angular2/core';
 * This directive aims to overcome the current issues in integrating vaadin-elements to an Angular 2 app.
 */
 @Directive({
-  selector: 'vaadin-grid, vaadin-combo-box, vaadin-date-picker, vaadin-upload, [vaadin-element]'
+  selector: 'vaadin-grid, [vaadin-element]'
 })
 export class VaadinElement {
 
@@ -63,22 +63,6 @@ export class VaadinElement {
         // Ignore
       }
       this.element._grid.c = _c;
-    }
-
-    /*
-    * Common workarounds for vaadin-combo-box and vaadin-date-picker
-    */
-    if (this.element.is === 'vaadin-combo-box' || this.element.is === 'vaadin-date-picker') {
-      // Need to fire 'input' event manually so ngControl can react to changes
-      this.element.addEventListener('value-changed', () => {
-        this.element.fire('input');
-      });
-      // Need to fire 'blur' event manually so ngControl can react to changes
-      this.element.$$('paper-input-container').addEventListener('blur', () => {
-        if (!this.element.opened && !this.element._opened) {
-          this.element.fire('blur');
-        }
-      });
     }
 
     /*
