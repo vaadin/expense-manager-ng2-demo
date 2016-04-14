@@ -10,7 +10,7 @@
       <div prefix>$</div>
     </paper-input>
 
-    <vaadin-date-picker ngControl="date" ngDefaultControl auto-validate required [value]="expense.date" label="Date"></vaadin-date-picker>
+    <vaadin-date-picker ngControl="date" auto-validate required [value]="expense.date" label="Date"></vaadin-date-picker>
     <paper-textarea #comment ngControl="comment" ngDefaultControl [value]="expense.comment" (value-changed)="comment.fire('input');" label="Comment"></paper-textarea>
   </div>
 
