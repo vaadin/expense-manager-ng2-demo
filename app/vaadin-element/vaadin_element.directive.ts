@@ -55,14 +55,21 @@ export class VaadinElement {
       this.element.parentElement.addEventListener('selected-items-changed', this.stopper, true);
 
       // vaadin-grid 1.0 doesn't support placing a configuration table dynamically. A hacky workaround needed for now.
-      const _c = this.element._grid.c;
+      var c;
+      for (var i in this.element._grid) {
+        if (this.element._grid[i] && this.element._grid[i].tagName == 'VAADIN-GRID') {
+          c = i;
+          break;
+        }
+      }
+      const _c = this.element._grid[c];
       try {
-        this.element._grid.c = null;
+        this.element._grid[c] = null;
         this.element._grid.init(this.element, this.element._findTableElement(Polymer.dom(this.element).children), Polymer.dom(this.element.root), this.element.$.measureobject);
       } catch (e) {
         // Ignore
       }
-      this.element._grid.c = _c;
+      this.element._grid[c] = _c;
     }
 
     /*
