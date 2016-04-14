@@ -40,7 +40,7 @@ System.register(['angular2/core', '../../bower_components/vaadin-combo-box/direc
                 SearchFilters = __decorate([
                     core_1.Component({
                         selector: 'search-filters',
-                        template: "\n    <vaadin-combo-box class=\"merchants\" [items]=\"merchants\" label=\"Merchant\" (value-changed)=\"filters.merchant = $event.target.value; filtersChanged();\"></vaadin-combo-box>\n    <paper-input placeholder=\"Min\" (keyup)=\"filters.min = $event.target.value; filtersChanged();\"></paper-input>\n    <paper-input placeholder=\"Max\" (keyup)=\"filters.max = $event.target.value; filtersChanged();\"></paper-input>\n  ",
+                        template: "\n    <vaadin-combo-box class=\"merchants\" [items]=\"merchants\" label=\"Merchant\" (valueChange)=\"filtersChanged()\" [(value)]=\"filters.merchant\"></vaadin-combo-box>\n    <paper-input placeholder=\"Min\" (keyup)=\"filters.min = $event.target.value; filtersChanged();\"></paper-input>\n    <paper-input placeholder=\"Max\" (keyup)=\"filters.max = $event.target.value; filtersChanged();\"></paper-input>\n  ",
                         styleUrls: ['./app/search-filters/search_filters.component.css'],
                         directives: [vaadin_combo_box_1.VaadinComboBox]
                     }), 
