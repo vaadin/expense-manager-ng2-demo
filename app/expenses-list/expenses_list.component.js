@@ -1,6 +1,4 @@
-System.register(['angular2/core', '../vaadin-element/vaadin_element.directive', '../search-filters/search_filters.component'], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(['angular2/core', 'vaadin-grid', '../search-filters/search_filters.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,15 +8,15 @@ System.register(['angular2/core', '../vaadin-element/vaadin_element.directive', 
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, vaadin_element_directive_1, search_filters_component_1;
+    var core_1, vaadin_grid_1, search_filters_component_1;
     var ExpensesList;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (vaadin_element_directive_1_1) {
-                vaadin_element_directive_1 = vaadin_element_directive_1_1;
+            function (vaadin_grid_1_1) {
+                vaadin_grid_1 = vaadin_grid_1_1;
             },
             function (search_filters_component_1_1) {
                 search_filters_component_1 = search_filters_component_1_1;
@@ -57,6 +55,12 @@ System.register(['angular2/core', '../vaadin-element/vaadin_element.directive', 
                         });
                     }
                 };
+                ExpensesList.prototype.onFiltersChanged = function (grid) {
+                    if (Polymer && Polymer.isInstance(grid)) {
+                        grid.scrollToStart(0);
+                        grid.refreshItems();
+                    }
+                };
                 ExpensesList.prototype.refreshItems = function () {
                     var _this = this;
                     // This will make grid update it's items (since the datasource changes)
@@ -74,12 +78,12 @@ System.register(['angular2/core', '../vaadin-element/vaadin_element.directive', 
                     core_1.Component({
                         selector: 'expenses-list',
                         templateUrl: './app/expenses-list/expenses_list.component.html',
-                        directives: [vaadin_element_directive_1.VaadinElement, search_filters_component_1.SearchFilters]
+                        directives: [vaadin_grid_1.VaadinGrid, search_filters_component_1.SearchFilters]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], ExpensesList);
                 return ExpensesList;
-            }());
+            })();
             exports_1("ExpensesList", ExpensesList);
         }
     }

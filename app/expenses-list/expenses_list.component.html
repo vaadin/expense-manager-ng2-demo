@@ -1,4 +1,4 @@
-<search-filters [merchants]="merchants" (filtersChange)="filters=$event;grid.scrollToStart();grid.refreshItems();"></search-filters>
+<search-filters [merchants]="merchants" (filtersChange)="filters=$event;onFiltersChanged(grid);"></search-filters>
 <vaadin-grid #grid [items]="expenses" [frozenColumns]="1" (selected-items-changed)="selected(grid)">
   <table>
     <colgroup>

@@ -16,7 +16,8 @@
     "blueimp-load-image": "~1.14.0",
     "moment": "~2.10.6",
     "vaadin-icons": "vaadin/vaadin-icons#~1.0.0-alpha1",
-    "offline": "~0.7.14"
+    "offline": "~0.7.14",
+    "vaadin-grid": "ng-manolo"
   },
   "devDependencies": {
     "web-component-tester": "*",

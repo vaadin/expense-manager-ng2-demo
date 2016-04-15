@@ -1,6 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(['angular2/core'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -47,14 +45,21 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                         // avoid "Attempt to use a dehydrated detector" error.
                         this.element.parentElement.addEventListener('selected-items-changed', this.stopper, true);
                         // vaadin-grid 1.0 doesn't support placing a configuration table dynamically. A hacky workaround needed for now.
-                        var _c = this.element._grid.c;
+                        var c;
+                        for (var i in this.element._grid) {
+                            if (this.element._grid[i] && this.element._grid[i].tagName == 'VAADIN-GRID') {
+                                c = i;
+                                break;
+                            }
+                        }
+                        var _c = this.element._grid[c];
                         try {
-                            this.element._grid.c = null;
+                            this.element._grid[c] = null;
                             this.element._grid.init(this.element, this.element._findTableElement(Polymer.dom(this.element).children), Polymer.dom(this.element.root), this.element.$.measureobject);
                         }
                         catch (e) {
                         }
-                        this.element._grid.c = _c;
+                        this.element._grid[c] = _c;
                     }
                     /*
                     * Vaadin Charts workarounds
@@ -83,7 +88,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     __metadata('design:paramtypes', [core_1.ViewContainerRef])
                 ], VaadinElement);
                 return VaadinElement;
-            }());
+            })();
             exports_1("VaadinElement", VaadinElement);
         }
     }

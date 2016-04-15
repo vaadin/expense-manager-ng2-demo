@@ -20,7 +20,6 @@
   <script src="app/getjson.js"></script>
 
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="bower_components/vaadin-grid/vaadin-grid.html">
   <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
   <link rel="import" href="bower_components/vaadin-icons/vaadin-icons.html">
   <link rel="import" href="bower_components/paper-input/paper-input.html">
@@ -45,7 +44,8 @@
           'vaadin-combo-box': 'bower_components/vaadin-combo-box/directives',
           'vaadin-upload': 'bower_components/vaadin-upload/directives',
           'vaadin-date-picker': 'bower_components/vaadin-date-picker/directives',
-          'vaadin-charts': 'bower_components/vaadin-charts/directives'
+          'vaadin-charts': 'bower_components/vaadin-charts/directives',
+          'vaadin-grid': 'bower_components/vaadin-grid/directives'
         },
         packages: {
           app: {
@@ -67,6 +67,10 @@
           'vaadin-charts': {
             defaultExtension: 'js',
             main: 'vaadin-charts.js'
+          },
+          'vaadin-grid': {
+            defaultExtension: 'js',
+            main: 'vaadin-grid.js'
           }
         }
       });

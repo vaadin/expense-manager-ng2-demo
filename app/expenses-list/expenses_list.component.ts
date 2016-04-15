@@ -1,11 +1,11 @@
 import {Component, Input, Output, EventEmitter} from 'angular2/core';
-import {VaadinElement} from '../vaadin-element/vaadin_element.directive';
+import {VaadinGrid} from 'vaadin-grid';
 import {SearchFilters} from '../search-filters/search_filters.component';
 
 @Component({
   selector: 'expenses-list',
   templateUrl: './app/expenses-list/expenses_list.component.html',
-  directives: [VaadinElement, SearchFilters]
+  directives: [VaadinGrid, SearchFilters]
 })
 export class ExpensesList {
 
@@ -47,6 +47,13 @@ export class ExpensesList {
       grid.getItem(selection[0], (err, item) => {
         this.editExpense.emit(item);
       });
+    }
+  }
+
+  private onFiltersChanged(grid) {
+    if (Polymer && Polymer.isInstance(grid)) {
+      grid.scrollToStart(0);
+      grid.refreshItems();
     }
   }
 
