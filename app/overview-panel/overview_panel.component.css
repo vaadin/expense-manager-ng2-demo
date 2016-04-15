@@ -36,7 +36,6 @@
 
 .chart {
   flex: 1;
-  height: 400px;
 }
 
 #barchart::content text {
