@@ -1,4 +1,6 @@
-System.register(['angular2/core'], function(exports_1) {
+System.register(['angular2/core'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -55,21 +57,6 @@ System.register(['angular2/core'], function(exports_1) {
                         this.element._grid.c = _c;
                     }
                     /*
-                    * Common workarounds for vaadin-combo-box and vaadin-date-picker
-                    */
-                    if (this.element.is === 'vaadin-combo-box' || this.element.is === 'vaadin-date-picker') {
-                        // Need to fire 'input' event manually so ngControl can react to changes
-                        this.element.addEventListener('value-changed', function () {
-                            _this.element.fire('input');
-                        });
-                        // Need to fire 'blur' event manually so ngControl can react to changes
-                        this.element.$$('paper-input-container').addEventListener('blur', function () {
-                            if (!_this.element.opened && !_this.element._opened) {
-                                _this.element.fire('blur');
-                            }
-                        });
-                    }
-                    /*
                     * Vaadin Charts workarounds
                     */
                     if (this.element.reloadConfiguration) {
@@ -91,12 +78,12 @@ System.register(['angular2/core'], function(exports_1) {
                 };
                 VaadinElement = __decorate([
                     core_1.Directive({
-                        selector: 'vaadin-grid, vaadin-combo-box, vaadin-date-picker, vaadin-upload, [vaadin-element]'
+                        selector: 'vaadin-grid, [vaadin-element]'
                     }), 
                     __metadata('design:paramtypes', [core_1.ViewContainerRef])
                 ], VaadinElement);
                 return VaadinElement;
-            })();
+            }());
             exports_1("VaadinElement", VaadinElement);
         }
     }

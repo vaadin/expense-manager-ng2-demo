@@ -1,0 +1,5 @@
+{
+  "snippetOptions": {
+    "ignorePaths": "bower_components/**/*.html"
+  }
+}
