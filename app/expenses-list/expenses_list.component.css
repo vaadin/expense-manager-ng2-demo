@@ -13,10 +13,6 @@ vaadin-grid /deep/ td.status-new {
   font-weight: bold;
 }
 
-vaadin-grid /deep/ td.status-reimbursed span {
-  opacity: 0.4;
-}
-
 vaadin-grid /deep/ thead.vaadin-grid-header th.last-frozen {
   border-right: 1px solid #37474F !important;
 }

@@ -27,6 +27,35 @@ System.register(['angular2/core', 'vaadin-grid', '../search-filters/search_filte
                     this.editExpense = new core_1.EventEmitter();
                     this.refreshItems();
                 }
+                ExpensesList.prototype.ngAfterViewInit = function () {
+                    var _this = this;
+                    HTMLImports.whenReady(function () {
+                        var grid = _this.grid.nativeElement;
+                        grid.cellClassGenerator = function (cell) {
+                            if (cell.columnName === 'status') {
+                                return 'status-' + cell.data.replace(/ /g, '-').toLowerCase();
+                            }
+                        };
+                        grid.addEventListener('sort-order-changed', function () {
+                            // if (Polymer && Polymer.isInstance(grid)) {
+                            //   // grid.scrollToStart(0);
+                            //   grid.refreshItems();
+                            // }
+                            // // _this._update(); //TODO hook up sorting
+                        });
+                        grid.columns[0].renderer = function (cell) {
+                            cell.element.innerHTML = moment(cell.data).format('YYYY-MM-DD');
+                        };
+                        grid.columns[2].renderer = function (cell) {
+                            cell.element.innerHTML = accounting.formatMoney(cell.data);
+                        };
+                        grid.columns[3].renderer = function (cell) {
+                            var status = cell.data.replace(/_/g, ' ');
+                            status = status.charAt(0).toUpperCase() + status.slice(1);
+                            cell.element.textContent = status;
+                        };
+                    });
+                };
                 ExpensesList.prototype.expenses = function (params, callback) {
                     var filters = this.filters || {};
                     var url = './api/expenses?index=' + params.index +
@@ -74,6 +103,10 @@ System.register(['angular2/core', 'vaadin-grid', '../search-filters/search_filte
                     core_1.Output(), 
                     __metadata('design:type', Object)
                 ], ExpensesList.prototype, "editExpense", void 0);
+                __decorate([
+                    core_1.ViewChild('grid'), 
+                    __metadata('design:type', Object)
+                ], ExpensesList.prototype, "grid", void 0);
                 ExpensesList = __decorate([
                     core_1.Component({
                         selector: 'expenses-list',
