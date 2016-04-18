@@ -14,6 +14,9 @@ import {ExpenseEditor} from '../expense-editor/expense_editor.component';
       expenses-list {
         flex: 1;
       }
+      h1 {
+        font-weight: 300;
+      }
       overview-panel {
         width: 33%;
         max-width: 300px;
@@ -24,9 +27,10 @@ import {ExpenseEditor} from '../expense-editor/expense_editor.component';
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 20px;
+        padding: 0 18px;
         background: #37474F;
         color: #fff;
+        height: 64px;
       }
       paper-dialog {
         display: block;

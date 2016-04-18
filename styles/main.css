@@ -7,11 +7,10 @@
   url('../fonts/Vaadin-Icons.svg#icomoon') format('svg');
 }
 
-
-
 body {
   background: #fafafa;
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: #333;
   font-weight: 300;
+  margin: 0;
 }
