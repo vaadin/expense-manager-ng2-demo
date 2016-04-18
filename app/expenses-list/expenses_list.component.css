@@ -1,0 +1,50 @@
+vaadin-grid /deep/ thead.vaadin-grid-header th {
+  background: #37474F !important;
+  color: #ccc !important;
+  font-size: 1.2em !important;
+  font-weight: 400 !important;
+}
+
+vaadin-grid /deep/ tr.vaadin-grid-row-stripe td {
+  background: #F7F8F8 !important;
+}
+
+vaadin-grid /deep/ td.status-new {
+  font-weight: bold;
+}
+
+vaadin-grid /deep/ td.status-reimbursed span {
+  opacity: 0.4;
+}
+
+vaadin-grid /deep/ thead.vaadin-grid-header th.last-frozen {
+  border-right: 1px solid #37474F !important;
+}
+
+vaadin-grid /deep/ .vaadin-grid-header.vaadin-grid .sort-asc.vaadin-grid:after {
+  content: "\e7c3 " attr(sort-order);
+  font-family: Vaadin-Icons;
+  font-size: 16px;
+  speak: none;
+  font-weight: normal;
+  font-variant: normal;
+  font-style: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  color: #80CBC4;
+}
+
+vaadin-grid /deep/ .vaadin-grid-header.vaadin-grid .sort-desc.vaadin-grid:after {
+  content: "\e7bc " attr(sort-order);
+  font-family: Vaadin-Icons;
+  font-size: 16px;
+  speak: none;
+  font-weight: normal;
+  font-variant: normal;
+  font-style: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  color: #80CBC4;
+}
