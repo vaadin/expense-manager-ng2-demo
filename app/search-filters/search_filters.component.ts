@@ -13,6 +13,12 @@ import {VaadinDatePicker} from '../../bower_components/vaadin-date-picker/direct
     <div class="row">
       <paper-input placeholder="Min ($)" (keyup)="filters.min = $event.target.value; filtersChanged();"></paper-input>
       <paper-input placeholder="Max ($)" (keyup)="filters.max = $event.target.value; filtersChanged();"></paper-input>
+      <div class="checkboxes">
+        <span class="caption">Status</span>
+        <paper-checkbox (change)="updateStatus($event)" name="new">New</paper-checkbox>
+        <paper-checkbox (change)="updateStatus($event)" name="in_progress">In progress</paper-checkbox>
+        <paper-checkbox (change)="updateStatus($event)" name="reimbursed">Reimbursed</paper-checkbox>
+      </div>
     </div>
   `,
   styleUrls: ['./app/search-filters/search_filters.component.css'],
@@ -20,11 +26,26 @@ import {VaadinDatePicker} from '../../bower_components/vaadin-date-picker/direct
 })
 export class SearchFilters {
 
-  filters: Object = {};
+  filters: any = {};
 
   @Output() filtersChange = new EventEmitter();
 
   @Input() merchants: string[];
+
+  private updateStatus(e) {
+    const status = e.target.name;
+    const toggle = e.target.checked;
+
+    if (!this.filters.statuses) {
+      this.filters.statuses = [];
+    }
+
+    if (toggle) {
+      this.filters.statuses.push(status)
+    } else {
+      this.filters.statuses.splice(this.filters.statuses.indexOf(status), 1);
+    }
+  }
 
   private filtersChanged() {
     this.filtersChange.emit(this.filters);

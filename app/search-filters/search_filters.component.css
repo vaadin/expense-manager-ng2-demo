@@ -9,6 +9,19 @@
   flex-direction: row;
 }
 
+.checkboxes {
+  padding: 14px 0 0 14px;
+}
+
+.checkboxes .caption {
+  font-weight: bold;
+  display: block;
+}
+
+.checkboxes paper-checkbox {
+  margin: 0 15px 0 5px;
+}
+
 paper-input,
 vaadin-combo-box {
   margin-right: 4px;
