@@ -5,23 +5,29 @@ import {VaadinDatePicker} from '../../bower_components/vaadin-date-picker/direct
 @Component({
   selector: 'search-filters',
   template: `
-    <div class="row">
-      <div class="dates">
-        <vaadin-date-picker label="After" (valueChange)="filtersChanged()" [(value)]="filters.after"></vaadin-date-picker>
-        <vaadin-date-picker label="Before" (valueChange)="filtersChanged()" [(value)]="filters.before"></vaadin-date-picker>
-      </div>
-      <vaadin-combo-box class="merchants" [items]="merchants" label="Merchant" (valueChange)="filtersChanged()" [(value)]="filters.merchant"></vaadin-combo-box>
+    <div class="toolbar" (click)="toggleFilters = !toggleFilters">
+      Filters
+      <iron-icon icon="filter-list"></iron-icon>
     </div>
-    <div class="row">
-      <div class="amounts">
-        <paper-input placeholder="Min ($)" (keyup)="filters.min = $event.target.value; filtersChanged();"></paper-input>
-        <paper-input placeholder="Max ($)" (keyup)="filters.max = $event.target.value; filtersChanged();"></paper-input>
+    <div class="filters" [ngClass]="{open: toggleFilters}">
+      <div class="row">
+        <div class="dates">
+          <vaadin-date-picker label="After" (valueChange)="filtersChanged()" [(value)]="filters.after"></vaadin-date-picker>
+          <vaadin-date-picker label="Before" (valueChange)="filtersChanged()" [(value)]="filters.before"></vaadin-date-picker>
+        </div>
+        <vaadin-combo-box class="merchants" [items]="merchants" label="Merchant" (valueChange)="filtersChanged()" [(value)]="filters.merchant"></vaadin-combo-box>
       </div>
-      <div class="checkboxes">
-        <span class="caption">Status</span>
-        <paper-checkbox (change)="updateStatus($event); filtersChanged();" name="new">New</paper-checkbox>
-        <paper-checkbox (change)="updateStatus($event); filtersChanged();" name="in_progress">In progress</paper-checkbox>
-        <paper-checkbox (change)="updateStatus($event); filtersChanged();" name="reimbursed">Reimbursed</paper-checkbox>
+      <div class="row">
+        <div class="amounts">
+          <paper-input placeholder="Min ($)" (keyup)="filters.min = $event.target.value; filtersChanged();"></paper-input>
+          <paper-input placeholder="Max ($)" (keyup)="filters.max = $event.target.value; filtersChanged();"></paper-input>
+        </div>
+        <div class="checkboxes">
+          <span class="caption">Status</span>
+          <paper-checkbox (change)="updateStatus($event); filtersChanged();" name="new">New</paper-checkbox>
+          <paper-checkbox (change)="updateStatus($event); filtersChanged();" name="in_progress">In progress</paper-checkbox>
+          <paper-checkbox (change)="updateStatus($event); filtersChanged();" name="reimbursed">Reimbursed</paper-checkbox>
+        </div>
       </div>
     </div>
   `,

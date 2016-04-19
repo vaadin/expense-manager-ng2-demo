@@ -1,12 +1,23 @@
 :host {
   display: flex;
   flex-direction: column;
-  padding: 0 12px 24px;
 }
 
 .row {
   display: flex;
   flex-direction: row;
+}
+
+.row:first-child {
+  padding: 0 12px;
+}
+
+.row:last-child {
+  padding: 0 12px 24px;
+}
+
+.toolbar {
+  display: none;
 }
 
 .dates,
@@ -40,15 +51,41 @@ vaadin-date-picker {
 }
 
 @media (max-width: 960px) {
+  .toolbar {
+    display: block;
+    background: #80cbc4;
+    cursor: pointer;
+    color: #fff;
+    padding: 10px 18px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .toolbar iron-icon {
+    float: right;
+  }
+
+  .filters {
+    max-height: 0;
+    transition: max-height 500ms;
+  }
+
+  .filters.open {
+    max-height: 400px;
+  }
+
   .dates,
   .amounts {
     flex-direction: row;
   }
+
   .dates vaadin-date-picker,
   .amounts paper-input {
     width: 50%;
   }
+
   .row {
     flex-direction: column;
   }
+
 }

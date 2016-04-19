@@ -49,6 +49,11 @@ import {ExpenseEditor} from '../expense-editor/expense_editor.component';
         margin: 0 !important;
         padding: 0 !important;
       }
+      @media (max-width: 960px) {
+        overview-panel {
+          display: none;
+        }
+      }
     `]
 })
 export class OverviewPage {
