@@ -1,6 +1,4 @@
-System.register(['angular2/core', '../../bower_components/vaadin-grid/directives/vaadin-grid', '../search-filters/search_filters.component'], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(['angular2/core', '../../bower_components/vaadin-grid/directives/vaadin-grid', '../search-filters/search_filters.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -29,34 +27,30 @@ System.register(['angular2/core', '../../bower_components/vaadin-grid/directives
                     this.editExpense = new core_1.EventEmitter();
                     this.refreshItems();
                 }
-                ExpensesList.prototype.ngAfterViewInit = function () {
-                    var _this = this;
-                    HTMLImports.whenReady(function () {
-                        var grid = _this.grid.nativeElement;
-                        grid.cellClassGenerator = function (cell) {
-                            if (cell.columnName === 'status') {
-                                return 'status-' + cell.data.replace(/ /g, '-').toLowerCase();
-                            }
-                        };
-                        grid.addEventListener('sort-order-changed', function () {
-                            // if (Polymer && Polymer.isInstance(grid)) {
-                            //   // grid.scrollToStart(0);
-                            //   grid.refreshItems();
-                            // }
-                            // // _this._update(); //TODO hook up sorting
-                        });
-                        grid.columns[0].renderer = function (cell) {
-                            cell.element.innerHTML = moment(cell.data).format('YYYY-MM-DD');
-                        };
-                        grid.columns[2].renderer = function (cell) {
-                            cell.element.innerHTML = accounting.formatMoney(cell.data);
-                        };
-                        grid.columns[3].renderer = function (cell) {
-                            var status = cell.data.replace(/_/g, ' ');
-                            status = status.charAt(0).toUpperCase() + status.slice(1);
-                            cell.element.textContent = status;
-                        };
+                ExpensesList.prototype.gridReady = function (grid) {
+                    grid.cellClassGenerator = function (cell) {
+                        if (cell.columnName === 'status') {
+                            return 'status-' + cell.data.replace(/ /g, '-').toLowerCase();
+                        }
+                    };
+                    grid.addEventListener('sort-order-changed', function () {
+                        // if (Polymer && Polymer.isInstance(grid)) {
+                        //   // grid.scrollToStart(0);
+                        //   grid.refreshItems();
+                        // }
+                        // // _this._update(); //TODO hook up sorting
                     });
+                    grid.columns[0].renderer = function (cell) {
+                        cell.element.innerHTML = moment(cell.data).format('YYYY-MM-DD');
+                    };
+                    grid.columns[2].renderer = function (cell) {
+                        cell.element.innerHTML = accounting.formatMoney(cell.data);
+                    };
+                    grid.columns[3].renderer = function (cell) {
+                        var status = cell.data.replace(/_/g, ' ');
+                        status = status.charAt(0).toUpperCase() + status.slice(1);
+                        cell.element.textContent = status;
+                    };
                 };
                 ExpensesList.prototype.expenses = function (params, callback) {
                     var filters = this.filters || {};
@@ -108,10 +102,6 @@ System.register(['angular2/core', '../../bower_components/vaadin-grid/directives
                     core_1.Output(), 
                     __metadata('design:type', Object)
                 ], ExpensesList.prototype, "editExpense", void 0);
-                __decorate([
-                    core_1.ViewChild('grid'), 
-                    __metadata('design:type', Object)
-                ], ExpensesList.prototype, "grid", void 0);
                 ExpensesList = __decorate([
                     core_1.Component({
                         selector: 'expenses-list',
@@ -122,7 +112,7 @@ System.register(['angular2/core', '../../bower_components/vaadin-grid/directives
                     __metadata('design:paramtypes', [])
                 ], ExpensesList);
                 return ExpensesList;
-            }());
+            })();
             exports_1("ExpensesList", ExpensesList);
         }
     }

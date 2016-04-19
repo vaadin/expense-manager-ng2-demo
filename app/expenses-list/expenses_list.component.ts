@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, ViewChild} from 'angular2/core';
+import {Component, Input, Output, EventEmitter} from 'angular2/core';
 import {VaadinGrid} from '../../bower_components/vaadin-grid/directives/vaadin-grid';
 import {SearchFilters} from '../search-filters/search_filters.component';
 declare var HTMLImports;
@@ -20,44 +20,39 @@ export class ExpensesList {
 
   private merchants: string[];
 
-  @ViewChild('grid') grid;
-
   constructor() {
     this.refreshItems();
   }
 
-  ngAfterViewInit() {
-    HTMLImports.whenReady(() => {
-      var grid = this.grid.nativeElement;
+  gridReady(grid) {
 
-      grid.cellClassGenerator = (cell) => {
-        if (cell.columnName === 'status') {
-          return 'status-' + cell.data.replace(/ /g, '-').toLowerCase();
-        }
-      };
+    grid.cellClassGenerator = (cell) => {
+      if (cell.columnName === 'status') {
+        return 'status-' + cell.data.replace(/ /g, '-').toLowerCase();
+      }
+    };
 
-      grid.addEventListener('sort-order-changed', () => {
-        // if (Polymer && Polymer.isInstance(grid)) {
-        //   // grid.scrollToStart(0);
-        //   grid.refreshItems();
-        // }
-        // // _this._update(); //TODO hook up sorting
-      });
-
-      grid.columns[0].renderer = (cell) => {
-        cell.element.innerHTML = moment(cell.data).format('YYYY-MM-DD');
-      };
-
-      grid.columns[2].renderer = (cell) => {
-        cell.element.innerHTML = accounting.formatMoney(cell.data);
-      };
-
-      grid.columns[3].renderer = (cell) => {
-        var status = cell.data.replace(/_/g, ' ');
-        status = status.charAt(0).toUpperCase() + status.slice(1);
-        cell.element.textContent = status;
-      };
+    grid.addEventListener('sort-order-changed', () => {
+      // if (Polymer && Polymer.isInstance(grid)) {
+      //   // grid.scrollToStart(0);
+      //   grid.refreshItems();
+      // }
+      // // _this._update(); //TODO hook up sorting
     });
+
+    grid.columns[0].renderer = (cell) => {
+      cell.element.innerHTML = moment(cell.data).format('YYYY-MM-DD');
+    };
+
+    grid.columns[2].renderer = (cell) => {
+      cell.element.innerHTML = accounting.formatMoney(cell.data);
+    };
+
+    grid.columns[3].renderer = (cell) => {
+      var status = cell.data.replace(/_/g, ' ');
+      status = status.charAt(0).toUpperCase() + status.slice(1);
+      cell.element.textContent = status;
+    };
   }
 
   private expenses(params, callback) {
