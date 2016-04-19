@@ -1,6 +1,12 @@
 :host {
   display: flex;
+  flex-direction: column;
   padding: 0 12px 24px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
 }
 
 paper-input,
