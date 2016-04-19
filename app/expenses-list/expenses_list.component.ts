@@ -67,7 +67,10 @@ export class ExpensesList {
       '&count=' + params.count +
       '&merchant=' + (filters.merchant || '') +
       '&min=' + (filters.min || '') +
-      '&max=' + (filters.max || '');
+      '&max=' + (filters.max || '') +
+      '&before=' + (filters.before || '') +
+      '&after=' + (filters.after || '') +
+      '&statuses=' + (filters.statuses || '');
 
     //this.http.get(url)
     //  .subscribe(response => {...});

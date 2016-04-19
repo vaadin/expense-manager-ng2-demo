@@ -64,7 +64,10 @@ System.register(['angular2/core', '../../bower_components/vaadin-grid/directives
                         '&count=' + params.count +
                         '&merchant=' + (filters.merchant || '') +
                         '&min=' + (filters.min || '') +
-                        '&max=' + (filters.max || '');
+                        '&max=' + (filters.max || '') +
+                        '&before=' + (filters.before || '') +
+                        '&after=' + (filters.after || '') +
+                        '&statuses=' + (filters.statuses || '');
                     //this.http.get(url)
                     //  .subscribe(response => {...});
                     // In this demo we'll use a dummy datasource instead of an actual xhr

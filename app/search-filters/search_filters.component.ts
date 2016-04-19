@@ -15,9 +15,9 @@ import {VaadinDatePicker} from '../../bower_components/vaadin-date-picker/direct
       <paper-input placeholder="Max ($)" (keyup)="filters.max = $event.target.value; filtersChanged();"></paper-input>
       <div class="checkboxes">
         <span class="caption">Status</span>
-        <paper-checkbox (change)="updateStatus($event)" name="new">New</paper-checkbox>
-        <paper-checkbox (change)="updateStatus($event)" name="in_progress">In progress</paper-checkbox>
-        <paper-checkbox (change)="updateStatus($event)" name="reimbursed">Reimbursed</paper-checkbox>
+        <paper-checkbox (change)="updateStatus($event); filtersChanged();" name="new">New</paper-checkbox>
+        <paper-checkbox (change)="updateStatus($event); filtersChanged();" name="in_progress">In progress</paper-checkbox>
+        <paper-checkbox (change)="updateStatus($event); filtersChanged();" name="reimbursed">Reimbursed</paper-checkbox>
       </div>
     </div>
   `,

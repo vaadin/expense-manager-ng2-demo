@@ -7,15 +7,27 @@
       var merchant = getParameterByName(url, 'merchant');
       var min = getParameterByName(url, 'min');
       var max = getParameterByName(url, 'max');
+      var statuses = getParameterByName(url, 'statuses');
+      statuses = statuses ? statuses.split(',') : '';
+      var after = moment(getParameterByName(url, 'after'));
+      var before = moment(getParameterByName(url, 'before'));
 
-      // Filter users by merchant
-      var resultArray = expenses.filter(function(item) {
-        return !merchant || item.merchant === merchant;
-      }).filter(function(item) {
-        return !min || item.total >= parseInt(min);
-      }).filter(function(item) {
-        return !max || item.total <= parseInt(max);
-      });
+      // Filter data by parameters.
+      var resultArray = expenses
+        .filter(function(item) {
+          return !merchant || item.merchant === merchant;
+        }).filter(function(item) {
+          return !min || item.total >= parseInt(min);
+        }).filter(function(item) {
+          return !max || item.total <= parseInt(max);
+        }).filter(function(item) {
+          return !statuses || statuses.indexOf(item.status) != -1;
+        }).filter(function(item) {
+          return !after.isValid() || moment(item.date).isAfter(after);
+        }).filter(function(item) {
+          return !before.isValid() || moment(item.date).isBefore(before);
+        });
+
 
       // Concat enough arrays to satisfy the requested range
       while (resultArray.length > 0 && resultArray.length <= index + count) {
