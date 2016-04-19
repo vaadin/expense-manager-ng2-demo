@@ -1,6 +1,10 @@
 import {Component, Input, Output, EventEmitter, ViewChild} from 'angular2/core';
-import {VaadinGrid} from 'vaadin-grid';
+import {VaadinGrid} from '../../bower_components/vaadin-grid/directives/vaadin-grid';
 import {SearchFilters} from '../search-filters/search_filters.component';
+declare var HTMLImports;
+declare var Polymer;
+declare var moment;
+declare var accounting;
 
 @Component({
   selector: 'expenses-list',
@@ -20,7 +24,6 @@ export class ExpensesList {
 
   constructor() {
     this.refreshItems();
-
   }
 
   ngAfterViewInit() {
@@ -58,7 +61,7 @@ export class ExpensesList {
   }
 
   private expenses(params, callback) {
-    const filters = this.filters || {};
+    const filters: any = this.filters || {};
 
     const url = './api/expenses?index=' + params.index +
       '&count=' + params.count +
