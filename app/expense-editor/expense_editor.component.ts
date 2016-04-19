@@ -3,6 +3,7 @@ import {NgForm}    from 'angular2/common';
 import {PolymerElement} from '../polymer-element/polymer_element.directive';
 import {VaadinDatePicker} from '../../bower_components/vaadin-date-picker/directives/vaadin-date-picker';
 import {VaadinUpload} from '../../bower_components/vaadin-upload/directives/vaadin-upload';
+declare var accounting;
 
 @Component({
   selector: 'expense-editor',
@@ -45,5 +46,7 @@ export class ExpenseEditor {
     }
   }
 
-
+  private formatMoney(value) {
+    return accounting.formatMoney(value, '');
+  }
 }
