@@ -9,6 +9,11 @@
   flex-direction: row;
 }
 
+.dates,
+.amounts {
+  display: flex;
+}
+
 .checkboxes {
   padding: 14px 0 0 14px;
 }
@@ -23,7 +28,8 @@
 }
 
 paper-input,
-vaadin-combo-box {
+vaadin-combo-box,
+vaadin-date-picker {
   margin-right: 4px;
   margin-left: 4px;
 }
@@ -31,4 +37,18 @@ vaadin-combo-box {
 .merchants {
   flex: 1;
   min-width: 300px;
+}
+
+@media (max-width: 960px) {
+  .dates,
+  .amounts {
+    flex-direction: row;
+  }
+  .dates vaadin-date-picker,
+  .amounts paper-input {
+    width: 50%;
+  }
+  .row {
+    flex-direction: column;
+  }
 }
