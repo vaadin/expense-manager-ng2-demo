@@ -76,10 +76,40 @@ vaadin-date-picker {
     padding: 10px 18px;
     font-weight: 400;
     line-height: 1.5;
+    transition: all 500ms;
+  }
+
+  .toolbar.open {
+    background: #fff;
+    color: #37474f;
   }
 
   .toolbar iron-icon {
     float: right;
+    color: #37474f;
+  }
+
+  .toolbar.open iron-icon {
+    color: #80cbc4;
+  }
+
+  .toolbar .badge {
+    float: right;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 50%;
+    background: #37474f;
+    color: #fff;
+    font-weight: 600;
+    margin-right: 8px;
+    transition: all 500ms;
+  }
+
+  .toolbar.open .badge {
+    color: #fff;
+    background: #80cbc4;
   }
 
   .filters {

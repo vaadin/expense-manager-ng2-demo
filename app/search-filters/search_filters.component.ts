@@ -5,18 +5,19 @@ import {VaadinDatePicker} from '../../bower_components/vaadin-date-picker/direct
 @Component({
   selector: 'search-filters',
   template: `
-    <div class="toolbar" (click)="toggleFilters = !toggleFilters">
+    <div class="toolbar" (click)="toggleFilters = !toggleFilters" [ngClass]="{open: toggleFilters}">
       Filters
       <iron-icon icon="filter-list"></iron-icon>
+      <div class="badge">{{activeFilterCount}}</div>
     </div>
     <div class="filters" [ngClass]="{open: toggleFilters}">
       <div class="row">
         <div class="dates col">
-          <vaadin-date-picker label="After" (valueChange)="filtersChanged()" [(value)]="filters.after"></vaadin-date-picker>
-          <vaadin-date-picker label="Before" (valueChange)="filtersChanged()" [(value)]="filters.before"></vaadin-date-picker>
+          <vaadin-date-picker label="After" [(value)]="filters.after" (valueChange)="filtersChanged()"></vaadin-date-picker>
+          <vaadin-date-picker label="Before" [(value)]="filters.before" (valueChange)="filtersChanged()"></vaadin-date-picker>
         </div>
         <div class="merchants col">
-          <vaadin-combo-box class="merchants" [items]="merchants" label="Merchant" (valueChange)="filtersChanged()" [(value)]="filters.merchant"></vaadin-combo-box>
+          <vaadin-combo-box class="merchants" [items]="merchants" label="Merchant" [(value)]="filters.merchant" (valueChange)="filtersChanged()"></vaadin-combo-box>
         </div>
       </div>
       <div class="row">
@@ -44,6 +45,8 @@ export class SearchFilters {
 
   @Input() merchants: string[];
 
+  activeFilterCount = 0;
+
   private updateStatus(e) {
     const status = e.target.name;
     const toggle = e.target.checked;
@@ -61,6 +64,11 @@ export class SearchFilters {
 
   private filtersChanged() {
     this.filtersChange.emit(this.filters);
+
+    // Count active filters.
+    this.activeFilterCount = ['after', 'before', 'merchant', 'min', 'max', 'statuses'].filter((field) => {
+      return this.filters[field] && this.filters[field].length > 0;
+    }).length;
   }
 
 }

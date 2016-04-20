@@ -28,6 +28,7 @@ System.register(['angular2/core', '../../bower_components/vaadin-combo-box/direc
                 function SearchFilters() {
                     this.filters = {};
                     this.filtersChange = new core_1.EventEmitter();
+                    this.activeFilterCount = 0;
                 }
                 SearchFilters.prototype.updateStatus = function (e) {
                     var status = e.target.name;
@@ -43,7 +44,12 @@ System.register(['angular2/core', '../../bower_components/vaadin-combo-box/direc
                     }
                 };
                 SearchFilters.prototype.filtersChanged = function () {
+                    var _this = this;
                     this.filtersChange.emit(this.filters);
+                    // Count active filters.
+                    this.activeFilterCount = ['after', 'before', 'merchant', 'min', 'max', 'statuses'].filter(function (field) {
+                        return _this.filters[field] && _this.filters[field].length > 0;
+                    }).length;
                 };
                 __decorate([
                     core_1.Output(), 
@@ -56,7 +62,7 @@ System.register(['angular2/core', '../../bower_components/vaadin-combo-box/direc
                 SearchFilters = __decorate([
                     core_1.Component({
                         selector: 'search-filters',
-                        template: "\n    <div class=\"toolbar\" (click)=\"toggleFilters = !toggleFilters\">\n      Filters\n      <iron-icon icon=\"filter-list\"></iron-icon>\n    </div>\n    <div class=\"filters\" [ngClass]=\"{open: toggleFilters}\">\n      <div class=\"row\">\n        <div class=\"dates col\">\n          <vaadin-date-picker label=\"After\" (valueChange)=\"filtersChanged()\" [(value)]=\"filters.after\"></vaadin-date-picker>\n          <vaadin-date-picker label=\"Before\" (valueChange)=\"filtersChanged()\" [(value)]=\"filters.before\"></vaadin-date-picker>\n        </div>\n        <div class=\"merchants col\">\n          <vaadin-combo-box class=\"merchants\" [items]=\"merchants\" label=\"Merchant\" (valueChange)=\"filtersChanged()\" [(value)]=\"filters.merchant\"></vaadin-combo-box>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"amounts col\">\n          <paper-input placeholder=\"Min ($)\" (keyup)=\"filters.min = $event.target.value; filtersChanged();\"></paper-input>\n          <paper-input placeholder=\"Max ($)\" (keyup)=\"filters.max = $event.target.value; filtersChanged();\"></paper-input>\n        </div>\n        <div class=\"checkboxes col\">\n          <span class=\"caption\">Status</span>\n          <paper-checkbox (change)=\"updateStatus($event); filtersChanged();\" name=\"new\">New</paper-checkbox>\n          <paper-checkbox (change)=\"updateStatus($event); filtersChanged();\" name=\"in_progress\">In progress</paper-checkbox>\n          <paper-checkbox (change)=\"updateStatus($event); filtersChanged();\" name=\"reimbursed\">Reimbursed</paper-checkbox>\n        </div>\n      </div>\n    </div>\n  ",
+                        template: "\n    <div class=\"toolbar\" (click)=\"toggleFilters = !toggleFilters\" [ngClass]=\"{open: toggleFilters}\">\n      Filters\n      <iron-icon icon=\"filter-list\"></iron-icon>\n      <div class=\"badge\">{{activeFilterCount}}</div>\n    </div>\n    <div class=\"filters\" [ngClass]=\"{open: toggleFilters}\">\n      <div class=\"row\">\n        <div class=\"dates col\">\n          <vaadin-date-picker label=\"After\" [(value)]=\"filters.after\" (valueChange)=\"filtersChanged()\"></vaadin-date-picker>\n          <vaadin-date-picker label=\"Before\" [(value)]=\"filters.before\" (valueChange)=\"filtersChanged()\"></vaadin-date-picker>\n        </div>\n        <div class=\"merchants col\">\n          <vaadin-combo-box class=\"merchants\" [items]=\"merchants\" label=\"Merchant\" [(value)]=\"filters.merchant\" (valueChange)=\"filtersChanged()\"></vaadin-combo-box>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"amounts col\">\n          <paper-input placeholder=\"Min ($)\" (keyup)=\"filters.min = $event.target.value; filtersChanged();\"></paper-input>\n          <paper-input placeholder=\"Max ($)\" (keyup)=\"filters.max = $event.target.value; filtersChanged();\"></paper-input>\n        </div>\n        <div class=\"checkboxes col\">\n          <span class=\"caption\">Status</span>\n          <paper-checkbox (change)=\"updateStatus($event); filtersChanged();\" name=\"new\">New</paper-checkbox>\n          <paper-checkbox (change)=\"updateStatus($event); filtersChanged();\" name=\"in_progress\">In progress</paper-checkbox>\n          <paper-checkbox (change)=\"updateStatus($event); filtersChanged();\" name=\"reimbursed\">Reimbursed</paper-checkbox>\n        </div>\n      </div>\n    </div>\n  ",
                         styleUrls: ['./app/search-filters/search_filters.component.css'],
                         directives: [vaadin_combo_box_1.VaadinComboBox, vaadin_date_picker_1.VaadinDatePicker]
                     }), 
