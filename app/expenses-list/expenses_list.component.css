@@ -1,3 +1,12 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+vaadin-grid {
+  flex: 1;
+}
+
 vaadin-grid /deep/ thead.vaadin-grid-header th {
   background: #37474F !important;
   color: #ccc !important;

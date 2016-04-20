@@ -8,8 +8,14 @@ import {ExpenseEditor} from '../expense-editor/expense_editor.component';
   templateUrl: './app/overview-page/overview_page.component.html',
   directives: [ExpensesList, OverviewPanel, ExpenseEditor],
   styles: [`
+      :host {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
       .content {
         display: flex;
+        flex: 1;
       }
       expenses-list {
         flex: 1;

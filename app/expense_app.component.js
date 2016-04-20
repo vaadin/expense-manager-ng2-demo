@@ -28,6 +28,7 @@ System.register(['angular2/core', './overview-page/overview_page.component'], fu
                     core_1.Component({
                         selector: 'expense-app',
                         template: '<overview-page></overview-page>',
+                        styles: ["\n        :host {\n          display: block;\n          height: 100%;\n        }\n      "],
                         directives: [overview_page_component_1.OverviewPage]
                     }), 
                     __metadata('design:paramtypes', [])
