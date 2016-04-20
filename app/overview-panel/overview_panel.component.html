@@ -1,23 +1,24 @@
-<vaadin-bar-chart vaadin-element id="basic-bar">
-    <chart-title>Historic World Population by Region</chart-title>
-    <subtitle>Source: Wikipedia.org</subtitle>
-    <x-axis>
-        <categories>Africa, America, Asia, Europe, Oceania</categories>
-        <chart-title></chart-title>
-    </x-axis>
-    <y-axis min="0">
-        <chart-title align="high">Population (millions)</chart-title>
-        <labels overflow="justify"></labels>
-    </y-axis>
-    <tooltip value-suffix=" millions"></tooltip>
-    <plot-options>
-        <bar>
-            <data-labels enabled="true"></data-labels>
-        </bar>
-    </plot-options>
-    <legend layout="vertical" align="right" vertical-align="top" x="-40" y="80" floating="true" border-width="1"
-            background-color="#FFFFFF" shadow="true"></legend>
-    <data-series name="Year 1800">
-        <data>107, 31, 635, 203, 2</data>
-    </data-series>
-</vaadin-bar-chart>
+<div class="total">
+    <div>
+        Total
+    </div>
+    <div class="sum">
+        {{totalExpenses}}
+    </div>
+</div>
+<div class="chart">
+  <h2 class="chart-title">
+    Last 12 Month
+  </h2>
+    <vaadin-bar-chart vaadin-element id="basic-bar">
+        <chart-title text=""></chart-title>
+        <legend enabled="false"></legend>
+        <x-axis>
+            <categories>{{xAxisLabels}}</categories>
+        </x-axis>
+        <y-axis min="0">
+            <chart-title text=""></chart-title>
+        </y-axis>
+        <data-series [data]="monthlyExpenses"></data-series>
+    </vaadin-bar-chart>
+</div>
