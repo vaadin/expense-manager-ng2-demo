@@ -6,6 +6,7 @@
 .row {
   display: flex;
   flex-direction: row;
+  margin-bottom: 8px;
 }
 
 .row:first-child {
@@ -14,6 +15,11 @@
 
 .row:last-child {
   padding: 0 12px 24px;
+}
+
+.col {
+  display: inline-block;
+  width: 49%;
 }
 
 .toolbar {
@@ -35,15 +41,36 @@
 }
 
 .checkboxes paper-checkbox {
+  display: inline-block;
   margin: 0 15px 0 5px;
 }
 
 paper-input,
 vaadin-combo-box,
 vaadin-date-picker {
-  margin-right: 4px;
-  margin-left: 4px;
+  margin-right: 2px;
+  margin-left: 2px;
 }
+
+paper-input,
+vaadin-date-picker {
+  display: inline-block;
+  width: 49%;
+}
+
+/*
+@media (min-width: 960px) {
+  .col {
+    display: inline-block;
+    width: 49%;
+  }
+
+  paper-input,
+  vaadin-date-picker {
+    display: inline-block;
+    width: 49%;
+  }
+}*/
 
 .merchants {
   flex: 1;
@@ -51,6 +78,10 @@ vaadin-date-picker {
 }
 
 @media (max-width: 960px) {
+  .col {
+    width: 100%;
+  }
+  
   .toolbar {
     display: block;
     background: #80cbc4;

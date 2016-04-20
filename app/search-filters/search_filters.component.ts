@@ -11,18 +11,20 @@ import {VaadinDatePicker} from '../../bower_components/vaadin-date-picker/direct
     </div>
     <div class="filters" [ngClass]="{open: toggleFilters}">
       <div class="row">
-        <div class="dates">
+        <div class="dates col">
           <vaadin-date-picker label="After" (valueChange)="filtersChanged()" [(value)]="filters.after"></vaadin-date-picker>
           <vaadin-date-picker label="Before" (valueChange)="filtersChanged()" [(value)]="filters.before"></vaadin-date-picker>
         </div>
-        <vaadin-combo-box class="merchants" [items]="merchants" label="Merchant" (valueChange)="filtersChanged()" [(value)]="filters.merchant"></vaadin-combo-box>
+        <div class="merchants col">
+          <vaadin-combo-box class="merchants" [items]="merchants" label="Merchant" (valueChange)="filtersChanged()" [(value)]="filters.merchant"></vaadin-combo-box>
+        </div>
       </div>
       <div class="row">
-        <div class="amounts">
+        <div class="amounts col">
           <paper-input placeholder="Min ($)" (keyup)="filters.min = $event.target.value; filtersChanged();"></paper-input>
           <paper-input placeholder="Max ($)" (keyup)="filters.max = $event.target.value; filtersChanged();"></paper-input>
         </div>
-        <div class="checkboxes">
+        <div class="checkboxes col">
           <span class="caption">Status</span>
           <paper-checkbox (change)="updateStatus($event); filtersChanged();" name="new">New</paper-checkbox>
           <paper-checkbox (change)="updateStatus($event); filtersChanged();" name="in_progress">In progress</paper-checkbox>
