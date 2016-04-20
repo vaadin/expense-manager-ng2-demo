@@ -13,6 +13,12 @@ form {
   overflow: auto;
 }
 
+@media (max-width: 900px) {
+  form {
+    flex-direction: column;
+  }
+}
+
 .form {
   flex: 2;
   padding-right: 24px;
@@ -32,4 +38,8 @@ img {
 vaadin-upload {
   display: flex;
   flex-direction: column-reverse;
+}
+
+.file-list {
+  text-align: center;
 }
