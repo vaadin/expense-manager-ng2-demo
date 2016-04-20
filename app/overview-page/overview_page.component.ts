@@ -38,6 +38,15 @@ import {ExpenseEditor} from '../expense-editor/expense_editor.component';
         color: #fff;
         height: 64px;
       }
+      .toolbar img {
+        margin-left: 12px;
+      }
+      .toolbar span {
+        flex: 1;
+        text-align: right;
+        font-size: 14px;
+        color: #80cbc4;
+      }
       paper-dialog {
         display: block;
         padding: 16px 32px;
@@ -58,6 +67,11 @@ import {ExpenseEditor} from '../expense-editor/expense_editor.component';
       @media (max-width: 960px) {
         overview-panel {
           display: none;
+        }
+      }
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 18px;
         }
       }
     `]
