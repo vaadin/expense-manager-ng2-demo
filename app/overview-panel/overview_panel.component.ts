@@ -12,8 +12,8 @@ export class OverviewPanel implements OnInit {
 
     private displayPeriod: number;
     private totalExpenses: number;
-    private xAxisLabels: string[];
     private monthlyExpenses: number[];
+    private xAxisLabels: string[];
 
     constructor() {
         this.displayPeriod = 12;
@@ -27,7 +27,10 @@ export class OverviewPanel implements OnInit {
 
     ngOnInit() {
         this.initXAxis();
-        const url = './api/expenses?index=322&count=2000&merchant=&min=&max=';
+        let before = new Date();
+        let after = new Date(before.getFullYear() - 1, before.getMonth(), 0, 0, 0, 0);
+        const url = './api/expenses?index=322&count=&before=' + before.toDateString() +
+            '&after=' + after.toDateString();
         window.getJSON(url, (data) => this.initData(data));
     }
 
@@ -35,15 +38,13 @@ export class OverviewPanel implements OnInit {
         let today = new Date();
         for (var expense of data) {
             let expenseDate = new Date(expense.date);
-            if (this.monthDiff(expenseDate, today) <= this.displayPeriod) {
-                let idx = today.getMonth() - expenseDate.getMonth();
-                idx = (idx >= 0) ? idx : (this.displayPeriod + idx);
-                if ((expenseDate.getMonth() == today.getMonth()) && (expenseDate.getFullYear() != today.getFullYear())) {
-                    idx = this.displayPeriod;
-                }
-                this.monthlyExpenses[idx] = this.monthlyExpenses[idx] + expense.total;
-                this.totalExpenses = this.totalExpenses + expense.total;
+            let idx = today.getMonth() - expenseDate.getMonth();
+            idx = (idx >= 0) ? idx : (this.displayPeriod + idx);
+            if ((expenseDate.getMonth() == today.getMonth()) && (expenseDate.getFullYear() != today.getFullYear())) {
+                idx = this.displayPeriod;
             }
+            this.monthlyExpenses[idx] = this.monthlyExpenses[idx] + expense.total;
+            this.totalExpenses = this.totalExpenses + expense.total;
         }
     }
 

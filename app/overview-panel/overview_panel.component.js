@@ -35,7 +35,10 @@ System.register(['angular2/core', 'vaadin-charts'], function(exports_1, context_
                 OverviewPanel.prototype.ngOnInit = function () {
                     var _this = this;
                     this.initXAxis();
-                    var url = './api/expenses?index=322&count=2000&merchant=&min=&max=';
+                    var before = new Date();
+                    var after = new Date(before.getFullYear() - 1, before.getMonth(), 0, 0, 0, 0);
+                    var url = './api/expenses?index=322&count=&before=' + before.toDateString() +
+                        '&after=' + after.toDateString();
                     window.getJSON(url, function (data) { return _this.initData(data); });
                 };
                 OverviewPanel.prototype.initData = function (data) {
@@ -43,15 +46,13 @@ System.register(['angular2/core', 'vaadin-charts'], function(exports_1, context_
                     for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
                         var expense = data_1[_i];
                         var expenseDate = new Date(expense.date);
-                        if (this.monthDiff(expenseDate, today) <= this.displayPeriod) {
-                            var idx = today.getMonth() - expenseDate.getMonth();
-                            idx = (idx >= 0) ? idx : (this.displayPeriod + idx);
-                            if ((expenseDate.getMonth() == today.getMonth()) && (expenseDate.getFullYear() != today.getFullYear())) {
-                                idx = this.displayPeriod;
-                            }
-                            this.monthlyExpenses[idx] = this.monthlyExpenses[idx] + expense.total;
-                            this.totalExpenses = this.totalExpenses + expense.total;
+                        var idx = today.getMonth() - expenseDate.getMonth();
+                        idx = (idx >= 0) ? idx : (this.displayPeriod + idx);
+                        if ((expenseDate.getMonth() == today.getMonth()) && (expenseDate.getFullYear() != today.getFullYear())) {
+                            idx = this.displayPeriod;
                         }
+                        this.monthlyExpenses[idx] = this.monthlyExpenses[idx] + expense.total;
+                        this.totalExpenses = this.totalExpenses + expense.total;
                     }
                 };
                 OverviewPanel.prototype.monthDiff = function (fromDate, toDate) {
