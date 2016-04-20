@@ -58,20 +58,6 @@ vaadin-date-picker {
   width: 49%;
 }
 
-/*
-@media (min-width: 960px) {
-  .col {
-    display: inline-block;
-    width: 49%;
-  }
-
-  paper-input,
-  vaadin-date-picker {
-    display: inline-block;
-    width: 49%;
-  }
-}*/
-
 .merchants {
   flex: 1;
   min-width: 300px;
@@ -81,7 +67,7 @@ vaadin-date-picker {
   .col {
     width: 100%;
   }
-  
+
   .toolbar {
     display: block;
     background: #80cbc4;
