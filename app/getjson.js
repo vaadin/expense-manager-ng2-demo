@@ -11,6 +11,8 @@
       statuses = statuses ? statuses.split(',') : '';
       var after = moment(getParameterByName(url, 'after'));
       var before = moment(getParameterByName(url, 'before'));
+      var sortBy = getParameterByName(url, 'sortBy');
+      var sortDirection = getParameterByName(url, 'sortDirection');
 
       // Filter data by parameters.
       var resultArray = expenses
@@ -32,6 +34,27 @@
       // Concat enough arrays to satisfy the requested range
       while (resultArray.length > 0 && resultArray.length <= index + count) {
         resultArray = resultArray.concat(resultArray);
+      }
+
+      // Sort
+      if (sortBy) {
+        var sortProperty = sortBy;
+        var sortDirection = sortDirection || 'desc';
+        resultArray.sort(function(a, b) {
+          var res;
+          if (!isNaN(a[sortProperty])) {
+            res = parseInt(a[sortProperty], 10) - parseInt(b[sortProperty], 10);
+          } else {
+            // Let's pretend everything that's not a number is a string.
+            if (a[sortProperty]) {
+              res = a[sortProperty].localeCompare(b[sortProperty]);
+            }
+          }
+          if ('desc' === sortDirection) {
+            res *= -1;
+          }
+          return res;
+        });
       }
 
       // Slice out the requested range

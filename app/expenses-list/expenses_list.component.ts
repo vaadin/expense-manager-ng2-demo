@@ -17,6 +17,7 @@ export class ExpensesList {
   @Output() editExpense = new EventEmitter();
 
   filters: Object;
+  sortOrder: Object;
 
   private merchants: string[];
 
@@ -25,19 +26,24 @@ export class ExpensesList {
   }
 
   gridReady(grid) {
-
     grid.cellClassGenerator = (cell) => {
       if (cell.columnName === 'status') {
         return 'status-' + cell.data.replace(/ /g, '-').toLowerCase();
       }
     };
 
-    grid.addEventListener('sort-order-changed', () => {
-      // if (Polymer && Polymer.isInstance(grid)) {
-      //   // grid.scrollToStart(0);
-      //   grid.refreshItems();
-      // }
-      // // _this._update(); //TODO hook up sorting
+    grid.addEventListener('sort-order-changed', (e) => {
+      var sortBy = grid.columns[e.detail.value[0].column].name;
+      this.sortOrder = { sortBy: sortBy, direction: e.detail.value[0].direction };
+
+      // sort order is fired for the first time before grid has been initialized properly,
+      // so scrolling will crash.
+      try {
+        grid.scrollToStart(0);
+        grid.refreshItems();
+      } catch (err) {
+
+      }
     });
 
     grid.columns[0].renderer = (cell) => {
@@ -57,6 +63,7 @@ export class ExpensesList {
 
   private expenses(params, callback) {
     const filters: any = this.filters || {};
+    const sortOrder: any = this.sortOrder || {};
 
     const url = './api/expenses?index=' + params.index +
       '&count=' + params.count +
@@ -65,7 +72,9 @@ export class ExpensesList {
       '&max=' + (filters.max || '') +
       '&before=' + (filters.before || '') +
       '&after=' + (filters.after || '') +
-      '&statuses=' + (filters.statuses || '');
+      '&statuses=' + (filters.statuses || '') +
+      '&sortBy=' + (sortOrder.sortBy) +
+      '&sortDirection=' + (sortOrder.direction);
 
     //this.http.get(url)
     //  .subscribe(response => {...});

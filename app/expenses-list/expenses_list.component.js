@@ -28,17 +28,23 @@ System.register(['angular2/core', '../../bower_components/vaadin-grid/directives
                     this.refreshItems();
                 }
                 ExpensesList.prototype.gridReady = function (grid) {
+                    var _this = this;
                     grid.cellClassGenerator = function (cell) {
                         if (cell.columnName === 'status') {
                             return 'status-' + cell.data.replace(/ /g, '-').toLowerCase();
                         }
                     };
-                    grid.addEventListener('sort-order-changed', function () {
-                        // if (Polymer && Polymer.isInstance(grid)) {
-                        //   // grid.scrollToStart(0);
-                        //   grid.refreshItems();
-                        // }
-                        // // _this._update(); //TODO hook up sorting
+                    grid.addEventListener('sort-order-changed', function (e) {
+                        var sortBy = grid.columns[e.detail.value[0].column].name;
+                        _this.sortOrder = { sortBy: sortBy, direction: e.detail.value[0].direction };
+                        // sort order is fired for the first time before grid has been initialized properly,
+                        // so scrolling will crash.
+                        try {
+                            grid.scrollToStart(0);
+                            grid.refreshItems();
+                        }
+                        catch (err) {
+                        }
                     });
                     grid.columns[0].renderer = function (cell) {
                         cell.element.innerHTML = moment(cell.data).format('YYYY-MM-DD');
@@ -54,6 +60,7 @@ System.register(['angular2/core', '../../bower_components/vaadin-grid/directives
                 };
                 ExpensesList.prototype.expenses = function (params, callback) {
                     var filters = this.filters || {};
+                    var sortOrder = this.sortOrder || {};
                     var url = './api/expenses?index=' + params.index +
                         '&count=' + params.count +
                         '&merchant=' + (filters.merchant || '') +
@@ -61,7 +68,9 @@ System.register(['angular2/core', '../../bower_components/vaadin-grid/directives
                         '&max=' + (filters.max || '') +
                         '&before=' + (filters.before || '') +
                         '&after=' + (filters.after || '') +
-                        '&statuses=' + (filters.statuses || '');
+                        '&statuses=' + (filters.statuses || '') +
+                        '&sortBy=' + (sortOrder.sortBy) +
+                        '&sortDirection=' + (sortOrder.direction);
                     //this.http.get(url)
                     //  .subscribe(response => {...});
                     // In this demo we'll use a dummy datasource instead of an actual xhr
