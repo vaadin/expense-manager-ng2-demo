@@ -24,7 +24,6 @@ System.register(['angular2/core', 'vaadin-charts'], function(exports_1, context_
             OverviewPanel = (function () {
                 function OverviewPanel() {
                     this.displayPeriod = 12;
-                    this.totalExpenses = 0;
                     this.xAxisLabels = new Array(this.displayPeriod + 1);
                     this.monthlyExpenses = new Array(this.displayPeriod + 1);
                     for (var i = 0; i <= this.displayPeriod; i++) {
@@ -36,13 +35,15 @@ System.register(['angular2/core', 'vaadin-charts'], function(exports_1, context_
                     var _this = this;
                     this.initXAxis();
                     var before = new Date();
-                    var after = new Date(before.getFullYear() - 1, before.getMonth(), 0, 0, 0, 0);
+                    var after = new Date();
+                    after.setFullYear(before.getFullYear() - 1);
                     var url = './api/expenses?index=322&count=&before=' + before.toDateString() +
                         '&after=' + after.toDateString();
                     window.getJSON(url, function (data) { return _this.initData(data); });
                 };
                 OverviewPanel.prototype.initData = function (data) {
                     var today = new Date();
+                    var totalExpenses = 0;
                     for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
                         var expense = data_1[_i];
                         var expenseDate = new Date(expense.date);
@@ -52,15 +53,15 @@ System.register(['angular2/core', 'vaadin-charts'], function(exports_1, context_
                             idx = this.displayPeriod;
                         }
                         this.monthlyExpenses[idx] = this.monthlyExpenses[idx] + expense.total;
-                        this.totalExpenses = this.totalExpenses + expense.total;
+                        totalExpenses = totalExpenses + expense.total;
                     }
+                    this.totalExpensesInDollar = this.dollarFormat(totalExpenses);
                 };
-                OverviewPanel.prototype.monthDiff = function (fromDate, toDate) {
-                    var months;
-                    months = (toDate.getFullYear() - fromDate.getFullYear()) * 12;
-                    months -= fromDate.getMonth();
-                    months += toDate.getMonth();
-                    return months <= 0 ? 0 : months;
+                OverviewPanel.prototype.dollarFormat = function (amount) {
+                    var amountInDollar = amount.toFixed(2);
+                    var commaPosition = amountInDollar.indexOf(".") - 3;
+                    return '$' + amountInDollar.substr(0, commaPosition) + ','
+                        + amountInDollar.substr(commaPosition, amountInDollar.length);
                 };
                 OverviewPanel.prototype.initXAxis = function () {
                     var currentDate = new Date();

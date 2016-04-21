@@ -11,13 +11,12 @@ import {VaadinCharts, DataSeries } from 'vaadin-charts';
 export class OverviewPanel implements OnInit {
 
     private displayPeriod: number;
-    private totalExpenses: number;
+    private totalExpensesInDollar: string;
     private monthlyExpenses: number[];
     private xAxisLabels: string[];
 
     constructor() {
         this.displayPeriod = 12;
-        this.totalExpenses = 0;
         this.xAxisLabels = new Array(this.displayPeriod + 1);
         this.monthlyExpenses = new Array(this.displayPeriod + 1);
         for (var i = 0; i <= this.displayPeriod; i++) {
@@ -28,7 +27,8 @@ export class OverviewPanel implements OnInit {
     ngOnInit() {
         this.initXAxis();
         let before = new Date();
-        let after = new Date(before.getFullYear() - 1, before.getMonth(), 0, 0, 0, 0);
+        let after = new Date();
+        after.setFullYear(before.getFullYear() - 1);
         const url = './api/expenses?index=322&count=&before=' + before.toDateString() +
             '&after=' + after.toDateString();
         window.getJSON(url, (data) => this.initData(data));
@@ -36,6 +36,7 @@ export class OverviewPanel implements OnInit {
 
     initData(data: string[]) {
         let today = new Date();
+        let totalExpenses = 0;
         for (var expense of data) {
             let expenseDate = new Date(expense.date);
             let idx = today.getMonth() - expenseDate.getMonth();
@@ -44,16 +45,16 @@ export class OverviewPanel implements OnInit {
                 idx = this.displayPeriod;
             }
             this.monthlyExpenses[idx] = this.monthlyExpenses[idx] + expense.total;
-            this.totalExpenses = this.totalExpenses + expense.total;
+            totalExpenses = totalExpenses + expense.total;
         }
+        this.totalExpensesInDollar = this.dollarFormat(totalExpenses);
     }
 
-    monthDiff(fromDate: Date, toDate: Date) {
-        let months;
-        months = (toDate.getFullYear() - fromDate.getFullYear()) * 12;
-        months -= fromDate.getMonth();
-        months += toDate.getMonth()
-        return months <= 0 ? 0 : months;
+    dollarFormat(amount: number): string {
+        let amountInDollar: string = amount.toFixed(2);
+        let commaPosition = amountInDollar.indexOf(".") - 3;
+        return '$' + amountInDollar.substr(0, commaPosition) + ','
+                + amountInDollar.substr(commaPosition, amountInDollar.length);
     }
 
     initXAxis() {

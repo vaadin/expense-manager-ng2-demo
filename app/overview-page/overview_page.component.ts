@@ -26,7 +26,7 @@ import {ExpenseEditor} from '../expense-editor/expense_editor.component';
       overview-panel {
         width: 33%;
         max-width: 300px;
-        background: #80CBC4;
+        background: #F2FAF9;
         z-index: 1;
       }
       .toolbar {

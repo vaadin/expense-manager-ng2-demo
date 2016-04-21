@@ -1,24 +1,29 @@
 <div class="total">
-    <div>
-        Total
-    </div>
-    <div class="sum">
-        {{totalExpenses}}
-    </div>
+    <div>Total</div>
+    <div class="sum">{{totalExpensesInDollar}}</div>
 </div>
-<div class="chart">
-  <h2 class="chart-title">
-    Last 12 Month
-  </h2>
-    <vaadin-bar-chart vaadin-element id="basic-bar">
-        <chart-title text=""></chart-title>
-        <legend enabled="false"></legend>
-        <x-axis>
-            <categories>{{xAxisLabels}}</categories>
-        </x-axis>
-        <y-axis min="0">
-            <chart-title text=""></chart-title>
-        </y-axis>
-        <data-series [data]="monthlyExpenses"></data-series>
-    </vaadin-bar-chart>
+<div id="container">
+    <div class="chart">
+        <h2 class="chart-title">
+          Last 12 months
+        </h2>
+        <vaadin-bar-chart vaadin-element id="barchart">
+            <title>
+                <style display="none"></style>
+            </title>
+            <chart background-color="transparent"></chart>
+            <exporting enabled="false"></exporting>
+            <legend enabled="false"></legend>
+            <x-axis>
+                <categories>{{xAxisLabels}}</categories>
+            </x-axis>
+            <y-axis min="0">
+                <chart-title text=""></chart-title>
+            </y-axis>
+            <tooltip formatter="function() { return '$' + this.y.toFixed(2); }"></tooltip>
+            <data-series [data]="monthlyExpenses">
+                <color>#80CBC4</color>
+            </data-series>
+        </vaadin-bar-chart>
+    </div>
 </div>

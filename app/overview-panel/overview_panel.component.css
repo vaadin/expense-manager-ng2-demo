@@ -1,6 +1,6 @@
 :host {
   display: block;
-  background: var(--light-primary-color);
+  background: #F2FAF9;
 }
 
 #container {
@@ -9,11 +9,11 @@
 }
 
 .total {
-  background: var(--default-primary-color);
-  color: var(--text-primary-color);
+  background: #80CBC4;
+  color: #FFFFFF;
   box-sizing: border-box;
   width: 100%;
-  height: 144px;
+  height: 168px;
   font-weight: 500;
   font-size: 18px;
   line-height: 1.4;
