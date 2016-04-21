@@ -2,3 +2,5 @@
 /node_modules
 /bower_components
 /typings
+.DS_Store
+
