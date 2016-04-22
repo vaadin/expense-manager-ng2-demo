@@ -8,6 +8,9 @@
           Last 12 months
         </h2>
         <vaadin-bar-chart vaadin-element id="barchart">
+            <!-- Chart should take its size base on containers size. Doesn't work currently-->
+            <!--Remove after solve bug with container.offsetWidth in Chrome. -->
+            <chart width=300 height=400></chart>
             <title>
                 <style display="none"></style>
             </title>
