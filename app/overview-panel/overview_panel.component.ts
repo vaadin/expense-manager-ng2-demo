@@ -19,24 +19,29 @@ export class OverviewPanel implements OnInit {
         this.displayPeriod = 12;
         this.xAxisLabels = new Array(this.displayPeriod + 1);
         this.monthlyExpenses = new Array(this.displayPeriod + 1);
-        for (var i = 0; i <= this.displayPeriod; i++) {
-            this.monthlyExpenses[i] = 0;
-        }
     };
+
+    setExpenses() {
+      let before = new Date();
+      let after = new Date();
+      after.setFullYear(before.getFullYear() - 1);
+      const url = './api/expenses?index=322&count=&before=' + before.toDateString() +
+          '&after=' + after.toDateString();
+      window.getJSON(url, (data) => this.setData(data));
+    }
 
     ngOnInit() {
         this.initXAxis();
-        let before = new Date();
-        let after = new Date();
-        after.setFullYear(before.getFullYear() - 1);
-        const url = './api/expenses?index=322&count=&before=' + before.toDateString() +
-            '&after=' + after.toDateString();
-        window.getJSON(url, (data) => this.initData(data));
+        this.setExpenses();
     }
 
-    initData(data: string[]) {
+    setData(data: string[]) {
         let today = new Date();
         let totalExpenses = 0;
+        let newMonthlyExpenses = [];
+        for (var i = 0; i <= this.displayPeriod; i++) {
+            newMonthlyExpenses[i] = 0;
+        }
         for (var expense of data) {
             let expenseDate = new Date(expense.date);
             let idx = today.getMonth() - expenseDate.getMonth();
@@ -44,9 +49,10 @@ export class OverviewPanel implements OnInit {
             if ((expenseDate.getMonth() == today.getMonth()) && (expenseDate.getFullYear() != today.getFullYear())) {
                 idx = this.displayPeriod;
             }
-            this.monthlyExpenses[idx] = this.monthlyExpenses[idx] + expense.total;
-            totalExpenses = totalExpenses + expense.total;
+            newMonthlyExpenses[idx] = newMonthlyExpenses[idx] + parseFloat(expense.total);
+            totalExpenses = totalExpenses + parseFloat(expense.total);
         }
+        this.monthlyExpenses = newMonthlyExpenses;
         this.totalExpensesInDollar = this.dollarFormat(totalExpenses);
     }
 

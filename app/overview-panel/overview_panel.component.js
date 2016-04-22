@@ -26,24 +26,28 @@ System.register(['angular2/core', 'vaadin-charts'], function(exports_1, context_
                     this.displayPeriod = 12;
                     this.xAxisLabels = new Array(this.displayPeriod + 1);
                     this.monthlyExpenses = new Array(this.displayPeriod + 1);
-                    for (var i = 0; i <= this.displayPeriod; i++) {
-                        this.monthlyExpenses[i] = 0;
-                    }
                 }
                 ;
-                OverviewPanel.prototype.ngOnInit = function () {
+                OverviewPanel.prototype.setExpenses = function () {
                     var _this = this;
-                    this.initXAxis();
                     var before = new Date();
                     var after = new Date();
                     after.setFullYear(before.getFullYear() - 1);
                     var url = './api/expenses?index=322&count=&before=' + before.toDateString() +
                         '&after=' + after.toDateString();
-                    window.getJSON(url, function (data) { return _this.initData(data); });
+                    window.getJSON(url, function (data) { return _this.setData(data); });
                 };
-                OverviewPanel.prototype.initData = function (data) {
+                OverviewPanel.prototype.ngOnInit = function () {
+                    this.initXAxis();
+                    this.setExpenses();
+                };
+                OverviewPanel.prototype.setData = function (data) {
                     var today = new Date();
                     var totalExpenses = 0;
+                    var newMonthlyExpenses = [];
+                    for (var i = 0; i <= this.displayPeriod; i++) {
+                        newMonthlyExpenses[i] = 0;
+                    }
                     for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
                         var expense = data_1[_i];
                         var expenseDate = new Date(expense.date);
@@ -52,9 +56,10 @@ System.register(['angular2/core', 'vaadin-charts'], function(exports_1, context_
                         if ((expenseDate.getMonth() == today.getMonth()) && (expenseDate.getFullYear() != today.getFullYear())) {
                             idx = this.displayPeriod;
                         }
-                        this.monthlyExpenses[idx] = this.monthlyExpenses[idx] + expense.total;
-                        totalExpenses = totalExpenses + expense.total;
+                        newMonthlyExpenses[idx] = newMonthlyExpenses[idx] + parseFloat(expense.total);
+                        totalExpenses = totalExpenses + parseFloat(expense.total);
                     }
+                    this.monthlyExpenses = newMonthlyExpenses;
                     this.totalExpensesInDollar = this.dollarFormat(totalExpenses);
                 };
                 OverviewPanel.prototype.dollarFormat = function (amount) {

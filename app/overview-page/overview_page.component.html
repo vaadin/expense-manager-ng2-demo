@@ -5,8 +5,8 @@
 </div>
 <div class="content">
   <expenses-list #list (editExpense)="expenseEditor.expense=$event; dialog.open();"></expenses-list>
-  <overview-panel></overview-panel>
+  <overview-panel #panel></overview-panel>
 </div>
 <paper-dialog #dialog modal>
-  <expense-editor #expenseEditor (closeEditor)="dialog.close(); list.refreshItems();"></expense-editor>
+  <expense-editor #expenseEditor (closeEditor)="dialog.close(); list.refreshItems(); panel.setExpenses();"></expense-editor> <!-- Tähän chart.refreshItems -->
 </paper-dialog>
