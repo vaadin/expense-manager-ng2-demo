@@ -113,6 +113,7 @@ vaadin-date-picker {
   }
 
   .filters {
+    overflow: hidden;
     max-height: 0;
     transition: max-height 500ms;
   }
