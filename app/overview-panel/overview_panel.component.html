@@ -3,30 +3,23 @@
     <div class="sum">{{totalExpensesInDollar}}</div>
 </div>
 <div id="container">
-    <div class="chart">
-        <h2 class="chart-title">
-          Last 12 months
-        </h2>
-        <vaadin-bar-chart vaadin-element id="barchart">
-            <!-- Chart should take its size base on containers size. Doesn't work currently-->
-            <!--Remove after solve bug with container.offsetWidth in Chrome. -->
-            <chart width=300 height=400></chart>
-            <title>
-                <style display="none"></style>
-            </title>
-            <chart background-color="transparent"></chart>
-            <exporting enabled="false"></exporting>
-            <legend enabled="false"></legend>
-            <x-axis>
-                <categories>{{xAxisLabels}}</categories>
-            </x-axis>
-            <y-axis min="0">
-                <chart-title text=""></chart-title>
-            </y-axis>
-            <tooltip formatter="function() { return '$' + this.y.toFixed(2); }"></tooltip>
-            <data-series [data]="monthlyExpenses">
-                <color>#80CBC4</color>
-            </data-series>
-        </vaadin-bar-chart>
-    </div>
+    <h2 class="chart-title">
+      Last 12 months
+    </h2>
+    <vaadin-bar-chart id="barchart" class="chart">
+        <chart-title text=""></chart-title>
+        <chart background-color="transparent"></chart>
+        <exporting enabled="false"></exporting>
+        <legend enabled="false"></legend>
+        <x-axis>
+            <categories>{{xAxisLabels}}</categories>
+        </x-axis>
+        <y-axis min="0">
+            <chart-title text=""></chart-title>
+        </y-axis>
+        <tooltip formatter="function() { return '$' + this.y.toFixed(2); }"></tooltip>
+        <data-series [data]="monthlyExpenses">
+            <color>#80CBC4</color>
+        </data-series>
+    </vaadin-bar-chart>
 </div>
