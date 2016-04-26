@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {OnInit} from 'angular2/core';
-import {VaadinCharts, DataSeries } from 'vaadin-charts';
+import {VaadinCharts, DataSeries } from '../../bower_components/vaadin-charts/directives/vaadin-charts';
 
 @Component({
     selector: 'overview-panel',

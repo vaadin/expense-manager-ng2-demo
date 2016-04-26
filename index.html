@@ -50,37 +50,13 @@
   <script>
     HTMLImports.whenReady(function() {
       System.config({
-        map: {
-          'vaadin-combo-box': 'bower_components/vaadin-combo-box/directives',
-          'vaadin-upload': 'bower_components/vaadin-upload/directives',
-          'vaadin-date-picker': 'bower_components/vaadin-date-picker/directives',
-          'vaadin-charts': 'bower_components/vaadin-charts/directives',
-          'vaadin-grid': 'bower_components/vaadin-grid/directives'
-        },
         packages: {
           app: {
             format: 'register',
             defaultExtension: 'js'
           },
-          'vaadin-combo-box': {
-            defaultExtension: 'js',
-            main: 'vaadin-combo-box.js'
-          },
-          'vaadin-date-picker': {
-            defaultExtension: 'js',
-            main: 'vaadin-date-picker.js'
-          },
-          'vaadin-upload': {
-            defaultExtension: 'js',
-            main: 'vaadin-upload.js'
-          },
-          'vaadin-charts': {
-            defaultExtension: 'js',
-            main: 'vaadin-charts.js'
-          },
-          'vaadin-grid': {
-            defaultExtension: 'js',
-            main: 'vaadin-grid.js'
+          'bower_components': {
+            defaultExtension: 'js'
           }
         }
       });
