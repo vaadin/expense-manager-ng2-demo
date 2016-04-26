@@ -24,7 +24,6 @@ System.register(['angular2/core', '../../bower_components/vaadin-charts/directiv
             OverviewPanel = (function () {
                 function OverviewPanel() {
                     this.displayPeriod = 12;
-                    this.xAxisLabels = new Array(this.displayPeriod + 1);
                     this.monthlyExpenses = new Array(this.displayPeriod + 1);
                 }
                 ;
@@ -38,7 +37,6 @@ System.register(['angular2/core', '../../bower_components/vaadin-charts/directiv
                     window.getJSON(url, function (data) { return _this.setData(data); });
                 };
                 OverviewPanel.prototype.ngOnInit = function () {
-                    this.initXAxis();
                     this.setExpenses();
                 };
                 OverviewPanel.prototype.setData = function (data) {
@@ -46,7 +44,7 @@ System.register(['angular2/core', '../../bower_components/vaadin-charts/directiv
                     var totalExpenses = 0;
                     var newMonthlyExpenses = [];
                     for (var i = 0; i <= this.displayPeriod; i++) {
-                        newMonthlyExpenses[i] = 0;
+                        newMonthlyExpenses[i] = { 'y': 0 };
                     }
                     for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
                         var expense = data_1[_i];
@@ -56,8 +54,19 @@ System.register(['angular2/core', '../../bower_components/vaadin-charts/directiv
                         if ((expenseDate.getMonth() == today.getMonth()) && (expenseDate.getFullYear() != today.getFullYear())) {
                             idx = this.displayPeriod;
                         }
-                        newMonthlyExpenses[idx] = newMonthlyExpenses[idx] + parseFloat(expense.total);
+                        newMonthlyExpenses[idx].y = newMonthlyExpenses[idx].y + parseFloat(expense.total);
                         totalExpenses = totalExpenses + parseFloat(expense.total);
+                    }
+                    var currentDate = new Date();
+                    var currentLabel = currentDate.getFullYear() + " "
+                        + currentDate.toDateString().substr(4, 3);
+                    for (var i = 0; i <= this.displayPeriod; i++) {
+                        newMonthlyExpenses[i].name = currentLabel;
+                        currentDate.setMonth((currentDate.getMonth() - 1));
+                        currentLabel = currentDate.toDateString().substr(4, 3);
+                        if (currentLabel == "Dec") {
+                            currentLabel = currentDate.getFullYear() + " " + currentLabel;
+                        }
                     }
                     this.monthlyExpenses = newMonthlyExpenses;
                     this.totalExpensesInDollar = this.dollarFormat(totalExpenses);
@@ -67,19 +76,6 @@ System.register(['angular2/core', '../../bower_components/vaadin-charts/directiv
                     var commaPosition = amountInDollar.indexOf(".") - 3;
                     return '$' + amountInDollar.substr(0, commaPosition) + ','
                         + amountInDollar.substr(commaPosition, amountInDollar.length);
-                };
-                OverviewPanel.prototype.initXAxis = function () {
-                    var currentDate = new Date();
-                    var currentLabel = currentDate.getFullYear() + " "
-                        + currentDate.toDateString().substr(4, 3);
-                    for (var i = 0; i <= this.displayPeriod; i++) {
-                        this.xAxisLabels[i] = currentLabel;
-                        currentDate.setMonth((currentDate.getMonth() - 1));
-                        currentLabel = currentDate.toDateString().substr(4, 3);
-                        if (currentLabel == "Dec") {
-                            currentLabel = currentDate.getFullYear() + " " + currentLabel;
-                        }
-                    }
                 };
                 OverviewPanel = __decorate([
                     core_1.Component({

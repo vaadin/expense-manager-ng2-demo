@@ -8,11 +8,10 @@
     </h2>
     <vaadin-bar-chart id="barchart" class="chart">
         <chart-title text=""></chart-title>
-        <chart background-color="transparent"></chart>
+        <chart background-color="transparent" height="400"></chart>
         <exporting enabled="false"></exporting>
         <legend enabled="false"></legend>
-        <x-axis>
-            <categories>{{xAxisLabels}}</categories>
+        <x-axis type="category">
         </x-axis>
         <y-axis min="0">
             <chart-title text=""></chart-title>
