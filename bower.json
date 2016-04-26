@@ -16,7 +16,7 @@
     "moment": "~2.10.6",
     "vaadin-icons": "vaadin/vaadin-icons#~1.0.0-alpha1",
     "offline": "~0.7.14",
-    "vaadin-grid": "#feature/ng2"
+    "vaadin-grid": "1.1.0-alpha1"
   },
   "devDependencies": {
     "web-component-tester": "*",
