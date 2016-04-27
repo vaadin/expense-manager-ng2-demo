@@ -15,7 +15,7 @@ vaadin-grid /deep/ thead.vaadin-grid-header th {
 }
 
 vaadin-grid /deep/ .vaadin-grid-sidebar-button {
-   right: 24px !important;
+   right: 20px !important;
    padding: 8px;
 }
 

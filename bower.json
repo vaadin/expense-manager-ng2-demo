@@ -7,16 +7,16 @@
     "paper-elements": "PolymerElements/paper-elements#^1.0.1",
     "platinum-elements": "PolymerElements/platinum-elements#^1.1.0",
     "neon-elements": "PolymerElements/neon-elements#^1.0.0",
-    "vaadin-combo-box": "1.1.0-alpha1",
-    "vaadin-date-picker": "1.1.0-alpha1",
-    "vaadin-upload": "1.1.0-alpha1",
+    "vaadin-combo-box": "1.1.0-beta1",
+    "vaadin-date-picker": "1.1.0-beta1",
+    "vaadin-upload": "1.1.0-beta1",
     "vaadin-charts": "git://github.com/vaadin/vaadin-charts.git#feature/ng2",
     "accounting": "~0.3.2",
     "blueimp-load-image": "~1.14.0",
     "moment": "~2.10.6",
     "vaadin-icons": "vaadin/vaadin-icons#~1.0.0-alpha1",
     "offline": "~0.7.14",
-    "vaadin-grid": "1.1.0-alpha1"
+    "vaadin-grid": "1.1.0-beta1"
   },
   "devDependencies": {
     "web-component-tester": "*",
