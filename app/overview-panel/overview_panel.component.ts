@@ -46,8 +46,12 @@ export class OverviewPanel implements OnInit {
             if ((expenseDate.getMonth() == today.getMonth()) && (expenseDate.getFullYear() != today.getFullYear())) {
                 idx = this.displayPeriod;
             }
-            newMonthlyExpenses[idx].y = newMonthlyExpenses[idx].y + parseFloat(expense.total);
-            totalExpenses = totalExpenses + parseFloat(expense.total);
+            if (typeof expense.total === 'string') {
+              //Edit expense saves total as string and with unnecessary ,.
+              expense.total = parseFloat(expense.total.replace(',', ''));
+            }
+            newMonthlyExpenses[idx].y = newMonthlyExpenses[idx].y + expense.total;
+            totalExpenses = totalExpenses + expense.total;
         }
         let currentDate = new Date();
         let currentLabel = currentDate.getFullYear() + " "
