@@ -10,7 +10,7 @@
     "vaadin-combo-box": "1.1.0-beta1",
     "vaadin-date-picker": "1.1.0-beta1",
     "vaadin-upload": "1.1.0-beta1",
-    "vaadin-charts": "git://github.com/vaadin/vaadin-charts.git#feature/ng2",
+    "vaadin-charts": "3.1.0-beta1",
     "accounting": "~0.3.2",
     "blueimp-load-image": "~1.14.0",
     "moment": "~2.10.6",
