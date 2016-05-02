@@ -23,8 +23,8 @@ export class OverviewPanel implements OnInit {
       let before = new Date();
       let after = new Date();
       after.setFullYear(before.getFullYear() - 1);
-      const url = './api/expenses?index=322&count=&before=' + before.toDateString() +
-          '&after=' + after.toDateString();
+      const url = './api/expenses?index=322&count=&before=' + before.toISOString() +
+          '&after=' + after.toISOString();
       window.getJSON(url, (data) => this.setData(data));
     }
 
