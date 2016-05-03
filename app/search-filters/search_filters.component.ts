@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output, Input} from 'angular2/core';
+import {Component, EventEmitter, Output, Input} from '@angular/core';
 import {VaadinComboBox} from '../../bower_components/vaadin-combo-box/directives/vaadin-combo-box';
 import {VaadinDatePicker} from '../../bower_components/vaadin-date-picker/directives/vaadin-date-picker';
 

@@ -13,23 +13,27 @@
   },
   "license": "ISC",
   "dependencies": {
-    "angular2": "2.0.0-beta.17",
+    "@angular/common": "^2.0.0-rc.0",
+    "@angular/compiler": "^2.0.0-rc.0",
+    "@angular/core": "2.0.0-rc.0",
+    "@angular/platform-browser": "^2.0.0-rc.0",
+    "@angular/platform-browser-dynamic": "^2.0.0-rc.0",
     "es6-shim": "^0.35.0",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.6",
-    "systemjs": "0.19.26",
+    "systemjs": "0.19.27",
     "zone.js": "0.6.12"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
-    "lite-server": "^2.1.0",
-    "typescript": "^1.8.9",
-    "typings": "^0.7.9",
     "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-tslint": "^4.3.3",
     "gulp-typescript": "^2.12.0",
-    "tslint": "^3.5.0"
+    "lite-server": "^2.1.0",
+    "tslint": "^3.5.0",
+    "typescript": "^1.8.9",
+    "typings": "^0.7.9"
   }
 }

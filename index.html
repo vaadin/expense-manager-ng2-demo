@@ -37,30 +37,17 @@
   <script src="bower_components/moment/min/moment.min.js" charset="utf-8"></script>
 
   <script src="node_modules/es6-shim/es6-shim.min.js"></script>
-  <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
-  <script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
 
-  <script src="node_modules/angular2/bundles/angular2-polyfills.min.js"></script>
+  <script src="node_modules/zone.js/dist/zone.js"></script>
+  <script src="node_modules/reflect-metadata/Reflect.js"></script>
   <script src="node_modules/systemjs/dist/system.src.js"></script>
-  <script src="node_modules/rxjs/bundles/Rx.min.js"></script>
-  <script src="node_modules/angular2/bundles/angular2.min.js"></script>
-  <script src="node_modules/angular2/bundles/http.min.js"></script>
 
+  <script src="systemjs.config.js"></script>
   <script>
-    HTMLImports.whenReady(function() {
-      System.config({
-        packages: {
-          app: {
-            format: 'register',
-            defaultExtension: 'js'
-          },
-          'bower_components': {
-            defaultExtension: 'js'
-          }
-        }
+    document.addEventListener('WebComponentsReady', function() {
+      System.import('app').catch(function(err) {
+        console.error(err);
       });
-      System.import('app/main')
-        .then(null, console.error.bind(console));
     });
   </script>
 

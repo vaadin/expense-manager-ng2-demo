@@ -1,4 +1,4 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Input} from '@angular/core';
 import {ExpensesList} from '../expenses-list/expenses_list.component';
 import {OverviewPanel} from '../overview-panel/overview_panel.component';
 import {ExpenseEditor} from '../expense-editor/expense_editor.component';

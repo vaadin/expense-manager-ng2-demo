@@ -1,6 +1,4 @@
-System.register(['angular2/core', '../../bower_components/vaadin-charts/directives/vaadin-charts'], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(['@angular/core', '../../bower_components/vaadin-charts/directives/vaadin-charts'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -32,8 +30,8 @@ System.register(['angular2/core', '../../bower_components/vaadin-charts/directiv
                     var before = new Date();
                     var after = new Date();
                     after.setFullYear(before.getFullYear() - 1);
-                    var url = './api/expenses?index=322&count=&before=' + before.toDateString() +
-                        '&after=' + after.toDateString();
+                    var url = './api/expenses?index=322&count=&before=' + before.toISOString() +
+                        '&after=' + after.toISOString();
                     window.getJSON(url, function (data) { return _this.setData(data); });
                 };
                 OverviewPanel.prototype.ngOnInit = function () {
@@ -91,7 +89,7 @@ System.register(['angular2/core', '../../bower_components/vaadin-charts/directiv
                     __metadata('design:paramtypes', [])
                 ], OverviewPanel);
                 return OverviewPanel;
-            }());
+            })();
             exports_1("OverviewPanel", OverviewPanel);
         }
     }

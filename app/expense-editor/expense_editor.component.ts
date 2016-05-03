@@ -1,5 +1,5 @@
-import {Component, Output, EventEmitter} from 'angular2/core'
-import {NgForm}    from 'angular2/common';
+import {Component, Output, EventEmitter} from '@angular/core'
+import {NgForm}    from '@angular/common';
 import {PolymerElement} from '../polymer-element/polymer_element.directive';
 import {VaadinDatePicker} from '../../bower_components/vaadin-date-picker/directives/vaadin-date-picker';
 import {VaadinUpload} from '../../bower_components/vaadin-upload/directives/vaadin-upload';

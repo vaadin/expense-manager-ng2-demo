@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter} from 'angular2/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {VaadinGrid} from '../../bower_components/vaadin-grid/directives/vaadin-grid';
 import {SearchFilters} from '../search-filters/search_filters.component';
 declare var HTMLImports;

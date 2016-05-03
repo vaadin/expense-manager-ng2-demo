@@ -1,5 +1,5 @@
 
-import {Directive, ElementRef} from 'angular2/core';
+import {Directive, ElementRef} from '@angular/core';
 
 @Directive({
   selector: '[polymer-element]'
