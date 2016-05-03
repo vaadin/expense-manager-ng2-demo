@@ -1,12 +1,12 @@
 import {Component} from 'angular2/core';
 import {OnInit} from 'angular2/core';
-import {VaadinCharts, DataSeries } from '../../bower_components/vaadin-charts/directives/vaadin-charts';
+import {PolymerElement} from 'vaadin-ng2-polymer/polymer-element'
 
 @Component({
     selector: 'overview-panel',
     templateUrl: './app/overview-panel/overview_panel.component.html',
     styleUrls: ['./app/overview-panel/overview_panel.component.css'],
-    directives: [VaadinCharts, DataSeries]
+    directives: [PolymerElement('data-series'), PolymerElement('vaadin-bar-chart')]
 })
 export class OverviewPanel implements OnInit {
 

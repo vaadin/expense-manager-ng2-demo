@@ -1,4 +1,4 @@
-System.register(['angular2/core', '../../bower_components/vaadin-charts/directives/vaadin-charts'], function(exports_1, context_1) {
+System.register(['angular2/core', 'vaadin-ng2-polymer/polymer-element'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,15 +10,15 @@ System.register(['angular2/core', '../../bower_components/vaadin-charts/directiv
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, vaadin_charts_1;
+    var core_1, polymer_element_1;
     var OverviewPanel;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (vaadin_charts_1_1) {
-                vaadin_charts_1 = vaadin_charts_1_1;
+            function (polymer_element_1_1) {
+                polymer_element_1 = polymer_element_1_1;
             }],
         execute: function() {
             OverviewPanel = (function () {
@@ -32,8 +32,8 @@ System.register(['angular2/core', '../../bower_components/vaadin-charts/directiv
                     var before = new Date();
                     var after = new Date();
                     after.setFullYear(before.getFullYear() - 1);
-                    var url = './api/expenses?index=322&count=&before=' + before.toDateString() +
-                        '&after=' + after.toDateString();
+                    var url = './api/expenses?index=322&count=&before=' + before.toISOString() +
+                        '&after=' + after.toISOString();
                     window.getJSON(url, function (data) { return _this.setData(data); });
                 };
                 OverviewPanel.prototype.ngOnInit = function () {
@@ -86,7 +86,7 @@ System.register(['angular2/core', '../../bower_components/vaadin-charts/directiv
                         selector: 'overview-panel',
                         templateUrl: './app/overview-panel/overview_panel.component.html',
                         styleUrls: ['./app/overview-panel/overview_panel.component.css'],
-                        directives: [vaadin_charts_1.VaadinCharts, vaadin_charts_1.DataSeries]
+                        directives: [polymer_element_1.PolymerElement('data-series'), polymer_element_1.PolymerElement('vaadin-bar-chart')]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], OverviewPanel);

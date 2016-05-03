@@ -49,12 +49,18 @@
   <script>
     HTMLImports.whenReady(function() {
       System.config({
+        map: {
+          'vaadin-ng2-polymer': 'node_modules/vaadin-ng2-polymer'
+        },
         packages: {
           app: {
             format: 'register',
             defaultExtension: 'js'
           },
           'bower_components': {
+            defaultExtension: 'js'
+          },
+          'vaadin-ng2-polymer': {
             defaultExtension: 'js'
           }
         }
