@@ -13,7 +13,7 @@ declare var accounting;
 })
 export class ExpenseEditor {
 
-  expense: Object = {}
+  expense: any = {}
 
   @Output() closeEditor = new EventEmitter();
 
@@ -26,7 +26,7 @@ export class ExpenseEditor {
   }
 
   private close() {
-    this.closeEditor.emit();
+    this.closeEditor.emit(false);
     setTimeout(()=> {
       this.expense = {};
     }, 100);

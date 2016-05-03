@@ -1,5 +1,5 @@
 <search-filters [merchants]="merchants" (filtersChange)="filters=$event;onFiltersChanged(grid);"></search-filters>
-<vaadin-grid #grid (grid-ready)="gridReady(grid)" [items]="expenses" [frozenColumns]="1" (selected-items-changed)="selected(grid)">
+<vaadin-grid #grid [items]="expenses" [frozenColumns]="1" (selected-items-changed)="selected(grid)">
   <table>
     <colgroup>
       <col name="date" width="120" sortable sort-direction="desc"/>

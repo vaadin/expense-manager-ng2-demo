@@ -1,5 +1,5 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {VaadinGrid} from '../../bower_components/vaadin-grid/directives/vaadin-grid';
+import {Component, Input, Output, EventEmitter, ViewChild} from '@angular/core';
+import { PolymerElement } from '../../node_modules/vaadin-ng2-polymer/polymer-element';
 import {SearchFilters} from '../search-filters/search_filters.component';
 declare var HTMLImports;
 declare var Polymer;
@@ -10,22 +10,26 @@ declare var accounting;
   selector: 'expenses-list',
   templateUrl: './app/expenses-list/expenses_list.component.html',
   styleUrls: ['./app/expenses-list/expenses_list.component.css'],
-  directives: [VaadinGrid, SearchFilters]
+  directives: [PolymerElement('vaadin-grid'), SearchFilters]
 })
 export class ExpensesList {
-
   @Output() editExpense = new EventEmitter();
+  @ViewChild('grid') grid: any;
 
   filters: Object;
   sortOrder: Object;
 
   private merchants: string[];
 
-  constructor() {
+  ngAfterViewInit() {
     this.refreshItems();
+    this.grid.nativeElement.then(() => {
+      this.gridReady(this.grid.nativeElement);
+    });
   }
 
   gridReady(grid) {
+    console.log("READY");
     grid.cellClassGenerator = (cell) => {
       if (cell.columnName === 'status') {
         return 'status-' + cell.data.replace(/ /g, '-').toLowerCase();
@@ -83,7 +87,7 @@ export class ExpensesList {
     totalCount -= filters.merchant ? 1000 : 0;
     totalCount -= filters.min ? 300 : 0;
     totalCount -= filters.max ? 300 : 0;
-    window.getJSON(url, (data) => {
+    (<any>window).getJSON(url, (data) => {
       callback(data, totalCount);
     });
   }
@@ -109,7 +113,7 @@ export class ExpensesList {
     // This will make grid update it's items (since the datasource changes)
     this.expenses = this.expenses.bind(this);
     // Update merchant list
-    window.getJSON('./api/merchants', (data) => {
+    (<any>window).getJSON('./api/merchants', (data) => {
       this.merchants = data.sort();
     });
   }

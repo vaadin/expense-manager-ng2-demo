@@ -1,4 +1,6 @@
-System.register(['@angular/core', '../../bower_components/vaadin-combo-box/directives/vaadin-combo-box', '../../bower_components/vaadin-date-picker/directives/vaadin-date-picker'], function(exports_1) {
+System.register(['@angular/core', '../../node_modules/vaadin-ng2-polymer/polymer-element'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,18 +10,15 @@ System.register(['@angular/core', '../../bower_components/vaadin-combo-box/direc
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, vaadin_combo_box_1, vaadin_date_picker_1;
+    var core_1, polymer_element_1;
     var SearchFilters;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (vaadin_combo_box_1_1) {
-                vaadin_combo_box_1 = vaadin_combo_box_1_1;
-            },
-            function (vaadin_date_picker_1_1) {
-                vaadin_date_picker_1 = vaadin_date_picker_1_1;
+            function (polymer_element_1_1) {
+                polymer_element_1 = polymer_element_1_1;
             }],
         execute: function() {
             SearchFilters = (function () {
@@ -62,12 +61,12 @@ System.register(['@angular/core', '../../bower_components/vaadin-combo-box/direc
                         selector: 'search-filters',
                         template: "\n    <div class=\"toolbar\" (click)=\"toggleFilters = !toggleFilters\" [ngClass]=\"{open: toggleFilters}\">\n      Filters\n      <iron-icon icon=\"filter-list\"></iron-icon>\n      <div class=\"badge\">{{activeFilterCount}}</div>\n    </div>\n    <div class=\"filters\" [ngClass]=\"{open: toggleFilters}\">\n      <div class=\"row\">\n        <div class=\"dates col\">\n          <vaadin-date-picker label=\"After\" [(value)]=\"filters.after\" (valueChange)=\"filtersChanged()\"></vaadin-date-picker>\n          <vaadin-date-picker label=\"Before\" [(value)]=\"filters.before\" (valueChange)=\"filtersChanged()\"></vaadin-date-picker>\n        </div>\n        <div class=\"merchants col\">\n          <vaadin-combo-box class=\"merchants\" [items]=\"merchants\" label=\"Merchant\" [(value)]=\"filters.merchant\" (valueChange)=\"filtersChanged()\"></vaadin-combo-box>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"amounts col\">\n          <paper-input placeholder=\"Min ($)\" (keyup)=\"filters.min = $event.target.value; filtersChanged();\"></paper-input>\n          <paper-input placeholder=\"Max ($)\" (keyup)=\"filters.max = $event.target.value; filtersChanged();\"></paper-input>\n        </div>\n        <div class=\"checkboxes col\">\n          <span class=\"caption\">Status</span>\n          <paper-checkbox (change)=\"updateStatus($event); filtersChanged();\" name=\"new\">New</paper-checkbox>\n          <paper-checkbox (change)=\"updateStatus($event); filtersChanged();\" name=\"in_progress\">In progress</paper-checkbox>\n          <paper-checkbox (change)=\"updateStatus($event); filtersChanged();\" name=\"reimbursed\">Reimbursed</paper-checkbox>\n        </div>\n      </div>\n    </div>\n  ",
                         styleUrls: ['./app/search-filters/search_filters.component.css'],
-                        directives: [vaadin_combo_box_1.VaadinComboBox, vaadin_date_picker_1.VaadinDatePicker]
+                        directives: [polymer_element_1.PolymerElement('vaadin-combo-box'), polymer_element_1.PolymerElement('vaadin-date-picker')]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], SearchFilters);
                 return SearchFilters;
-            })();
+            }());
             exports_1("SearchFilters", SearchFilters);
         }
     }

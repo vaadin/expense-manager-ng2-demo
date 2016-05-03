@@ -40,7 +40,7 @@ System.register(['@angular/core', '../polymer-element/polymer_element.directive'
                 };
                 ExpenseEditor.prototype.close = function () {
                     var _this = this;
-                    this.closeEditor.emit();
+                    this.closeEditor.emit(false);
                     setTimeout(function () {
                         _this.expense = {};
                     }, 100);
