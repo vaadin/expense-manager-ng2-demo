@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Output, Input} from '@angular/core';
-import {VaadinComboBox} from '../../bower_components/vaadin-combo-box/directives/vaadin-combo-box';
-import {VaadinDatePicker} from '../../bower_components/vaadin-date-picker/directives/vaadin-date-picker';
+import {PolymerElement} from 'vaadin-ng2-polymer/polymer-element'
 
 @Component({
   selector: 'search-filters',
@@ -35,8 +34,9 @@ import {VaadinDatePicker} from '../../bower_components/vaadin-date-picker/direct
     </div>
   `,
   styleUrls: ['./app/search-filters/search_filters.component.css'],
-  directives: [VaadinComboBox, VaadinDatePicker]
+  directives: [PolymerElement('vaadin-combo-box'), PolymerElement('vaadin-date-picker')]
 })
+
 export class SearchFilters {
 
   filters: any = {};

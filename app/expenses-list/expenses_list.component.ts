@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {VaadinGrid} from '../../bower_components/vaadin-grid/directives/vaadin-grid';
+import {PolymerElement} from 'vaadin-ng2-polymer/polymer-element'
 import {SearchFilters} from '../search-filters/search_filters.component';
 declare var HTMLImports;
 declare var Polymer;
@@ -10,7 +10,7 @@ declare var accounting;
   selector: 'expenses-list',
   templateUrl: './app/expenses-list/expenses_list.component.html',
   styleUrls: ['./app/expenses-list/expenses_list.component.css'],
-  directives: [VaadinGrid, SearchFilters]
+  directives: [PolymerElement('vaadin-grid'), SearchFilters]
 })
 export class ExpensesList {
 
