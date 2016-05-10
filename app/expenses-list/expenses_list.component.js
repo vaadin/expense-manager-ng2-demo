@@ -37,7 +37,6 @@ System.register(['@angular/core', '../../node_modules/vaadin-ng2-polymer/polymer
                 };
                 ExpensesList.prototype.gridReady = function (grid) {
                     var _this = this;
-                    console.log("READY");
                     grid.cellClassGenerator = function (cell) {
                         if (cell.columnName === 'status') {
                             return 'status-' + cell.data.replace(/ /g, '-').toLowerCase();

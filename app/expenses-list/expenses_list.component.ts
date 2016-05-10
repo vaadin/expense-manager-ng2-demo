@@ -29,7 +29,6 @@ export class ExpensesList {
   }
 
   gridReady(grid) {
-    console.log("READY");
     grid.cellClassGenerator = (cell) => {
       if (cell.columnName === 'status') {
         return 'status-' + cell.data.replace(/ /g, '-').toLowerCase();
