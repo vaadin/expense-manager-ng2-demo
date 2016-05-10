@@ -6,7 +6,7 @@
 <form (ngSubmit)="onSubmit($event.value)" #expenseForm="ngForm">
   <div class="form">
     <paper-input #merchant ngControl="merchant" ngDefaultControl [value]="expense.merchant" (value-changed)="merchant.fire('input');" label="Merchant" auto-validate required error-message="Merchant name required"></paper-input>
-    <paper-input #total ngControl="total" ngDefaultControl [value]="formatMoney(expense.total)" (value-changed)="total.fire('input');" polymer-element label="Total" auto-validate required pattern="[0-9,.]+" error-message="Numeric values only">
+    <paper-input #total ngControl="total" ngDefaultControl [value]="formatMoney(expense.total)" (value-changed)="total.fire('input');" label="Total" auto-validate required pattern="[0-9,.]+" error-message="Numeric values only">
       <div prefix>$</div>
     </paper-input>
 
