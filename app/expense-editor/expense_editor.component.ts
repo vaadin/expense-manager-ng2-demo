@@ -1,15 +1,14 @@
 import {Component, Output, EventEmitter} from 'angular2/core'
 import {NgForm}    from 'angular2/common';
-import {PolymerElement} from '../polymer-element/polymer_element.directive';
-import {VaadinDatePicker} from '../../bower_components/vaadin-date-picker/directives/vaadin-date-picker';
-import {VaadinUpload} from '../../bower_components/vaadin-upload/directives/vaadin-upload';
+import {PolymerElement} from 'vaadin-ng2-polymer/polymer-element'
+
 declare var accounting;
 
 @Component({
   selector: 'expense-editor',
   templateUrl: './app/expense-editor/expense_editor.component.html',
   styleUrls: ['./app/expense-editor/expense_editor.component.css'],
-  directives: [PolymerElement, VaadinUpload, VaadinDatePicker]
+  directives: [PolymerElement('paper-input'), PolymerElement('vaadin-upload'), PolymerElement('vaadin-date-picker')]
 })
 export class ExpenseEditor {
 
