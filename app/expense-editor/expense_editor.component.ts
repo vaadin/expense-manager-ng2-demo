@@ -1,6 +1,6 @@
 import {Component, Output, EventEmitter} from '@angular/core'
 import {NgForm}    from '@angular/common';
-import {PolymerElement} from '../../node_modules/vaadin-ng2-polymer/polymer-element'
+import {PolymerElement} from '@vaadin/angular2-polymer';
 declare var accounting;
 
 @Component({

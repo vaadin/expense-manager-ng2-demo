@@ -1,24 +1,24 @@
-System.register(['@angular/core', '../../node_modules/vaadin-ng2-polymer/polymer-element'], function(exports_1, context_1) {
-    "use strict";
-    var __moduleName = context_1 && context_1.id;
+System.register(['@angular/core', '@vaadin/angular2-polymer'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
+        switch (arguments.length) {
+            case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
+            case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
+            case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
+        }
     };
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, polymer_element_1;
+    var core_1, angular2_polymer_1;
     var OverviewPanel;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (polymer_element_1_1) {
-                polymer_element_1 = polymer_element_1_1;
+            function (angular2_polymer_1_1) {
+                angular2_polymer_1 = angular2_polymer_1_1;
             }],
         execute: function() {
             OverviewPanel = (function () {
@@ -46,8 +46,8 @@ System.register(['@angular/core', '../../node_modules/vaadin-ng2-polymer/polymer
                     for (var i = 0; i <= this.displayPeriod; i++) {
                         newMonthlyExpenses[i] = { 'y': 0 };
                     }
-                    for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
-                        var expense = data_1[_i];
+                    for (var _i = 0; _i < data.length; _i++) {
+                        var expense = data[_i];
                         var expenseDate = new Date(expense.date);
                         var idx = today.getMonth() - expenseDate.getMonth();
                         idx = (idx >= 0) ? idx : (this.displayPeriod + idx);
@@ -86,12 +86,12 @@ System.register(['@angular/core', '../../node_modules/vaadin-ng2-polymer/polymer
                         selector: 'overview-panel',
                         templateUrl: './app/overview-panel/overview_panel.component.html',
                         styleUrls: ['./app/overview-panel/overview_panel.component.css'],
-                        directives: [polymer_element_1.PolymerElement('data-series'), polymer_element_1.PolymerElement('vaadin-bar-chart')]
+                        directives: [angular2_polymer_1.PolymerElement('data-series'), angular2_polymer_1.PolymerElement('vaadin-bar-chart')]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], OverviewPanel);
                 return OverviewPanel;
-            }());
+            })();
             exports_1("OverviewPanel", OverviewPanel);
         }
     }

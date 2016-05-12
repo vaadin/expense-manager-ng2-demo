@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output, Input} from '@angular/core';
-import { PolymerElement } from '../../node_modules/vaadin-ng2-polymer/polymer-element';
+import {PolymerElement} from '@vaadin/angular2-polymer';
 
 @Component({
   selector: 'search-filters',

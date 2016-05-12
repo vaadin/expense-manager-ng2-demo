@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter, ViewChild} from '@angular/core';
-import { PolymerElement } from '../../node_modules/vaadin-ng2-polymer/polymer-element';
+import {PolymerElement} from '@vaadin/angular2-polymer';
 import {SearchFilters} from '../search-filters/search_filters.component';
 declare var HTMLImports;
 declare var Polymer;
