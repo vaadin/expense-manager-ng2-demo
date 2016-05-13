@@ -44,19 +44,6 @@
 
   <script src="systemjs.config.js"></script>
   <script>
-    System.config({
-      map: {
-        'bower_components': 'bower_components'
-      },
-      packages: {
-        'bower_components': {
-          defaultExtension: 'js'
-        },
-        'node_modules': {
-          defaultExtension: 'js'
-        }
-      }
-    });
     window.addEventListener('WebComponentsReady', function() {
       System.import('app/main').then(null, console.error.bind(console));
     });
