@@ -1,4 +1,6 @@
-System.register(['@angular/platform-browser-dynamic', './expense_app.component'], function(exports_1) {
+System.register(['@angular/platform-browser-dynamic', './expense_app.component'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var platform_browser_dynamic_1, expense_app_component_1;
     return {
         setters:[
