@@ -7,16 +7,16 @@
     "paper-elements": "PolymerElements/paper-elements#^1.0.1",
     "platinum-elements": "PolymerElements/platinum-elements#^1.1.0",
     "neon-elements": "PolymerElements/neon-elements#^1.0.0",
-    "vaadin-combo-box": "1.1.0-beta2",
-    "vaadin-date-picker": "1.1.0-beta2",
-    "vaadin-upload": "1.1.0-beta2",
-    "vaadin-charts": "3.1.0-rc1",
+    "vaadin-combo-box": "1.1.0-beta3",
+    "vaadin-date-picker": "1.1.0-beta3",
+    "vaadin-upload": "1.1.0-beta3",
+    "vaadin-charts": "vaadin/vaadin-charts#master",
     "accounting": "~0.3.2",
     "blueimp-load-image": "~1.14.0",
     "moment": "~2.10.6",
     "vaadin-icons": "vaadin/vaadin-icons#~1.0.0-rc1",
     "offline": "~0.7.14",
-    "vaadin-grid": "1.1.0-beta2"
+    "vaadin-grid": "1.1.0-beta4"
   },
   "devDependencies": {
     "web-component-tester": "*",

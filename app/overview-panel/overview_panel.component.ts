@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {VaadinCharts, DataSeries } from '../../bower_components/vaadin-charts/directives/vaadin-charts';
+import {PolymerElement} from '@vaadin/angular2-polymer';
 
 @Component({
     selector: 'overview-panel',
     templateUrl: './app/overview-panel/overview_panel.component.html',
     styleUrls: ['./app/overview-panel/overview_panel.component.css'],
-    directives: [VaadinCharts, DataSeries]
+    directives: [PolymerElement('data-series'), PolymerElement('vaadin-bar-chart')]
 })
 export class OverviewPanel implements OnInit {
 
@@ -24,7 +24,7 @@ export class OverviewPanel implements OnInit {
       after.setFullYear(before.getFullYear() - 1);
       const url = './api/expenses?index=322&count=&before=' + before.toISOString() +
           '&after=' + after.toISOString();
-      window.getJSON(url, (data) => this.setData(data));
+      (<any>window).getJSON(url, (data) => this.setData(data));
     }
 
     ngOnInit() {

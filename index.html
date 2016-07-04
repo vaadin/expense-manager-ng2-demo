@@ -44,10 +44,8 @@
 
   <script src="systemjs.config.js"></script>
   <script>
-    document.addEventListener('WebComponentsReady', function() {
-      System.import('app').catch(function(err) {
-        console.error(err);
-      });
+    window.addEventListener('WebComponentsReady', function() {
+      System.import('app/main').then(null, console.error.bind(console));
     });
   </script>
 

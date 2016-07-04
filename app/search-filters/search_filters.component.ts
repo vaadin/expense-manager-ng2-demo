@@ -1,42 +1,13 @@
 import {Component, EventEmitter, Output, Input} from '@angular/core';
-import {VaadinComboBox} from '../../bower_components/vaadin-combo-box/directives/vaadin-combo-box';
-import {VaadinDatePicker} from '../../bower_components/vaadin-date-picker/directives/vaadin-date-picker';
+import {PolymerElement} from '@vaadin/angular2-polymer';
 
 @Component({
   selector: 'search-filters',
-  template: `
-    <div class="toolbar" (click)="toggleFilters = !toggleFilters" [ngClass]="{open: toggleFilters}">
-      Filters
-      <iron-icon icon="filter-list"></iron-icon>
-      <div class="badge">{{activeFilterCount}}</div>
-    </div>
-    <div class="filters" [ngClass]="{open: toggleFilters}">
-      <div class="row">
-        <div class="dates col">
-          <vaadin-date-picker label="After" [(value)]="filters.after" (valueChange)="filtersChanged()"></vaadin-date-picker>
-          <vaadin-date-picker label="Before" [(value)]="filters.before" (valueChange)="filtersChanged()"></vaadin-date-picker>
-        </div>
-        <div class="merchants col">
-          <vaadin-combo-box class="merchants" [items]="merchants" label="Merchant" [(value)]="filters.merchant" (valueChange)="filtersChanged()"></vaadin-combo-box>
-        </div>
-      </div>
-      <div class="row">
-        <div class="amounts col">
-          <paper-input placeholder="Min ($)" (keyup)="filters.min = $event.target.value; filtersChanged();"></paper-input>
-          <paper-input placeholder="Max ($)" (keyup)="filters.max = $event.target.value; filtersChanged();"></paper-input>
-        </div>
-        <div class="checkboxes col">
-          <span class="caption">Status</span>
-          <paper-checkbox (change)="updateStatus($event); filtersChanged();" name="new">New</paper-checkbox>
-          <paper-checkbox (change)="updateStatus($event); filtersChanged();" name="in_progress">In progress</paper-checkbox>
-          <paper-checkbox (change)="updateStatus($event); filtersChanged();" name="reimbursed">Reimbursed</paper-checkbox>
-        </div>
-      </div>
-    </div>
-  `,
+  templateUrl: './app/search-filters/search_filters.component.html',
   styleUrls: ['./app/search-filters/search_filters.component.css'],
-  directives: [VaadinComboBox, VaadinDatePicker]
+  directives: [PolymerElement('vaadin-combo-box'), PolymerElement('vaadin-date-picker')]
 })
+
 export class SearchFilters {
 
   filters: any = {};
@@ -70,5 +41,4 @@ export class SearchFilters {
       return this.filters[field] && this.filters[field].length > 0;
     }).length;
   }
-
 }

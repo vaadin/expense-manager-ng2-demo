@@ -1,22 +1,24 @@
-System.register(['@angular/core', '../../bower_components/vaadin-grid/directives/vaadin-grid', '../search-filters/search_filters.component'], function(exports_1) {
+System.register(['@angular/core', '@vaadin/angular2-polymer', '../search-filters/search_filters.component'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
+        switch (arguments.length) {
+            case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
+            case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
+            case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
+        }
     };
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, vaadin_grid_1, search_filters_component_1;
+    var core_1, angular2_polymer_1, search_filters_component_1;
     var ExpensesList;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (vaadin_grid_1_1) {
-                vaadin_grid_1 = vaadin_grid_1_1;
+            function (angular2_polymer_1_1) {
+                angular2_polymer_1 = angular2_polymer_1_1;
             },
             function (search_filters_component_1_1) {
                 search_filters_component_1 = search_filters_component_1_1;
@@ -25,8 +27,14 @@ System.register(['@angular/core', '../../bower_components/vaadin-grid/directives
             ExpensesList = (function () {
                 function ExpensesList() {
                     this.editExpense = new core_1.EventEmitter();
-                    this.refreshItems();
                 }
+                ExpensesList.prototype.ngAfterViewInit = function () {
+                    var _this = this;
+                    this.refreshItems();
+                    this.grid.nativeElement.then(function () {
+                        _this.gridReady(_this.grid.nativeElement);
+                    });
+                };
                 ExpensesList.prototype.gridReady = function (grid) {
                     var _this = this;
                     grid.cellClassGenerator = function (cell) {
@@ -110,13 +118,17 @@ System.register(['@angular/core', '../../bower_components/vaadin-grid/directives
                 __decorate([
                     core_1.Output(), 
                     __metadata('design:type', Object)
-                ], ExpensesList.prototype, "editExpense", void 0);
+                ], ExpensesList.prototype, "editExpense");
+                __decorate([
+                    core_1.ViewChild('grid'), 
+                    __metadata('design:type', Object)
+                ], ExpensesList.prototype, "grid");
                 ExpensesList = __decorate([
                     core_1.Component({
                         selector: 'expenses-list',
                         templateUrl: './app/expenses-list/expenses_list.component.html',
                         styleUrls: ['./app/expenses-list/expenses_list.component.css'],
-                        directives: [vaadin_grid_1.VaadinGrid, search_filters_component_1.SearchFilters]
+                        directives: [angular2_polymer_1.PolymerElement('vaadin-grid'), search_filters_component_1.SearchFilters]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], ExpensesList);

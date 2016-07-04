@@ -14,21 +14,6 @@ vaadin-grid /deep/ thead.vaadin-grid-header th {
   font-weight: 400 !important;
 }
 
-vaadin-grid /deep/ .vaadin-grid-sidebar-button {
-   right: 20px !important;
-   padding: 8px;
-}
-
-vaadin-grid /deep/ .vaadin-grid-sidebar-button::after {
-  content: url('app/expenses-list/ic_view_column_grey_24px.png') !important;
-}
-
-vaadin-grid /deep/ .vaadin-grid-sidebar-button::before {
-  background: rgba(55, 71, 79, 0.4) !important;
-  box-shadow: none !important;
-  border-radius: 0px !important;
-}
-
 vaadin-grid /deep/ tr.vaadin-grid-row-stripe td {
   background: #F7F8F8 !important;
 }
