@@ -2,9 +2,9 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <title>Expense Manager</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <meta name="mobile-web-app-capable" content="yes" />
   <link rel="icon" sizes="192x192" href="images/app-icon-192.png" />
@@ -26,17 +26,19 @@
   <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
   <link rel="import" href="bower_components/paper-input/paper-textarea.html">
   <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+  <link rel="import" href="bower_components/paper-toast/paper-toast.html">
   <link rel="import" href="bower_components/vaadin-grid/vaadin-grid.html">
-  <link rel="import" href="bower_components/vaadin-charts/vaadin-bar-chart.html">
   <link rel="import" href="bower_components/vaadin-combo-box/vaadin-combo-box.html">
   <link rel="import" href="bower_components/vaadin-date-picker/vaadin-date-picker.html">
   <link rel="import" href="bower_components/vaadin-upload/vaadin-upload.html">
+  <link rel="import" href="app/chart-element.html">
   <link rel="import" href="styles/app-theme.html">
 
   <script src="bower_components/accounting/accounting.min.js" charset="utf-8"></script>
   <script src="bower_components/moment/min/moment.min.js" charset="utf-8"></script>
 
-  <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+  <!-- Polyfill(s) for older browsers -->
+  <script src="node_modules/core-js/client/shim.min.js"></script>
 
   <script src="node_modules/zone.js/dist/zone.js"></script>
   <script src="node_modules/reflect-metadata/Reflect.js"></script>
@@ -44,17 +46,16 @@
 
   <script src="systemjs.config.js"></script>
   <script>
-    window.addEventListener('WebComponentsReady', function() {
-      System.import('app/main').then(null, console.error.bind(console));
+    document.addEventListener('WebComponentsReady', function() {
+      System.import('app').catch(function(err) {
+        console.error(err);
+      });
     });
   </script>
-
 </head>
 
 <body>
-  <expense-app>
-    loading...
-  </expense-app>
+  <expense-app>Loading...</expense-app>
 </body>
 
 </html>

@@ -1,7 +1,9 @@
-/.idea
-/node_modules
-/bower_components
-/typings
-.DS_Store
-
-build/
+.idea
+typings/**
+node_modules
+bower_components
+jspm_packages
+link-checker-results.txt
+**/*npm-debug.log.*
+_test-output
+_temp

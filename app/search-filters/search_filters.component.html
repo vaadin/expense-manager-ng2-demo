@@ -6,8 +6,8 @@
 <div class="filters" [ngClass]="{open: toggleFilters}">
   <div class="row">
     <div class="dates col">
-      <vaadin-date-picker label="After" [(value)]="filters.after" (valueChange)="filtersChanged()"></vaadin-date-picker>
-      <vaadin-date-picker label="Before" [(value)]="filters.before" (valueChange)="filtersChanged()"></vaadin-date-picker>
+      <vaadin-date-picker label="After" [(value)]="filters.after" (valueChange)="filtersChanged()" initial-position="2015-02-01"></vaadin-date-picker>
+      <vaadin-date-picker label="Before" [(value)]="filters.before" (valueChange)="filtersChanged()" initial-position="2016-03-01"></vaadin-date-picker>
     </div>
     <div class="merchants col">
       <vaadin-combo-box class="merchants" [items]="merchants" label="Merchant" [(value)]="filters.merchant" (valueChange)="filtersChanged()"></vaadin-combo-box>

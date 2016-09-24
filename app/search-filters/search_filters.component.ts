@@ -1,15 +1,11 @@
-import {Component, EventEmitter, Output, Input} from '@angular/core';
-import {PolymerElement} from '@vaadin/angular2-polymer';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'search-filters',
   templateUrl: './app/search-filters/search_filters.component.html',
-  styleUrls: ['./app/search-filters/search_filters.component.css'],
-  directives: [PolymerElement('vaadin-combo-box'), PolymerElement('vaadin-date-picker')]
+  styleUrls: ['./app/search-filters/search_filters.component.css']
 })
-
-export class SearchFilters {
-
+export class SearchFilters{
   filters: any = {};
 
   @Output() filtersChange = new EventEmitter();
@@ -18,7 +14,7 @@ export class SearchFilters {
 
   activeFilterCount = 0;
 
-  private updateStatus(e) {
+  private updateStatus(e: any) {
     const status = e.target.name;
     const toggle = e.target.checked;
 

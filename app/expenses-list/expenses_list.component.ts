@@ -1,20 +1,19 @@
-import {Component, Input, Output, EventEmitter, ViewChild} from '@angular/core';
-import {PolymerElement} from '@vaadin/angular2-polymer';
-import {SearchFilters} from '../search-filters/search_filters.component';
-declare var HTMLImports;
-declare var Polymer;
-declare var moment;
-declare var accounting;
+import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+
+declare var HTMLImports: any;
+declare var Polymer: any;
+declare var moment: any;
+declare var accounting: any;
 
 @Component({
   selector: 'expenses-list',
   templateUrl: './app/expenses-list/expenses_list.component.html',
-  styleUrls: ['./app/expenses-list/expenses_list.component.css'],
-  directives: [PolymerElement('vaadin-grid'), SearchFilters]
+  styleUrls: ['./app/expenses-list/expenses_list.component.css']
 })
 export class ExpensesList {
   @Output() editExpense = new EventEmitter();
   @ViewChild('grid') grid: any;
+  @ViewChild('toast') toast: any;
 
   filters: Object;
   sortOrder: Object;
@@ -28,14 +27,14 @@ export class ExpensesList {
     });
   }
 
-  gridReady(grid) {
-    grid.cellClassGenerator = (cell) => {
+  gridReady(grid: any) {
+    grid.cellClassGenerator = (cell: any) => {
       if (cell.columnName === 'status') {
         return 'status-' + cell.data.replace(/ /g, '-').toLowerCase();
       }
     };
 
-    grid.addEventListener('sort-order-changed', (e) => {
+    grid.addEventListener('sort-order-changed', (e: any) => {
       var sortBy = grid.columns[e.detail.value[0].column].name;
       this.sortOrder = { sortBy: sortBy, direction: e.detail.value[0].direction };
 
@@ -49,22 +48,22 @@ export class ExpensesList {
       }
     });
 
-    grid.columns[0].renderer = (cell) => {
+    grid.columns[0].renderer = (cell: any) => {
       cell.element.innerHTML = moment(cell.data).format('YYYY-MM-DD');
     };
 
-    grid.columns[2].renderer = (cell) => {
+    grid.columns[2].renderer = (cell: any) => {
       cell.element.innerHTML = accounting.formatMoney(cell.data);
     };
 
-    grid.columns[3].renderer = (cell) => {
+    grid.columns[3].renderer = (cell: any) => {
       var status = cell.data.replace(/_/g, ' ');
       status = status.charAt(0).toUpperCase() + status.slice(1);
       cell.element.textContent = status;
     };
   }
 
-  private expenses(params, callback) {
+  private expenses(params: any, callback: any) {
     const filters: any = this.filters || {};
     const sortOrder: any = this.sortOrder || {};
 
@@ -86,22 +85,28 @@ export class ExpensesList {
     totalCount -= filters.merchant ? 1000 : 0;
     totalCount -= filters.min ? 300 : 0;
     totalCount -= filters.max ? 300 : 0;
-    (<any>window).getJSON(url, (data) => {
+    (<any>window).getJSON(url, (data: any) => {
       callback(data, totalCount);
+
+      if (data.length === 0 && this.toast) {
+        this.toast.nativeElement.open();
+      } else if (this.toast) {
+        this.toast.nativeElement.hide();
+      }
     });
   }
 
-  private selected(grid) {
+  private selected(grid: any) {
     var selection = grid.selection.selected();
     if (selection.length === 1) {
       grid.selection.clear();
-      grid.getItem(selection[0], (err, item) => {
+      grid.getItem(selection[0], (err: any, item: any) => {
         this.editExpense.emit(item);
       });
     }
   }
 
-  private onFiltersChanged(grid) {
+  private onFiltersChanged(grid: any) {
     if (Polymer && Polymer.isInstance(grid)) {
       grid.scrollToStart(0);
       grid.refreshItems();
@@ -112,8 +117,9 @@ export class ExpensesList {
     // This will make grid update it's items (since the datasource changes)
     this.expenses = this.expenses.bind(this);
     // Update merchant list
-    (<any>window).getJSON('./api/merchants', (data) => {
+    (<any>window).getJSON('./api/merchants', (data: any) => {
       this.merchants = data.sort();
     });
   }
+
 }

@@ -1,21 +1,18 @@
-import {Component, Output, EventEmitter} from '@angular/core'
-import {NgForm}    from '@angular/common';
-import {PolymerElement} from '@vaadin/angular2-polymer';
-declare var accounting;
+import { Component, Output, EventEmitter } from '@angular/core';
+
+declare var accounting: any;
 
 @Component({
   selector: 'expense-editor',
   templateUrl: './app/expense-editor/expense_editor.component.html',
-  styleUrls: ['./app/expense-editor/expense_editor.component.css'],
-  directives: [PolymerElement('paper-input'), PolymerElement('vaadin-upload'), PolymerElement('vaadin-date-picker')]
+  styleUrls: ['./app/expense-editor/expense_editor.component.css']
 })
 export class ExpenseEditor {
-
   expense: any = {}
 
   @Output() closeEditor = new EventEmitter();
 
-  private onSubmit(updated) {
+  private onSubmit(updated:any) {
     // Should save changes to some backend API probably
     // but we'll just update the object in this demo instead
     Object.assign(this.expense, updated);
@@ -25,13 +22,9 @@ export class ExpenseEditor {
 
   private close() {
     this.closeEditor.emit(false);
-    setTimeout(()=> {
-      this.expense = {};
-    }, 100);
-
   }
 
-  private upload(e) {
+  private upload(e:any) {
     const file = e.detail.file;
     var reader  = new FileReader();
 
@@ -44,7 +37,7 @@ export class ExpenseEditor {
     }
   }
 
-  private formatMoney(value) {
+  private formatMoney(value:any) {
     return accounting.formatMoney(value, '');
   }
 }
