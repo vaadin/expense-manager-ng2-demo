@@ -1,0 +1,38 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/vaadin-charts/vaadin-bar-chart.html">
+
+<dom-module id="chart-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <vaadin-bar-chart>
+      <chart-title text=""></chart-title>
+      <chart background-color="transparent" height="400"></chart>
+      <exporting enabled="false"></exporting>
+      <legend enabled="false"></legend>
+      <x-axis type="category">
+      </x-axis>
+      <y-axis min="0">
+        <chart-title text=""></chart-title>
+      </y-axis>
+      <tooltip formatter="function() { return '$' + this.y.toFixed(2); }"></tooltip>
+      <data-series data="[[data]]">
+        <color>#80CBC4</color>
+      </data-series>
+    </vaadin-bar-chart>
+
+  </template>
+  <script>
+    Polymer({
+      is: 'chart-element',
+
+      properties: {
+        data: Array
+      }
+    });
+  </script>
+</dom-module>

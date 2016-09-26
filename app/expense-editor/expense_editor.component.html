@@ -5,17 +5,17 @@
 
 <form (ngSubmit)="onSubmit($event.value)" #expenseForm="ngForm">
   <div class="form">
-    <paper-input #merchant ngControl="merchant" ngDefaultControl [value]="expense.merchant" (value-changed)="merchant.fire('input');" label="Merchant" auto-validate required error-message="Merchant name required"></paper-input>
-    <paper-input #total ngControl="total" ngDefaultControl [value]="formatMoney(expense.total)" (value-changed)="total.fire('input');" label="Total" auto-validate required pattern="[0-9,.]+" error-message="Numeric values only">
+    <paper-input #merchant ngDefaultControl [(value)]="expense.merchant" (value-changed)="merchant.fire('input');" label="Merchant" auto-validate required error-message="Merchant name required"></paper-input>
+    <paper-input #total ngDefaultControl [(value)]="expense.total" (value-changed)="total.fire('input');" label="Total" auto-validate required pattern="[0-9,.]+" error-message="Numeric values only">
       <div prefix>$</div>
     </paper-input>
 
-    <vaadin-date-picker ngControl="date" auto-validate required [value]="expense.date" label="Date"></vaadin-date-picker>
-    <paper-textarea #comment ngControl="comment" ngDefaultControl [value]="expense.comment" (value-changed)="comment.fire('input');" label="Comment"></paper-textarea>
+    <vaadin-date-picker auto-validate required [(value)]="expense.date" label="Date"></vaadin-date-picker>
+    <paper-textarea #comment ngDefaultControl [(value)]="expense.comment" (value-changed)="comment.fire('input');" label="Comment"></paper-textarea>
   </div>
 
   <div class="receipt">
-    <input type="hidden" ngControl="receipt" [ngModel]="expense.receipt">
+    <input type="hidden" [ngModel]="expense.receipt" name="receipt">
     <vaadin-upload (upload-before)="upload($event)" accept="image/*">
       <div class="file-list">
         <img *ngIf="expense.receipt !== 'default'" src={{expense.receipt}}>

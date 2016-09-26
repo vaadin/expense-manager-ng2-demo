@@ -1,17 +1,13 @@
-import {Component} from '@angular/core';
-import {OverviewPage} from './overview-page/overview_page.component'
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'expense-app',
-    template: '<overview-page></overview-page>',
-    styles: [`
-        :host {
-          display: block;
-          height: 100%;
-        }
-      `],
-    directives: [OverviewPage]
+  selector: 'expense-app',
+  template: '<overview-page></overview-page>',
+  styles: [`
+    :host {
+      display: block;
+      height: 100%;
+    }
+  `]
 })
-export class ExpenseApp {
-
-}
+export class ExpenseApp { }
