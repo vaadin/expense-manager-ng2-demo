@@ -1,5 +1,4 @@
 .idea
-typings/**
 node_modules
 bower_components
 jspm_packages
