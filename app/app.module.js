@@ -43,14 +43,14 @@ var AppModule = (function () {
                 angular2_polymer_1.PolymerElement('paper-input'),
                 angular2_polymer_1.PolymerElement('paper-textarea'),
                 angular2_polymer_1.PolymerElement('paper-toast'),
-                angular2_polymer_1.PolymerElement('chart-element'),
+                angular2_polymer_1.PolymerElement('vaadin-bar-chart'),
                 angular2_polymer_1.PolymerElement('vaadin-combo-box'),
                 angular2_polymer_1.PolymerElement('vaadin-date-picker'),
                 angular2_polymer_1.PolymerElement('vaadin-grid'),
                 angular2_polymer_1.PolymerElement('vaadin-upload')
             ],
             bootstrap: [expense_app_component_1.ExpenseApp],
-            schemas: [core_1.CUSTOM_ELEMENTS_SCHEMA]
+            schemas: [core_1.NO_ERRORS_SCHEMA]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);
